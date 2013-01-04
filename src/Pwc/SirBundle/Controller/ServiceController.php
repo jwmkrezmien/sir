@@ -69,6 +69,9 @@ class ServiceController extends Controller
         $locale = $this->getRequest()->getLocale();
         var_dump($locale);
 
+        $classifications = $this->container->getParameter('classifications');
+        var_dump($classifications);
+
         $entity = new Service();
         $form   = $this->createForm(new ServiceType(), $entity);
 

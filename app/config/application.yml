@@ -1,0 +1,6 @@
+parameters:
+    classifications:
+        likelihood: { 1: low, 2: medium, 3: high }
+        impact: { 1: low, 2: medium, 3: high }
+        time: { 1: low, 2: medium, 3: high }
+        cost: { 1: low, 2: medium, 3: high }
