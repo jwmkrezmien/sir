@@ -1,0 +1,18 @@
+service:
+    form:
+        name:               "Name:"
+    new:
+        title:              "Create a new Service"
+
+form:
+    type:
+        classification:
+            low:            "Low"
+            medium:         "Medium"
+            high:           "High"
+        layer:
+            application:    "Application"
+            network:        "Network"
+            infrastructure: "Infrastructure"
+        rootcause:
+            content:        "Web Content"

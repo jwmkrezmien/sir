@@ -3,6 +3,10 @@ pwc_sir:
     type:     annotation
     prefix:   /
 
+product:
+    resource:  "@PwcSirBundle/Controller/ServiceController.php"
+    type:     annotation
+
 # Internal routing configuration to handle ESI
 # ****** WARNING ******
 # This route should be enabled with caution as it can open a security vulnerability
