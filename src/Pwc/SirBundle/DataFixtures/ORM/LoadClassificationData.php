@@ -30,20 +30,23 @@ class LoadClassificationData implements FixtureInterface, ContainerAwareInterfac
      */
     public function load(ObjectManager $manager)
     {
-        foreach ($this->container->getParameter('classifications') as $type => $classes)
+        if ($this->container->hasParameter('classifications'))
         {
-            foreach ($classes as $rank => $class)
+            foreach ($this->container->getParameter('classifications') as $type => $classes)
             {
-                $classification = new Classification();
-                $classification->setName('classification.' . $type . '.' . $class);
-                $classification->setType($type);
-                $classification->setClass($class);
-                $classification->setRank($rank);
+                foreach ($classes as $rank => $class)
+                {
+                    $classification = new Classification();
+                    $classification->setName('classification.' . $type . '.' . $class);
+                    $classification->setType($type);
+                    $classification->setClass($class);
+                    $classification->setRank($rank);
 
-                $manager->persist($classification);
+                    $manager->persist($classification);
+                }
             }
-        }
 
-        $manager->flush();
+            $manager->flush();
+        }
     }
 }

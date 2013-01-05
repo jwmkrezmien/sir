@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="service")
+ * @ORM\Table(name="vulnref")
  */
-class Service
+class VulnRef
 {
     /**
      * @ORM\Id
@@ -18,20 +18,20 @@ class Service
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Vulnerability", inversedBy="services")
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $hyperlink;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Vulnerability", inversedBy="vulnRefs")
      * @ORM\JoinColumn(name="vulnerability_id", referencedColumnName="id")
      */
     protected $vulnerability;
-
-    /**
-     * @ORM\Column(type="string", length=10)
-     */
-    protected $protocol;
-
-    /**
-     * @ORM\Column(type="string", length=10)
-     */
-    protected $port;
 
     /**
      * Get id
@@ -44,56 +44,56 @@ class Service
     }
 
     /**
-     * Set protocol
+     * Set name
      *
-     * @param string $protocol
-     * @return Service
+     * @param string $name
+     * @return Vulnref
      */
-    public function setProtocol($protocol)
+    public function setName($name)
     {
-        $this->protocol = $protocol;
+        $this->name = $name;
     
         return $this;
     }
 
     /**
-     * Get protocol
+     * Get name
      *
      * @return string 
      */
-    public function getProtocol()
+    public function getName()
     {
-        return $this->protocol;
+        return $this->name;
     }
 
     /**
-     * Set port
+     * Set hyperlink
      *
-     * @param string $port
-     * @return Service
+     * @param string $hyperlink
+     * @return Vulnref
      */
-    public function setPort($port)
+    public function setHyperlink($hyperlink)
     {
-        $this->port = $port;
+        $this->hyperlink = $hyperlink;
     
         return $this;
     }
 
     /**
-     * Get port
+     * Get hyperlink
      *
      * @return string 
      */
-    public function getPort()
+    public function getHyperlink()
     {
-        return $this->port;
+        return $this->hyperlink;
     }
 
     /**
      * Set vulnerability
      *
      * @param \Pwc\SirBundle\Entity\Vulnerability $vulnerability
-     * @return Service
+     * @return VulnRef
      */
     public function setVulnerability(\Pwc\SirBundle\Entity\Vulnerability $vulnerability = null)
     {

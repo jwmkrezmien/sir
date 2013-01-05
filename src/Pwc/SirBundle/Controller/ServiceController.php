@@ -66,6 +66,12 @@ class ServiceController extends Controller
      */
     public function newAction()
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('PwcSirBundle:Classification')->findAllForType('likelihood');
+
+        var_dump($entity);
+
         $locale = $this->getRequest()->getLocale();
         var_dump($locale);
 
