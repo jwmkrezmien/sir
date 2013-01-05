@@ -5,7 +5,7 @@ namespace Pwc\SirBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Pwc\SirBundle\Repository\ClassificationRepository")
  * @ORM\Table(name="classification")
  */
 class Classification
@@ -36,6 +36,11 @@ class Classification
      * @ORM\Column(type="integer", length=1)
      */
     protected $rank;
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * Get id

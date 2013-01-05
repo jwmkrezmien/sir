@@ -1,18 +1,50 @@
 service:
     form:
-        name:               "Name:"
+        name:                 "Name:"
     new:
-        title:              "Create a new Service"
+        title:                "Create a new Service"
 
 form:
     type:
         classification:
-            low:            "Low"
-            medium:         "Medium"
-            high:           "High"
+            low:              "Low"
+            medium:           "Medium"
+            high:             "High"
         layer:
-            application:    "Application"
-            network:        "Network"
-            infrastructure: "Infrastructure"
+            application:      "Application"
+            network:          "Network"
+            infrastructure:   "Infrastructure"
         rootcause:
-            content:        "Web Content"
+            content:          "Web Content"
+
+products:
+    pentest.extern:           "External Penetration Test"
+    pentest.intern:           "Internal Penetration Test"
+    social.engineering:       "Social Engineering"
+layers:
+    application:              "Application"
+    infrastructure:           "Infrastructure"
+    network:                  "Network"
+rootcauses:
+    webcontent:               "Web Content"
+    website:                  "Website"
+    webapp:                   "Web Application"
+    webserversoft:            "Webserver Software"
+    hostos:                   "Host Operating System"
+    networkinf:               "Network Infrastructure"
+    backendsys:               "Backend System"
+    sysdev:                   "System Development"
+    orgsupport:               "Organizational Support"
+
+owaspitems:
+    injection:                "Injection"
+    xss:                      "Cross-Site Scripting"
+    authsessman:              "Broken Authentication and Session Management"
+    doref:                    "Insecure Direct Object References"
+    csrf:                     "Cross-Site Request Forgery"
+    misconfig:                "Security Misconfiguration"
+    cryptstor:                "Insecure Cryptographic Storage"
+    urlaccess:                "Failure to Restrict URL Access"
+    translayprot:             "Insufficient Transport Layer Protection"
+    redirects:                "Unvalidated Redirects and Forwards"
+

@@ -1,6 +1,23 @@
 parameters:
     classifications:
+        impact:     { 1: low, 2: medium, 3: high }
         likelihood: { 1: low, 2: medium, 3: high }
-        impact: { 1: low, 2: medium, 3: high }
-        time: { 1: low, 2: medium, 3: high }
-        cost: { 1: low, 2: medium, 3: high }
+        time:       { 1: low, 2: medium, 3: high }
+        cost:       { 1: low, 2: medium, 3: high }
+    products:
+        expen:
+            name: pentest.extern
+            tools: [ acunetix, nessus, manual ]
+        inpen:
+            name: pentest.intern
+            tools: [ acunetix, nessus, manual ]
+        socen:
+            name: social.engineering
+    layers:      [ application, infrastructure, network ]
+    rootcauses:  [ webcontent, website, webapp, webserversoft, hostos, networkinf, backendsys, sysdev, orgsupport ]
+    tools:       { acunetix: "Acunetix", nessus: "Nessus" }
+    owaspsets:
+        owasp2010:
+            name:  "OWASP TOP 10 - 2010"
+            year:  2010
+            items: { 1: injection, 2: xss, 3: authsessman, 4: doref, 5: csrf, 6: misconfig, 7: cryptstor, 8: urlaccess, 9: translayprot, 10: redirects }

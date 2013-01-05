@@ -2,8 +2,11 @@
 
 namespace Pwc\SirBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\AbstractType,
+    Symfony\Component\OptionsResolver\OptionsResolverInterface,
+    Symfony\Component\Form\FormBuilderInterface;
+
+use Doctrine\ORM\EntityRepository;
 
 class ClassificationType extends AbstractType
 {
@@ -14,20 +17,57 @@ class ClassificationType extends AbstractType
         $this->type = $type;
     }
 
+/*
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+//        $type = $this->type;
+
+        $builder->add('test', 'entity', array(
+            'class' => 'PwcSirBundle:Classification',
+            'query_builder' => function (EntityRepository $er) use ($type)
+            {
+                var_dump($type);
+
+                return $er->createQueryBuilder('c')
+                    ->where('c.type = :type')
+                    ->addOrderBy('c.rank', 'DESC')
+                    ->setParameters(array('type' => $type));
+            }
+        ));
+
+//        $resolver->setDefaults();
+    }
+
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'choices' => array(
-                'L' => 'form.type.classification.low',
-                'M' => 'form.type.classification.medium',
-                'H' => 'form.type.classification.high'
-            )
+            'type' => ''
+        ));
+    }
+*/
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $type = $this->type;
+
+        $resolver->setDefaults(array(
+            'class' => 'PwcSirBundle:Classification',
+            'query_builder' => function (EntityRepository $er) use ($type)
+            {
+                var_dump($type);
+
+                return $er->findAllForType($type);
+            }
+////            'choices' => array(
+////                'L' => 'form.type.classification.low',
+////                'M' => 'form.type.classification.medium',
+////                'H' => 'form.type.classification.high'
+////            )
         ));
     }
 
     public function getParent()
     {
-        return 'choice';
+        return 'entity';
     }
 
     public function getName()
