@@ -27,6 +27,11 @@ class Language
      */
     protected $vulnDescriptions;
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * Get id
      *

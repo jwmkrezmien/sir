@@ -4,6 +4,8 @@ namespace Pwc\SirBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="vulndescription")
@@ -48,6 +50,17 @@ class VulnDescription
      * @ORM\Column(type="text")
      */
     protected $solution;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128)
+     */
+    protected $slug;
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * Get id
@@ -195,5 +208,28 @@ class VulnDescription
     public function getSolution()
     {
         return $this->solution;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return VulnDescription
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
