@@ -2,20 +2,26 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{% block title %}Test Application{% endblock %}</title>
+    <title>{% block title %}Test Application!{% endblock %}</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    {% javascripts
+    'bundles/pwcsir/js/chosen.jquery.js'
+    'bundles/pwcsir/js/select2.js' output='bundles/sir/js/main.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% stylesheets
+    'bundles/pwcsir/css/chosen.css'
+    'bundles/pwcsir/css/select2.css' filter='cssrewrite' output='bundles/sir/css/main.css' %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+    {% endstylesheets %}
 </head>
 <body>
-<div id="sidebar">
-    {% block sidebar %}
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/blog">Blog</a></li>
-        </ul>
-    {% endblock %}
-</div>
 
 <div id="content">
     {% block body %}{% endblock %}
 </div>
+
 </body>
 </html>

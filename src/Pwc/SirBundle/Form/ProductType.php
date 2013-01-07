@@ -6,26 +6,28 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ServiceType extends AbstractType
+class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('protocol')
-            ->add('port')
-            ->add('vulnerability')
-        ;
+            ->add('name')
+            ->add('tools', 'genemu_jqueryselect2_entity', array(
+                'class' => 'Pwc\SirBundle\Entity\Tool',
+                'property' => 'name',
+                'multiple' => true
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Pwc\SirBundle\Entity\Service'
+            'data_class' => 'Pwc\SirBundle\Entity\Product'
         ));
     }
 
     public function getName()
     {
-        return 'pwc_sirbundle_servicetype';
+        return 'pwc_sirbundle_producttype';
     }
 }

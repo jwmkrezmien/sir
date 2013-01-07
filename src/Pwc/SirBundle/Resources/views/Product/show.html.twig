@@ -1,4 +1,4 @@
-<h1>Service</h1>
+<h1>Product</h1>
 
 <table class="record_properties">
     <tbody>
@@ -7,29 +7,25 @@
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
-            <th>Protocol</th>
-            <td>{{ entity.protocol }}</td>
-        </tr>
-        <tr>
-            <th>Port</th>
-            <td>{{ entity.port }}</td>
+            <th>Name</th>
+            <td>{{ entity.name }}</td>
         </tr>
     </tbody>
 </table>
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('service') }}">
+        <a href="{{ path('product') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('service_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('product_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
     <li>
-        <form action="{{ path('service_delete', { 'id': entity.id }) }}" method="post">
+        <form action="{{ path('product_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
             <button type="submit">Delete</button>
         </form>

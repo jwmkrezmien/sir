@@ -7,27 +7,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Pwc\SirBundle\Entity\Service;
-use Pwc\SirBundle\Form\ServiceType;
+use Pwc\SirBundle\Entity\Product;
+use Pwc\SirBundle\Form\ProductType;
 
 /**
- * Service controller.
+ * Product controller.
  *
- * @Route("/service")
+ * @Route("/product")
  */
-class ServiceController extends Controller
+class ProductController extends Controller
 {
     /**
-     * Lists all Service entities.
+     * Lists all Product entities.
      *
-     * @Route("/", name="service")
+     * @Route("/", name="product")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('PwcSirBundle:Service')->findAll();
+        $entities = $em->getRepository('PwcSirBundle:Product')->findAll();
 
         return array(
             'entities' => $entities,
@@ -35,19 +35,19 @@ class ServiceController extends Controller
     }
 
     /**
-     * Finds and displays a Service entity.
+     * Finds and displays a Product entity.
      *
-     * @Route("/{id}/show", name="service_show")
+     * @Route("/{id}/show", name="product_show")
      * @Template()
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:Service')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:Product')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Service entity.');
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -59,15 +59,15 @@ class ServiceController extends Controller
     }
 
     /**
-     * Displays a form to create a new Service entity.
+     * Displays a form to create a new Product entity.
      *
-     * @Route("/new", name="service_new")
+     * @Route("/new", name="product_new")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Service();
-        $form   = $this->createForm(new ServiceType(), $entity);
+        $entity = new Product();
+        $form   = $this->createForm(new ProductType(), $entity);
 
         return array(
             'entity' => $entity,
@@ -76,16 +76,16 @@ class ServiceController extends Controller
     }
 
     /**
-     * Creates a new Service entity.
+     * Creates a new Product entity.
      *
-     * @Route("/create", name="service_create")
+     * @Route("/create", name="product_create")
      * @Method("POST")
-     * @Template("PwcSirBundle:Service:new.html.twig")
+     * @Template("PwcSirBundle:Product:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new Service();
-        $form = $this->createForm(new ServiceType(), $entity);
+        $entity  = new Product();
+        $form = $this->createForm(new ProductType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -93,7 +93,7 @@ class ServiceController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('service_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('product_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -103,22 +103,22 @@ class ServiceController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Service entity.
+     * Displays a form to edit an existing Product entity.
      *
-     * @Route("/{id}/edit", name="service_edit")
+     * @Route("/{id}/edit", name="product_edit")
      * @Template()
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:Service')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:Product')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Service entity.');
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
-        $editForm = $this->createForm(new ServiceType(), $entity);
+        $editForm = $this->createForm(new ProductType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -129,31 +129,31 @@ class ServiceController extends Controller
     }
 
     /**
-     * Edits an existing Service entity.
+     * Edits an existing Product entity.
      *
-     * @Route("/{id}/update", name="service_update")
+     * @Route("/{id}/update", name="product_update")
      * @Method("POST")
-     * @Template("PwcSirBundle:Service:edit.html.twig")
+     * @Template("PwcSirBundle:Product:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:Service')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:Product')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Service entity.');
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new ServiceType(), $entity);
+        $editForm = $this->createForm(new ProductType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('service_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('product_edit', array('id' => $id)));
         }
 
         return array(
@@ -164,9 +164,9 @@ class ServiceController extends Controller
     }
 
     /**
-     * Deletes a Service entity.
+     * Deletes a Product entity.
      *
-     * @Route("/{id}/delete", name="service_delete")
+     * @Route("/{id}/delete", name="product_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -176,17 +176,17 @@ class ServiceController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('PwcSirBundle:Service')->find($id);
+            $entity = $em->getRepository('PwcSirBundle:Product')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Service entity.');
+                throw $this->createNotFoundException('Unable to find Product entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('service'));
+        return $this->redirect($this->generateUrl('product'));
     }
 
     private function createDeleteForm($id)
