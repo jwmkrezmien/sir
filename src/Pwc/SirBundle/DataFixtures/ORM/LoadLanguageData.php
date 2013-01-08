@@ -30,10 +30,11 @@ class LoadLanguageData implements FixtureInterface, ContainerAwareInterface
      */
     public function load(ObjectManager $manager)
     {
-        foreach ($this->container->getParameter('languages') as $confLanguage)
+        foreach ($this->container->getParameter('languages') as $slug => $confLanguage)
         {
                 $language = new Language();
                 $language->setName('language.' . $confLanguage);
+                $language->setSlug($slug);
 
                 $manager->persist($language);
         }

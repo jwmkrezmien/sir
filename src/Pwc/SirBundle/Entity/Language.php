@@ -4,6 +4,8 @@ namespace Pwc\SirBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="language")
@@ -26,6 +28,12 @@ class Language
      * @ORM\OneToMany(targetEntity="VulnDescription", mappedBy="language")
      */
     protected $vulnDescriptions;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128)
+     */
+    protected $slug;
 
     public function __toString()
     {
@@ -104,5 +112,28 @@ class Language
     public function getVulnDescriptions()
     {
         return $this->vulnDescriptions;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Language
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

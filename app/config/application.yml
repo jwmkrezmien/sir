@@ -14,7 +14,7 @@ parameters:
         socen:
             name: social.engineering
     layers:      [ application, infrastructure, network ]
-    languages:   [ en_US, nl_NL ]
+    languages:   { en: english, nl: dutch }
     rootcauses:  [ webcontent, website, webapp, webserversoft, hostos, networkinf, backendsys, sysdev, orgsupport ]
     tools:       { acunetix: "Acunetix", nessus: "Nessus" }
     owaspsets:
