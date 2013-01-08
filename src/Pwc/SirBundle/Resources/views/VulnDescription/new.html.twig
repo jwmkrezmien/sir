@@ -5,9 +5,11 @@
 <h1>{{ 'vulndescription.new.title' | trans() }}</h1>
 
 <form action="{{ path('vulndescription_create') }}" method="post" {{ form_enctype(form) }}>
+
+    <div class="row"><label for="vulnerability">{{ 'vulndescription.form.vulnerability' | trans() }}</label><span id="vulnerability" class="strvalue">{{ vulnerability.name | trans() }}</span></div>
+    <div class="row"><label for="language">{{ 'vulndescription.form.language' | trans() }}</label><span id="language" class="strvalue">{{ language.name | trans() }}</span></div>
+
     {{ form_widget(form) }}
-    <div class="row"><label for="language">{{ 'vulndescription.form.language' | trans() }}</label><span id="language">{{ language.name | trans() }}</span></div>
-    <div class="row"><label for="vulnerability">{{ 'vulndescription.form.vulnerability' | trans() }}</label><span id="vulnerability">{{ vulnerability.name | trans() }}</span></div>
 
     <ul class="record_actions">
         <li class="submit"><button type="submit">{{ 'form.general.submit.create' | trans() }}</button></li>
@@ -16,6 +18,5 @@
         </li>
     </ul>
 </form>
-
 
 {% endblock %}

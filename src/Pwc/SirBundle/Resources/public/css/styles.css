@@ -1,6 +1,7 @@
 BODY
 {
 	font: 77% Georgia;
+	color: #404040;
 }
 BUTTON
 {
@@ -51,7 +52,7 @@ FORM DIV.row
 	border-radius: 3px;
 	border: 1px solid #EDECEC;
 }
-FORM DIV.row SPAN
+FORM DIV.row SPAN.strvalue
 {
 	padding: 5px;
 	display: inline-block;
@@ -70,7 +71,7 @@ TEXTAREA.sir, INPUT[type=text].sir, SELECT.sir
 TEXTAREA.sir
 {
 	height: 100px;
-	resize: none;
+	resize: vertical;
 }
 DIV.row LABEL
 {
@@ -82,4 +83,33 @@ DIV.row LABEL
 H1
 {
 	padding: 5px;
+}
+INPUT[type=text].sir:focus, SELECT.sir:focus, TEXTAREA.sir:focus
+{
+	outline: 1px solid #5897FB;
+	/*+box-shadow:0 0 5px rgba(0, 0, 0, 0.3);*/
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	-o-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+BUTTON:focus, BUTTON:hover
+{
+	-webkit-transition: background-color 0.5s linear;;
+	-moz-transition: background-color 0.5s linear;;
+	-o-transition: background-color 0.5s linear;;
+	background: #5897FB;
+	text-decoration: underline;
+}
+BUTTON:active
+{
+	-webkit-transition: background-color 0.2s linear;;
+	-moz-transition: background-color 0.2s linear;;
+	-o-transition: background-color 0.2s linear;
+	background: #4D91FC;
+	/*+box-shadow:0 0 5px rgba(0, 0, 0, 0.3);*/
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	-o-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }

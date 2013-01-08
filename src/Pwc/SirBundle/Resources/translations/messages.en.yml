@@ -67,3 +67,8 @@ owaspitems:
     translayprot:             "Insufficient Transport Layer Protection"
     redirects:                "Unvalidated Redirects and Forwards"
 
+classification:
+    impact:
+        low:                  "Low"
+        medium:               "Medium"
+        high:                 "High"
