@@ -32,6 +32,11 @@ class OwaspSet
      */
     protected $owaspItems;
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     public function __construct()
     {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
