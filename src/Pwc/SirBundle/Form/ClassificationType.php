@@ -53,8 +53,6 @@ class ClassificationType extends AbstractType
             'class' => 'PwcSirBundle:Classification',
             'query_builder' => function (EntityRepository $er) use ($type)
             {
-                var_dump($type);
-
                 return $er->findAllForType($type);
             }
 ////            'choices' => array(

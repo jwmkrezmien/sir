@@ -4,7 +4,23 @@ service:
     new:
         title:                "Create a new Service"
 
+vulndescription:
+    form:
+        name:                 "Name:"
+        description:          "Description:"
+        risk:                 "Risk:"
+        solution:             "Solution:"
+        language:             "Language:"
+        vulnerability:        "Vulnerability:"
+    new:
+        title:                "New vulnerability description"
+
 form:
+    general:
+        back:                 "Back to list"
+        submit:
+            create:           "Create"
+            edit:             "Edit"
     type:
         classification:
             low:              "Low"
@@ -17,15 +33,15 @@ form:
         rootcause:
             content:          "Web Content"
 
-products:
+product:
     pentest.extern:           "External Penetration Test"
     pentest.intern:           "Internal Penetration Test"
     social.engineering:       "Social Engineering"
-layers:
+layer:
     application:              "Application"
     infrastructure:           "Infrastructure"
     network:                  "Network"
-rootcauses:
+rootcause:
     webcontent:               "Web Content"
     website:                  "Website"
     webapp:                   "Web Application"
@@ -35,6 +51,9 @@ rootcauses:
     backendsys:               "Backend System"
     sysdev:                   "System Development"
     orgsupport:               "Organizational Support"
+language:
+    english:                  "English"
+    dutch:                    "Dutch"
 
 owaspitems:
     injection:                "Injection"

@@ -12,10 +12,16 @@
     {% endjavascripts %}
 
     {% stylesheets
+    'bundles/pwcsir/css/cssreset-min.css'
+    'bundles/pwcsir/css/cssbase-min.css'
+    'bundles/pwcsir/css/select2.css'
     'bundles/pwcsir/css/chosen.css'
     'bundles/pwcsir/css/select2.css' filter='cssrewrite' output='bundles/sir/css/main.css' %}
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
     {% endstylesheets %}
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/bundles/pwcsir/css/styles.css" />
+
 </head>
 <body>
 

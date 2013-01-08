@@ -37,14 +37,14 @@ class VulnDescriptionController extends Controller
     /**
      * Finds and displays a VulnDescription entity.
      *
-     * @Route("/{id}/show", name="vulndescription_show")
+     * @Route("/show/{slug}", name="vulndescription_show")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:VulnDescription')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:VulnDescription')->findOneBySlug($slug);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find VulnDescription entity.');
@@ -61,17 +61,29 @@ class VulnDescriptionController extends Controller
     /**
      * Displays a form to create a new VulnDescription entity.
      *
-     * @Route("/new", name="vulndescription_new")
+     * @Route("/new/{language}/{slug}", name="vulndescription_new")
      * @Template()
      */
-    public function newAction()
+    public function newAction($language, $slug)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $vulnerability = $em->getRepository('PwcSirBundle:Vulnerability')->findOneBySlug($slug);
+        if (!$vulnerability) throw $this->createNotFoundException('Unable to find Vulnerability entity.');
+
+        $language = $em->getRepository('PwcSirBundle:Language')->findOneBySlug($language);
+        if (!$language) throw $this->createNotFoundException('Unable to find Language entity.');
+
         $entity = new VulnDescription();
-        $form   = $this->createForm(new VulnDescriptionType(), $entity);
+        $entity->setVulnerability($vulnerability);
+        $entity->setLanguage($language);
+        $form = $this->createForm(new VulnDescriptionType(), $entity);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+            'entity'        => $entity,
+            'form'          => $form->createView(),
+            'language'      => $language,
+            'vulnerability' => $vulnerability,
         );
     }
 

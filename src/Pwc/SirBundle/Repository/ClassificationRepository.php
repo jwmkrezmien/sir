@@ -8,8 +8,6 @@ class ClassificationRepository extends EntityRepository
 {
     public function findAllForType($type)
     {
-        var_dump($type);
-
         $query =  $this->createQueryBuilder('c')
                         ->where('c.type = :type')
                         ->orderBy('c.rank', 'ASC')
