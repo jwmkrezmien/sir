@@ -23,7 +23,7 @@ class RootCause
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="rootcause")
+     * @ORM\OneToMany(targetEntity="_Vulnerability", mappedBy="rootcause")
      */
     protected $vulnerabilities;
 

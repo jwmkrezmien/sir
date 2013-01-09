@@ -28,7 +28,7 @@ class Cost
     protected $rank;
 
     /**
-     * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="cost")
+     * @ORM\OneToMany(targetEntity="_Vulnerability", mappedBy="cost")
      */
     protected $vulnerabilities;
 

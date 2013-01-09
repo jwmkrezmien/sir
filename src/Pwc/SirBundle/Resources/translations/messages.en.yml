@@ -11,7 +11,7 @@ vulndescription:
         risk:                 "Risk:"
         solution:             "Solution:"
         language:             "Language:"
-        vulnerability:        "Vulnerability:"
+        vulnerability:        "_Vulnerability:"
     new:
         title:                "New vulnerability description"
 

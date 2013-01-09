@@ -18,7 +18,7 @@ class Service
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Vulnerability", inversedBy="services")
+     * @ORM\ManyToOne(targetEntity="_Vulnerability", inversedBy="services")
      * @ORM\JoinColumn(name="vulnerability_id", referencedColumnName="id")
      */
     protected $vulnerability;

@@ -28,7 +28,7 @@ class Time
     protected $rank;
 
     /**
-     * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="time")
+     * @ORM\OneToMany(targetEntity="_Vulnerability", mappedBy="time")
      */
     protected $vulnerabilities;
 

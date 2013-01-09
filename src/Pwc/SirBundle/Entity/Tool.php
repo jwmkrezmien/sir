@@ -28,7 +28,7 @@ class Tool
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="tool")
+     * @ORM\OneToMany(targetEntity="_Vulnerability", mappedBy="tool")
      */
     protected $vulnerabilities;
 
