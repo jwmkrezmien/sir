@@ -5,10 +5,10 @@ namespace Pwc\SirBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Pwc\SirBundle\Repository\ClassificationRepository")
- * @ORM\Table(name="classification")
+ * @ORM\Entity
+ * @ORM\Table(name="cost")
  */
-class Classification
+class Cost
 {
     /**
      * @ORM\Id
@@ -25,11 +25,6 @@ class Classification
     /**
      * @ORM\Column(type="string", length=25)
      */
-    protected $class;
-
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
     protected $type;
 
     /**
@@ -37,9 +32,22 @@ class Classification
      */
     protected $rank;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="cost")
+     */
+    protected $vulnerabilities;
+
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->vulnerabilities = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -56,7 +64,7 @@ class Classification
      * Set name
      *
      * @param string $name
-     * @return Classification
+     * @return Cost
      */
     public function setName($name)
     {
@@ -76,33 +84,10 @@ class Classification
     }
 
     /**
-     * Set class
-     *
-     * @param string $class
-     * @return Classification
-     */
-    public function setClass($class)
-    {
-        $this->class = $class;
-    
-        return $this;
-    }
-
-    /**
-     * Get class
-     *
-     * @return string 
-     */
-    public function getClass()
-    {
-        return $this->class;
-    }
-
-    /**
      * Set type
      *
      * @param string $type
-     * @return Classification
+     * @return Cost
      */
     public function setType($type)
     {
@@ -126,7 +111,7 @@ class Classification
      * Set rank
      *
      * @param integer $rank
-     * @return Classification
+     * @return Cost
      */
     public function setRank($rank)
     {
@@ -143,5 +128,38 @@ class Classification
     public function getRank()
     {
         return $this->rank;
+    }
+
+    /**
+     * Add vulnerability
+     *
+     * @param \Pwc\SirBundle\Entity\Vulnerability $vulnerability
+     * @return Cost
+     */
+    public function addVulnerability(\Pwc\SirBundle\Entity\Vulnerability $vulnerability)
+    {
+        $this->vulnerabilities[] = $vulnerability;
+    
+        return $this;
+    }
+
+    /**
+     * Remove vulnerability
+     *
+     * @param \Pwc\SirBundle\Entity\Vulnerability $vulnerability
+     */
+    public function removeVulnerability(\Pwc\SirBundle\Entity\Vulnerability $vulnerability)
+    {
+        $this->vulnerabilities->removeElement($vulnerability);
+    }
+
+    /**
+     * Get vulnerabilities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVulnerabilities()
+    {
+        return $this->vulnerabilities;
     }
 }
