@@ -27,6 +27,11 @@ class Layer
      */
     protected $vulnerabilities;
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * Get id
      *
