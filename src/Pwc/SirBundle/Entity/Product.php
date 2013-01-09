@@ -29,7 +29,7 @@ class Product
     private $tools;
 
     /**
-     * @ORM\OneToMany(targetEntity="_Vulnerability", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="product")
      */
     protected $vulnerabilities;
 

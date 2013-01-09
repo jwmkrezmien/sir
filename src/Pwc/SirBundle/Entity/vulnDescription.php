@@ -20,7 +20,7 @@ class VulnDescription
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="_Vulnerability", inversedBy="vulnDescriptions")
+     * @ORM\ManyToOne(targetEntity="Vulnerability", inversedBy="vulnDescriptions")
      * @ORM\JoinColumn(name="vulnerability_id", referencedColumnName="id")
      */
     protected $vulnerability;

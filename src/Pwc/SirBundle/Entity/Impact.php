@@ -28,7 +28,7 @@ class Impact
     protected $rank;
 
     /**
-     * @ORM\OneToMany(targetEntity="_Vulnerability", mappedBy="impact")
+     * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="impact")
      */
     protected $vulnerabilities;
 

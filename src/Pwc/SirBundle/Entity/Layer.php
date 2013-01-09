@@ -23,7 +23,7 @@ class Layer
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="_Vulnerability", mappedBy="layer")
+     * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="layer")
      */
     protected $vulnerabilities;
 

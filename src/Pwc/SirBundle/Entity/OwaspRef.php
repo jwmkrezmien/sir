@@ -18,7 +18,7 @@ class OwaspRef
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="_Vulnerability", inversedBy="owaspRefs")
+     * @ORM\ManyToOne(targetEntity="Vulnerability", inversedBy="owaspRefs")
      * @ORM\JoinColumn(name="vulnerability_id", referencedColumnName="id")
      */
     protected $vulnerability;

@@ -28,7 +28,7 @@ class Likelihood
     protected $rank;
 
     /**
-     * @ORM\OneToMany(targetEntity="_Vulnerability", mappedBy="likelihood")
+     * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="likelihood")
      */
     protected $vulnerabilities;
 

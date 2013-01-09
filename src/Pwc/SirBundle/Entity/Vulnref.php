@@ -28,7 +28,7 @@ class VulnRef
     protected $hyperlink;
 
     /**
-     * @ORM\ManyToOne(targetEntity="_Vulnerability", inversedBy="vulnRefs")
+     * @ORM\ManyToOne(targetEntity="Vulnerability", inversedBy="vulnRefs")
      * @ORM\JoinColumn(name="vulnerability_id", referencedColumnName="id")
      */
     protected $vulnerability;

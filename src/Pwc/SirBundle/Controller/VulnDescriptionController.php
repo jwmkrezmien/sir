@@ -68,8 +68,8 @@ class VulnDescriptionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $vulnerability = $em->getRepository('PwcSirBundle:_Vulnerability')->findOneBySlug($slug);
-        if (!$vulnerability) throw $this->createNotFoundException('Unable to find _Vulnerability entity.');
+        $vulnerability = $em->getRepository('PwcSirBundle:Vulnerability')->findOneBySlug($slug);
+        if (!$vulnerability) throw $this->createNotFoundException('Unable to find Vulnerability entity.');
 
         $language = $em->getRepository('PwcSirBundle:Language')->findOneBySlug($language);
         if (!$language) throw $this->createNotFoundException('Unable to find Language entity.');
