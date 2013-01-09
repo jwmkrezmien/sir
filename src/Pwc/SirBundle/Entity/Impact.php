@@ -23,11 +23,6 @@ class Impact
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=25)
-     */
-    protected $type;
-
-    /**
      * @ORM\Column(type="integer", length=1)
      */
     protected $rank;
@@ -82,30 +77,6 @@ class Impact
     {
         return $this->name;
     }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     * @return Impact
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string 
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
 
     /**
      * Set rank

@@ -1,9 +1,44 @@
 parameters:
-    classifications:
-        impact:     { 1: low, 2: medium, 3: high }
-        likelihood: { 1: low, 2: medium, 3: high }
-        time:       { 1: low, 2: medium, 3: high }
-        cost:       { 1: low, 2: medium, 3: high }
+    impacts:
+        low:
+            name: low
+            rank: 1
+        medium:
+            name: medium
+            rank: 2
+        high:
+            name: high
+            rank: 3
+    likelihoods:
+        low:
+            name: low
+            rank: 1
+        medium:
+            name: medium
+            rank: 2
+        high:
+            name: high
+            rank: 3
+    times:
+        low:
+            name: low
+            rank: 1
+        medium:
+            name: medium
+            rank: 2
+        high:
+            name: high
+            rank: 3
+    costs:
+        low:
+            name: low
+            rank: 1
+        medium:
+            name: medium
+            rank: 2
+        high:
+            name: high
+            rank: 3
     products:
         expen:
             name: pentest.extern
