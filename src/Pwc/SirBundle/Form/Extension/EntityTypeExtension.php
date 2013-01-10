@@ -31,7 +31,6 @@ class EntityTypeExtension extends AbstractTypeExtension
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        //$resolver->setOptional(array('select2'));
         $resolver->setDefaults(array(
                         'select2' => true,
                     ))
@@ -57,56 +56,6 @@ class EntityTypeExtension extends AbstractTypeExtension
 
                 return $attributes;
 
-/*
-                echo 'Run<br/>';
-
-                if (empty($attributes))
-                {
-                    echo 'attr is leeg <br/>';
-                }else{
-                    echo 'attr is niet leeg <br/>';
-                    var_dump($attributes);
-
-                    if (empty($attributes['class']))
-                    {
-                        echo 'attr["class"] is leeg <br/>';
-                    }else{
-                        echo 'attr["class"] is niet leeg <br/>';
-                        var_dump($attributes['class']);
-                    }
-                }
-*/
-                var_dump($attributes);
-
-                if ($options['select2'])
-                {
-
-                    echo 'option select2 is set <br/>';
-    /*
-                    return function (array $array) {
-
-                        if (array_key_exists('class', $array)) $array['class'] .= ' alter-select2';
-
-                        return $array;
-                    };
-*/
-                }
-
-
-/*
-                    if (array_key_exists('class', $options))
-                    {
-                        $previousValue['class'] = function ($value) { return $value . ' alter-select2'; };
-                        return $previousValue;
-                    }else
-                    {
-                        $previousValue['class'] = 'alter-select2';
-                        return $previousValue;
-                    }
-
-                    return $previousValue;
-                }
- */               return array();
             },
         ));
 
@@ -123,46 +72,7 @@ class EntityTypeExtension extends AbstractTypeExtension
     {
         if (array_key_exists('select2', $options))
         {
-            /*
-                        if (!isset($options['attr']['class']))
-                        {
-                            $options['attr']['class'] = 'select2';
 
-                        }else{
-
-                            $options['attr']['class'] .= 'select2';
-
-                        }
-
-                        var_dump($options);
-            /*
-                        $parentData = $form->getParent()->getData();
-
-                        if (null !== $parentData) {
-                            $propertyPath = new PropertyPath($options['image_path']);
-                            $imageUrl = $propertyPath->getValue($parentData);
-                        } else {
-                            $imageUrl = null;
-                        }
-
-                        // set an "image_url" variable that will be available when rendering this field
-                        $view->set('image_url', $imageUrl);
-            */
         }
     }
-
-/*
-    /**
-     * set the attribute class
-     *
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'attr'        => array('class' => "alter-select sir"),
-            'empty_value' => ''
-        ));
-    }
-*/
 }
