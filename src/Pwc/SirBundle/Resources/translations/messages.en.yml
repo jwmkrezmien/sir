@@ -5,9 +5,11 @@ form:
         submit:
             create:                   "Create"
             edit:                     "Edit"
+            delete:                   "Delete"
     label:
         vulnerability:
             _new:                     "Add a new vulnerability"
+            _edit:                    "Edit an existing vulnerability"
             product:                  "Product:"
             tool:                     "Tool:"
             name:                     "Name:"
