@@ -1,43 +1,45 @@
-service:
-    form:
-        name:                 "Name:"
-    new:
-        title:                "Create a new Service"
-
-vulndescription:
-    form:
-        name:                 "Name:"
-        description:          "Description:"
-        risk:                 "Risk:"
-        solution:             "Solution:"
-        language:             "Language:"
-        vulnerability:        "Vulnerability:"
-    new:
-        title:                "New vulnerability description"
-
 form:
     general:
-        back:                 "Back to list"
+        optional:                     "Optional"
+        back:                         "Back to list"
         submit:
-            create:           "Create"
-            edit:             "Edit"
-    type:
-        layer:
-            application:      "Application"
-            network:          "Network"
-            infrastructure:   "Infrastructure"
-        rootcause:
-            content:          "Web Content"
+            create:                   "Create"
+            edit:                     "Edit"
+    label:
+        vulnerability:
+            _new:                     "Add a new vulnerability"
+            product:                  "Product:"
+            tool:                     "Tool:"
+            name:                     "Name:"
+            layer:                    "Layer:"
+            rootcause:                "Root Cause:"
+            likelihood:               "Likelihood:"
+            impact:                   "Impact:"
+            time:                     "Time:"
+            cost:                     "Cost:"
+        vulndescription:
+            form:
+                name:                 "Name:"
+                description:          "Description:"
+                risk:                 "Risk:"
+                solution:             "Solution:"
+                language:             "Language:"
+                vulnerability:        "Vulnerability:"
 
 product:
+    empty_value:              "Choose the associated product"
     pentest.extern:           "External Penetration Test"
     pentest.intern:           "Internal Penetration Test"
     social.engineering:       "Social Engineering"
+tool:
+    empty_value:              "Choose the associated tool"
 layer:
+    empty_value:              "Choose the associated layer"
     application:              "Application"
     infrastructure:           "Infrastructure"
     network:                  "Network"
 rootcause:
+    empty_value:              "Choose the associated root cause"
     webcontent:               "Web Content"
     website:                  "Website"
     webapp:                   "Web Application"
@@ -47,6 +49,27 @@ rootcause:
     backendsys:               "Backend System"
     sysdev:                   "System Development"
     orgsupport:               "Organizational Support"
+likelihood:
+    empty_value:              "Choose the appropriate likelihood classification"
+    low:                      "Low"
+    medium:                   "Medium"
+    high:                     "High"
+impact:
+    empty_value:              "Choose the appropriate impact classification"
+    low:                      "Low"
+    medium:                   "Medium"
+    high:                     "High"
+time:
+    empty_value:              "Choose the appropriate time classification"
+    low:                      "Low"
+    medium:                   "Medium"
+    high:                     "High"
+cost:
+    empty_value:              "Choose the appropriate cost classification"
+    low:                      "Low"
+    medium:                   "Medium"
+    high:                     "High"
+
 language:
     english:                  "English"
     dutch:                    "Dutch"
@@ -62,23 +85,3 @@ owaspitems:
     urlaccess:                "Failure to Restrict URL Access"
     translayprot:             "Insufficient Transport Layer Protection"
     redirects:                "Unvalidated Redirects and Forwards"
-
-likelihood:
-    low:                      "Low"
-    medium:                   "Medium"
-    high:                     "High"
-
-impact:
-    low:                      "Low"
-    medium:                   "Medium"
-    high:                     "High"
-
-time:
-    low:                      "Low"
-    medium:                   "Medium"
-    high:                     "High"
-
-cost:
-    low:                      "Low"
-    medium:                   "Medium"
-    high:                     "High"

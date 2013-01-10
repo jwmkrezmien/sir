@@ -18,8 +18,20 @@
                 {% endfor %}
             </div>
         {% else %}
+            {%  if select2 %}
+                <script>
+                    $(document).ready(
+                            function() { $( "#{{ id }}" ).select2({
+                                {% if empty_value is not none %}placeholder: "{{ empty_value|trans }}{% if required == false %} [{{ 'form.general.optional'|trans }}]{% endif %}",{% endif %}
+                                {% if required == false %}allowClear: true,{% endif %}
+                            });
+                    });
+                </script>
+                {% endif %}
             <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
-                {% if empty_value is not none %}
+                {% if select2 and empty_value is not empty %}
+                    <option value=""></option>
+                {% elseif empty_value is not none %} %}
                     <option value="">{{ empty_value|trans }}</option>
                 {% endif %}
                 {% if preferred_choices|length > 0 %}

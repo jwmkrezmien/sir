@@ -5,14 +5,6 @@
 <h1>OwaspItem creation</h1>
 
 <form action="{{ path('owaspitem_create') }}" method="post" {{ form_enctype(form) }}>
-    <script>
-        $(document).ready(
-                function() { $( ".alter-select" ).select2({
-                    placeholder: "Select report type",
-                    width: '360px'
-                });
-                });
-    </script>
     {{ form_widget(form) }}
     <p>
         <button type="submit">Create</button>

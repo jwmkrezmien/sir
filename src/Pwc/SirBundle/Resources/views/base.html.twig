@@ -25,9 +25,11 @@
 </head>
 <body>
 
+{% block body %}
 <div id="content">
-    {% block body %}{% endblock %}
+    {% block content %}{% endblock %}
 </div>
+{% endblock %}
 
 </body>
 </html>

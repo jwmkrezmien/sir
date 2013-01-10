@@ -3,17 +3,13 @@
 namespace Pwc\SirBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension,
-    Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\Util\PropertyPath;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\Options;
+    Symfony\Component\OptionsResolver\OptionsResolverInterface,
+    Symfony\Component\Form\FormView,
+    Symfony\Component\Form\FormInterface,
+    Symfony\Component\OptionsResolver\Options;
 
 class EntityTypeExtension extends AbstractTypeExtension
 {
-
     /**
     * Returns the name of the type being extended.
     *
@@ -62,7 +58,7 @@ class EntityTypeExtension extends AbstractTypeExtension
     }
 
     /**
-     * Pass the select2 url to the view
+     * Pass the select2 attribute to the view
      *
      * @param \Symfony\Component\Form\FormView $view
      * @param \Symfony\Component\Form\FormInterface $form
@@ -70,9 +66,6 @@ class EntityTypeExtension extends AbstractTypeExtension
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        if (array_key_exists('select2', $options))
-        {
-
-        }
+        if (array_key_exists('select2', $options)) $view->set('select2', $options['select2']);
     }
 }
