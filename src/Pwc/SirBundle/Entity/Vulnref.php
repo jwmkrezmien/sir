@@ -28,10 +28,15 @@ class VulnRef
     protected $hyperlink;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Vulnerability", inversedBy="vulnRefs")
-     * @ORM\JoinColumn(name="vulnerability_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Vulnerability", inversedBy="vulnRefs"))
+     * @ORM\JoinColumn(name="vulnerability_id", referencedColumnName="id", nullable=false)
      */
     protected $vulnerability;
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * Get id
@@ -97,6 +102,8 @@ class VulnRef
      */
     public function setVulnerability(\Pwc\SirBundle\Entity\Vulnerability $vulnerability = null)
     {
+        var_dump($vulnerability);
+
         $this->vulnerability = $vulnerability;
     
         return $this;

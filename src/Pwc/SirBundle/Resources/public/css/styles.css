@@ -60,7 +60,7 @@ FORM DIV.row SPAN.strvalue
 	padding: 5px;
 	display: inline-block;
 }
-TEXTAREA.sir, INPUT[type=text].sir, SELECT.sir
+TEXTAREA.sir, INPUT[type=text].sir, INPUT[type=url].sir, SELECT.sir
 {
 	border: 1px solid #B7B7B7;
 	/*+border-radius:3px;*/
@@ -74,6 +74,14 @@ TEXTAREA.sir, INPUT[type=text].sir, SELECT.sir
 .sir.alter-select2
 {
 	width: 360px;
+}
+.sir.alter-select2 .select2-choices
+{
+	/*+border-radius:3px;*/
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	border-radius: 3px;
 }
 TEXTAREA.sir
 {
@@ -91,7 +99,7 @@ H1
 {
 	padding: 5px;
 }
-INPUT[type=text].sir:focus, SELECT.sir:focus, TEXTAREA.sir:focus
+INPUT[type=text].sir:focus, INPUT[type=url].sir:focus, SELECT.sir:focus, TEXTAREA.sir:focus
 {
 	outline: 1px solid #5897FB;
 	/*+box-shadow:0 0 5px rgba(0, 0, 0, 0.3);*/
@@ -133,4 +141,40 @@ BUTTON:active
 	-khtml-border-radius: 3px;
 	border-radius: 3px;
 	border: 1px solid #B7B7B7;
+}
+UL.form-collection
+{
+	margin: 0px;
+	padding: 0px;
+	display: inline-block;
+	list-style-type: none;
+}
+UL.form-collection LI.add-child
+{
+	text-align: right;
+	margin-right: 10px;
+}
+UL.form-collection LI.embedded-child
+{
+	background-color: #EDEDF7;
+	/*+border-radius:3px;*/
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #E1E3E1;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+UL.form-collection LI.embedded-child .delete-child
+{
+	margin-left: 155px;
+}
+UL.form-collection LI.embedded-child TEXTAREA.sir, UL.form-collection LI.embedded-child INPUT[type=text].sir, UL.form-collection LI.embedded-child INPUT[type=url].sir, UL.form-collection LI.embedded-child SELECT.sir
+{
+	width: 340px;
+}
+UL.form-collection LI.embedded-child DIV.row
+{
+	width: 500px;
 }

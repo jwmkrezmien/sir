@@ -7,6 +7,10 @@ form:
             edit:                     "Edit"
             delete:                   "Delete"
     label:
+        vulnref:
+            _manage:                  "Manage the vulnerability's references"
+        product:
+            _new:                     "Add a new product"
         vulnerability:
             _new:                     "Add a new vulnerability"
             _edit:                    "Edit an existing vulnerability"

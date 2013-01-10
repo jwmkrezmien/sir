@@ -1,21 +1,18 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
+{% form_theme form 'PwcSirBundle:Form:fields.html.twig' %}
 
-{% block body %}
-<h1>Product creation</h1>
+{% block content %}
+    <h1>{{ 'form.label.product._new' | trans() }}</h1>
 
-<form action="{{ path('product_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_javascript(form) }}
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
+    <form action="{{ path('product_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('product') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        <ul class="record_actions">
+            <li class="submit"><button type="submit">{{ 'form.general.submit.create' | trans() }}</button></li>
+            <li class="cancel">
+                <a href="{{ path('vulndescription') }}">{{ 'form.general.back' | trans() }}</a>
+            </li>
+        </ul>
+    </form>
+
 {% endblock %}
