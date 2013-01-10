@@ -63,3 +63,13 @@ swiftmailer:
 
 genemu_form:
     select2: ~
+
+services:
+   pwc_sir.entity_type_extension:
+        class: Pwc\SirBundle\Form\Extension\EntityTypeExtension
+        tags:
+           -  { name: form.type_extension, alias: entity }
+   pwc_sir.form_type_extension:
+       class: Pwc\SirBundle\Form\Extension\FormTypeExtension
+       tags:
+           -  { name: form.type_extension, alias: form }

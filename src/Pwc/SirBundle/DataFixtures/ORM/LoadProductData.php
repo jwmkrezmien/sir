@@ -32,10 +32,12 @@ class LoadProductData implements FixtureInterface, ContainerAwareInterface
     {
         foreach ($this->container->getParameter('products') as $confProduct)
         {
-                $product = new Product();
-                $product->setName('product.' . $confProduct);
+            $name = $confProduct['name'];
 
-                $manager->persist($product);
+            $product = new Product();
+            $product->setName('product.' . $name);
+
+            $manager->persist($product);
         }
 
         $manager->flush();

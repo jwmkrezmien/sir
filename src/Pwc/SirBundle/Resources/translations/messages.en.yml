@@ -22,10 +22,6 @@ form:
             create:           "Create"
             edit:             "Edit"
     type:
-        classification:
-            low:              "Low"
-            medium:           "Medium"
-            high:             "High"
         layer:
             application:      "Application"
             network:          "Network"
@@ -67,8 +63,22 @@ owaspitems:
     translayprot:             "Insufficient Transport Layer Protection"
     redirects:                "Unvalidated Redirects and Forwards"
 
-classification:
-    impact:
-        low:                  "Low"
-        medium:               "Medium"
-        high:                 "High"
+likelihood:
+    low:                      "Low"
+    medium:                   "Medium"
+    high:                     "High"
+
+impact:
+    low:                      "Low"
+    medium:                   "Medium"
+    high:                     "High"
+
+time:
+    low:                      "Low"
+    medium:                   "Medium"
+    high:                     "High"
+
+cost:
+    low:                      "Low"
+    medium:                   "Medium"
+    high:                     "High"
