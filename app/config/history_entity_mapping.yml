@@ -1,0 +1,17 @@
+parameters:
+    entity_mapping:
+        vulnerability:
+            entity:                   Pwc\SirBundle\Entity\Vulnerability
+            attributes:
+                product:              Pwc\SirBundle\Entity\Product
+                tool:                 Pwc\SirBundle\Entity\Tool
+                layer:                Pwc\SirBundle\Entity\Layer
+                rootcause:            Pwc\SirBundle\Entity\Rootcause
+                likelihood:           Pwc\SirBundle\Entity\Likelihood
+                impact:               Pwc\SirBundle\Entity\Impact
+                time:                 Pwc\SirBundle\Entity\Time
+                cost:                 Pwc\SirBundle\Entity\Cost
+        vulndescription:
+            entity:                   Pwc\SirBundle\Entity\VulnDescription
+            attributes:
+                language:             Pwc\SirBundle\Entity\Language

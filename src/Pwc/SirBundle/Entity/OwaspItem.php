@@ -5,7 +5,7 @@ namespace Pwc\SirBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Pwc\SirBundle\Repository\OwaspItemRepository")
  * @ORM\Table(name="owaspitem")
  */
 class OwaspItem
@@ -37,6 +37,11 @@ class OwaspItem
      * @ORM\OneToMany(targetEntity="OwaspRef", mappedBy="vulnerability")
      */
     protected $owaspRefs;
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * Get id

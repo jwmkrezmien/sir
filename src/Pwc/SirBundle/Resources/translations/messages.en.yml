@@ -75,12 +75,10 @@ cost:
     low:                      "Low"
     medium:                   "Medium"
     high:                     "High"
-
 language:
     english:                  "English"
     dutch:                    "Dutch"
-
-owaspitems:
+owaspitem:
     injection:                "Injection"
     xss:                      "Cross-Site Scripting"
     authsessman:              "Broken Authentication and Session Management"

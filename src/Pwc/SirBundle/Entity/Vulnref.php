@@ -102,8 +102,6 @@ class VulnRef
      */
     public function setVulnerability(\Pwc\SirBundle\Entity\Vulnerability $vulnerability = null)
     {
-        var_dump($vulnerability);
-
         $this->vulnerability = $vulnerability;
     
         return $this;
