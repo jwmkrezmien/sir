@@ -4,7 +4,7 @@ namespace Pwc\SirBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 
-class HistoryContextProvider
+class ModContextProvider
 {
     protected $entityManager;
 

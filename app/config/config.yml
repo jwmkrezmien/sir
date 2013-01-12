@@ -3,7 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: application.yml }
     - { resource: doctrine_extensions.yml }
-    - { resource: history_entity_mapping.yml }
+    - { resource: mod_entity_mapping.yml }
 
 framework:
     #esi:             ~
@@ -77,9 +77,9 @@ genemu_form:
     select2: ~
 
 services:
-    history_context_provider:
-        class:        Pwc\SirBundle\Service\HistoryContextProvider
-        arguments:    [ @doctrine.orm.entity_manager, %entity_mapping% ]
+    mod_context_provider:
+        class:        Pwc\SirBundle\Service\ModContextProvider
+        arguments:    [ @doctrine.orm.entity_manager, %mod_entity_mapping% ]
     pwc_sir.entity_type_extension:
         class: Pwc\SirBundle\Form\Extension\EntityTypeExtension
         tags:

@@ -18,7 +18,7 @@ class EntityVersion
 
     protected $username;
 
-    public function __construct(\Gedmo\Loggable\Entity\LogEntry $logEntry, \Pwc\SirBundle\Service\HistoryContextProvider $historyContextProvider)
+    public function __construct(\Gedmo\Loggable\Entity\LogEntry $logEntry, \Pwc\SirBundle\Service\ModContextProvider $modContextProvider)
     {
         $this->loggedAt = $logEntry->getLoggedAt();
         $this->action = $logEntry->getAction();
@@ -26,8 +26,8 @@ class EntityVersion
         $this->version = $logEntry->getVersion();
         $this->username = $logEntry->getUsername();
 
-        $reversedMapping = $historyContextProvider->getReversedEntityMapping();
-        $context = $historyContextProvider->getContext();
+        $reversedMapping = $modContextProvider->getReversedEntityMapping();
+        $context = $modContextProvider->getContext();
 
         foreach ($logEntry->getData() as $subject => $value)
         {

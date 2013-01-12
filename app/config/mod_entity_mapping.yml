@@ -1,5 +1,5 @@
 parameters:
-    entity_mapping:
+    mod_entity_mapping:
         vulnerability:
             entity:                   Pwc\SirBundle\Entity\Vulnerability
             attributes:
