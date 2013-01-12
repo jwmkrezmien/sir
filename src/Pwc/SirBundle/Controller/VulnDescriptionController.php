@@ -90,13 +90,24 @@ class VulnDescriptionController extends Controller
     /**
      * Creates a new VulnDescription entity.
      *
-     * @Route("/create", name="vulndescription_create")
+     * @Route("/create/{language}/{slug}", name="vulndescription_create")
      * @Method("POST")
      * @Template("PwcSirBundle:VulnDescription:new.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $language, $slug)
     {
-        $entity  = new VulnDescription();
+        $em = $this->getDoctrine()->getManager();
+
+        $vulnerability = $em->getRepository('PwcSirBundle:Vulnerability')->findOneBySlug($slug);
+        if (!$vulnerability) throw $this->createNotFoundException('Unable to find Vulnerability entity.');
+
+        $language = $em->getRepository('PwcSirBundle:Language')->findOneBySlug($language);
+        if (!$language) throw $this->createNotFoundException('Unable to find Language entity.');
+
+        $entity = new VulnDescription();
+        $entity->setVulnerability($vulnerability);
+        $entity->setLanguage($language);
+
         $form = $this->createForm(new VulnDescriptionType(), $entity);
         $form->bind($request);
 

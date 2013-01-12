@@ -4,7 +4,7 @@
 {% block body %}
 <h1>{{ 'vulndescription.new.title' | trans() }}</h1>
 
-<form action="{{ path('vulndescription_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('vulndescription_create', { 'language': language.slug, 'slug': vulnerability.slug }) }}" method="post" {{ form_enctype(form) }}>
 
     <div class="row"><label for="vulnerability">{{ 'vulndescription.form.vulnerability' | trans() }}</label><span id="vulnerability" class="strvalue">{{ vulnerability.name | trans() }}</span></div>
     <div class="row"><label for="language">{{ 'vulndescription.form.language' | trans() }}</label><span id="language" class="strvalue">{{ language.name | trans() }}</span></div>
