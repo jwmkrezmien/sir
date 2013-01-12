@@ -9,6 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity
  * @ORM\Table(name="vulndescription")
+ * @Gedmo\Loggable
  */
 class VulnDescription
 {
@@ -28,25 +29,30 @@ class VulnDescription
     /**
      * @ORM\ManyToOne(targetEntity="Language", inversedBy="vulnDescriptions")
      * @ORM\JoinColumn(name="language_id", referencedColumnName="id")
+     * @Gedmo\Versioned
      */
     protected $language;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="string", length=100)
      */
     protected $name;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="text")
      */
     protected $description;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="text")
      */
     protected $risk;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="text")
      */
     protected $solution;
