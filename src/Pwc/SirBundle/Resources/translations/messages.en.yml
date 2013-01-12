@@ -24,13 +24,12 @@ form:
             time:                     "Time:"
             cost:                     "Cost:"
         vulndescription:
-            form:
-                name:                 "Name:"
-                description:          "Description:"
-                risk:                 "Risk:"
-                solution:             "Solution:"
-                language:             "Language:"
-                vulnerability:        "Vulnerability:"
+            name:                 "Name:"
+            description:          "Description:"
+            risk:                 "Risk:"
+            solution:             "Solution:"
+            language:             "Language:"
+            vulnerability:        "Vulnerability:"
 
 product:
     empty_value:              "Choose the associated product"
