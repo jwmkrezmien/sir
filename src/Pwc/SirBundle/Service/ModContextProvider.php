@@ -138,18 +138,17 @@ class ModContextProvider
     /**
      * Set current versions of objects
      *
-     * @param string $name
      * @param array $entity
      */
-    public function setCurrentVersions($name, $entity)
+    public function setCurrentVersions($entity)
     {
-        $this->addCurrentVersions($name, array($entity));
+        $this->addCurrentVersions($this->getReversedEntityMapping(get_class($entity)), array($entity));
 
-        foreach($this->getHierarchy($name) as $currentVersion)
+        foreach($this->getHierarchy($this->getReversedEntityMapping(get_class($entity))) as $currentVersion)
         {
             $this->addCurrentVersions(
                 $currentVersion,
-                call_user_func(array($this->entityManager->getRepository($this->getEntityNamespace($currentVersion)), 'findBy' . $name), $entity)
+                call_user_func(array($this->entityManager->getRepository($this->getEntityNamespace($currentVersion)), 'findBy' . $this->getReversedEntityMapping(get_class($entity))), $entity)
             );
         }
     }
