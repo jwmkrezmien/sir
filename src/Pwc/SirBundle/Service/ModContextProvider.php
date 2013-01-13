@@ -25,6 +25,63 @@ class ModContextProvider
         $this->setReversedMapping('vulnerability');
     }
 
+    public function getLogEntries($entity)
+    {
+        $entries = $this->getLogEntriesQuery($entity)->getQuery()->getResult();
+
+        $version = array();
+        $chronologicalEntries = array();
+
+        foreach($entries as $entry)
+        {
+            $entityVersion = new \Pwc\SirBundle\Service\EntityVersion($entry, $this);
+
+            if(!isset($version[$entityVersion->getObjectClass()][$entityVersion->getObjectId()]))
+            {
+                if(!isset($version[$entityVersion->getObjectClass()])) $version[$entityVersion->getObjectClass()] = array();
+                $version[$entityVersion->getObjectClass()][$entityVersion->getObjectId()] = true;
+                $entityVersion->setCurrentFlag(true);
+            }
+
+            $chronologicalEntries[] = $entityVersion;
+        }
+
+        return $chronologicalEntries;
+    }
+
+    /**
+     * Gets a query to retrieve all associated log entries
+     *
+     * @param string $entity
+     * @return QueryBuilder
+     */
+    private function getLogEntriesQuery($entity)
+    {
+        $repo = $this->entityManager->getRepository('Gedmo\Loggable\Entity\LogEntry');
+
+        $qb = $repo->createQueryBuilder('e')
+                       ->where('e.objectClass = :parent_class AND e.objectId = :object_id')
+                       ->orderBy('e.loggedAt', 'DESC')
+                       ->addOrderBy('e.version', 'DESC');
+
+        $params = array(
+                    ':parent_class' => 'Pwc\SirBundle\Entity\Vulnerability',
+                    ':object_id'    => $entity->getId()
+                  );
+
+        foreach($this->getHierarchy($this->getReversedEntityMapping(get_class($entity))) as $child)
+        {
+            $qb->orWhere(sprintf('e.objectClass = :%s AND e.objectId IN (SELECT %s.id FROM %s %s WHERE %s.vulnerability = :object_id)', $child, $child, $this->getEntityNamespace($child), $child, $child));
+            $params[':'. $child] = $this->getEntityNamespace($child);
+        }
+
+        $qb->setParameters($params);
+
+        return $qb;
+    }
+
+
+
     /**
      * Check whether a particular attribute of an entity has a glossary
      *

@@ -22,6 +22,8 @@ class EntityVersion
 
     protected $modContextProvider;
 
+    protected $currentFlag = false;
+
     public function __construct(\Gedmo\Loggable\Entity\LogEntry $logEntry, \Pwc\SirBundle\Service\ModContextProvider $modContextProvider)
     {
         $this->loggedAt = $logEntry->getLoggedAt();
@@ -46,6 +48,36 @@ class EntityVersion
                                             ) : $value
                                      );
         }
+    }
+
+    /**
+     * Set a flag whether this entity version is the current one
+     *
+     * @param bool $flag
+     */
+    public function setCurrentFlag($flag)
+    {
+        $this->currentFlag = $flag === true ? true : false;
+    }
+
+    /**
+     * Get the current flag to assess whether this entity version is the current one
+     *
+     * @return bool
+     */
+    public function getCurrentFlag()
+    {
+        return $this->currentFlag;
+    }
+
+    /**
+     * Get assessment whether attribute is affected by reversion
+     *
+     * @return bool
+     */
+    public function getAffectedByReversion(Modification $modification)
+    {
+        return call_user_func(array($this->modContextProvider->getCurrentObject($this->getObjectName(), $this->getObjectId()), 'get' . $modification->getSubject())) != $modification->getValue();
     }
 
     /**
@@ -165,7 +197,7 @@ class EntityVersion
      * @param $attribute
      * @return string
      */
-    protected function getCurrentAttributeValue($attribute)
+    public function getCurrentAttributeValue($attribute)
     {
         return call_user_func(array($this->modContextProvider->getCurrentObject($this->getObjectName(), $this->getObjectId()), 'get' . $attribute));
     }
