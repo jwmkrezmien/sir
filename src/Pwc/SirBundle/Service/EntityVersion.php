@@ -32,8 +32,6 @@ class EntityVersion
         $this->username = $logEntry->getUsername();
         $this->modContextProvider = $modContextProvider;
 
-        //$context = $this->modContextProvider->getGlossary2();
-
         foreach ($logEntry->getData() as $attribute => $value)
         {
             $this->modifications[] = new Modification(
@@ -48,12 +46,6 @@ class EntityVersion
                                             ) : $value
                                      );
         }
-/*
-        foreach ($logEntry->getData() as $subject => $value)
-        {
-            $this->modifications[] = new Modification($subject, array_key_exists($subject, $context[$this->getObjectName()]) && isset($context[$this->getObjectName()][$subject][$value['id']]) ? $context[$this->getObjectName()][$subject][$value['id']] : $value);
-        }
-*/
     }
 
     /**
@@ -167,11 +159,22 @@ class EntityVersion
         return $this->modContextProvider->getEntityIdentifier($this->getObjectName()) ? $this->modContextProvider->getEntityIdentifier($this->getObjectName()) : 'id';
     }
 
+    /**
+     * Get an attribute value of the current version of an entity
+     *
+     * @param $attribute
+     * @return string
+     */
     protected function getCurrentAttributeValue($attribute)
     {
         return call_user_func(array($this->modContextProvider->getCurrentObject($this->getObjectName(), $this->getObjectId()), 'get' . $attribute));
     }
 
+    /**
+     * Get the identifier of current entity
+     *
+     * @return string
+     */
     public function getIdentifierOfCurrent()
     {
         return $this->getCurrentAttributeValue($this->getIdentifierAttribute());
