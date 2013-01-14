@@ -163,12 +163,12 @@ class EntityVersion
     /**
      * Get converted form label
      *
-     * @param string $subject
+     * @param Modification $modification
      * @return string
      */
-    public function convertSubjectToLabel($subject)
+    public function convertToLabel(Modification $modification)
     {
-        return 'form.label.'. $this->getObjectName() . '.' . $subject;
+        return 'form.label.'. $this->getObjectName() . '.' . $modification->getSubject();
     }
 
     /**
@@ -176,13 +176,13 @@ class EntityVersion
      *
      * @return object
      */
-    public function getCurrent()
+    protected function getCurrent()
     {
         return $this->modContextProvider->getCurrentObject($this->getObjectName(), $this->getObjectId());
     }
 
     /**
-     * Get the attribute that uniquely identifies this entity
+     * Get the attribute that uniquely identifies this entity, like slug. If not provider, the functions returns 'id'
      *
      * @return string
      */
@@ -194,12 +194,12 @@ class EntityVersion
     /**
      * Get an attribute value of the current version of an entity
      *
-     * @param $attribute
+     * @param Modification $modification
      * @return string
      */
-    public function getCurrentAttributeValue($attribute)
+    public function getCurrentAttributeValue(Modification $modification)
     {
-        return call_user_func(array($this->modContextProvider->getCurrentObject($this->getObjectName(), $this->getObjectId()), 'get' . $attribute));
+        return call_user_func(array($this->modContextProvider->getCurrentObject($this->getObjectName(), $this->getObjectId()), 'get' . $modification->getSubject()));
     }
 
     /**
@@ -209,6 +209,6 @@ class EntityVersion
      */
     public function getIdentifierOfCurrent()
     {
-        return $this->getCurrentAttributeValue($this->getIdentifierAttribute());
+        return call_user_func(array($this->modContextProvider->getCurrentObject($this->getObjectName(), $this->getObjectId()), 'get' . $this->getIdentifierAttribute()));
     }
 }
