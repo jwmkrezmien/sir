@@ -73,9 +73,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-genemu_form:
-    select2: ~
-
 services:
     mod_context_provider:
         class:        Pwc\SirBundle\Service\ModContextProvider
