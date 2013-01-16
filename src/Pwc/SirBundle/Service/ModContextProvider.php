@@ -91,7 +91,8 @@ class ModContextProvider
      */
     public function hasGlossary($entity, $attribute)
     {
-        return array_key_exists($attribute, $this->glossary[$entity]) && isset($this->glossary[$entity][$attribute]) ? true : false;
+
+        return isset($this->glossary[$entity]) && array_key_exists($attribute, $this->glossary[$entity]) ? true : false;
     }
 
     /**
@@ -281,7 +282,7 @@ class ModContextProvider
      */
     public function getEntityAttributes($entity)
     {
-        return array_key_exists($entity, $this->entityMapping['entities']) && isset($this->entityMapping['entities'][$entity]['attributes']) ? $this->entityMapping['entities'][$entity]['attributes'] : false;
+        return array_key_exists($entity, $this->entityMapping['entities']) && isset($this->entityMapping['entities'][$entity]['attributes']) ? $this->entityMapping['entities'][$entity]['attributes'] : array();
     }
 
     /**

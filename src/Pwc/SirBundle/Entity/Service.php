@@ -4,9 +4,12 @@ namespace Pwc\SirBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="service")
+ * @Gedmo\Loggable
  */
 class Service
 {
@@ -25,13 +28,21 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Gedmo\Versioned
      */
     protected $protocol;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Gedmo\Versioned
      */
     protected $port;
+
+    /**
+     * @Gedmo\Slug(fields={"protocol", "port"})
+     * @ORM\Column(length=40)
+     */
+    protected $slug;
 
     /**
      * Get id
@@ -110,5 +121,28 @@ class Service
     public function getVulnerability()
     {
         return $this->vulnerability;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return VulnDescription
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

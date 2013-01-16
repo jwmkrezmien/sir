@@ -4,9 +4,12 @@ namespace Pwc\SirBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="vulnref")
+ * @Gedmo\Loggable
  */
 class VulnRef
 {
@@ -19,11 +22,13 @@ class VulnRef
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Gedmo\Versioned
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Versioned
      */
     protected $hyperlink;
 
@@ -32,6 +37,12 @@ class VulnRef
      * @ORM\JoinColumn(name="vulnerability_id", referencedColumnName="id", nullable=false)
      */
     protected $vulnerability;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128)
+     */
+    protected $slug;
 
     public function __toString()
     {
@@ -115,5 +126,28 @@ class VulnRef
     public function getVulnerability()
     {
         return $this->vulnerability;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return VulnDescription
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

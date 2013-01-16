@@ -4,9 +4,12 @@ namespace Pwc\SirBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="owaspref")
+ * @Gedmo\Loggable
  */
 class OwaspRef
 {
@@ -26,6 +29,7 @@ class OwaspRef
     /**
      * @ORM\ManyToOne(targetEntity="OwaspItem", inversedBy="owaspRefs")
      * @ORM\JoinColumn(name="owaspitem_id", referencedColumnName="id")
+     * @Gedmo\Versioned
      */
     protected $owaspitem;
 

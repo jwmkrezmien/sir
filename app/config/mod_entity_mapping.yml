@@ -18,5 +18,15 @@ parameters:
                 attributes:
                     language:             Pwc\SirBundle\Entity\Language
                 identifier:               slug
+            service:
+                namespace:                Pwc\SirBundle\Entity\Service
+                identifier:               slug
+            vulnref:
+                namespace:                Pwc\SirBundle\Entity\VulnRef
+                identifier:               slug
+            owaspref:
+                namespace:                Pwc\SirBundle\Entity\OwaspRef
+                attributes:
+                    owaspitem:            Pwc\SirBundle\Entity\OwaspItem
         hierarchies:
-            vulnerability:                [ vulndescription ]
+            vulnerability:                [ vulndescription, service, vulnref, owaspref ]

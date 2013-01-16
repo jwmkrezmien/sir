@@ -24,12 +24,20 @@ form:
             time:                     "Time:"
             cost:                     "Cost:"
         vulndescription:
-            name:                 "Name:"
-            description:          "Description:"
-            risk:                 "Risk:"
-            solution:             "Solution:"
-            language:             "Language:"
-            vulnerability:        "Vulnerability:"
+            name:                     "Name:"
+            description:              "Description:"
+            risk:                     "Risk:"
+            solution:                 "Solution:"
+            language:                 "Language:"
+            vulnerability:            "Vulnerability:"
+        owaspref:
+            owaspitem:                "OWASP Reference:"
+        service:
+            protocol:                 "Protocol:"
+            port:                     "Port:"
+        vulnref:
+            name:                     "Name:"
+            hyperlink:                "Hyperlink:"
 
 product:
     empty_value:              "Choose the associated product"
