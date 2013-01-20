@@ -26,8 +26,16 @@
 <body>
 
 {% block body %}
-<div id="content">
-    {% block content %}{% endblock %}
+<div id="main">
+    {% block main %}
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="sidebar">
+        {% block sidebar %}
+            <div id="options">{% block options %}test{% endblock %}</div>
+            <div id="entity">{% block entity %}{% endblock %}</div>
+        {% endblock %}
+    </div>
+    {% endblock %}
 </div>
 {% endblock %}
 

@@ -31,7 +31,7 @@ form:
             language:                 "Language:"
             vulnerability:            "Vulnerability:"
         owaspref:
-            owaspitem:                "OWASP Reference:"
+            owaspitem:                "OWASP:"
         service:
             protocol:                 "Protocol:"
             port:                     "Port:"
