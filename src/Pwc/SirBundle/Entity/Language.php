@@ -35,6 +35,8 @@ class Language
      */
     protected $slug;
 
+    protected $available = true;
+
     public function __toString()
     {
         return $this->getName();
@@ -135,5 +137,28 @@ class Language
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set availability of language for new description
+     *
+     * @param boolean $available
+     * @return boolean
+     */
+    public function setAvailable($available)
+    {
+        $this->available = is_bool($available) ? $available : true;
+
+        return $this;
+    }
+
+    /**
+     * Get availability of language for new description
+     *
+     * @return boolean
+     */
+    public function getAvailable()
+    {
+        return $this->available;
     }
 }

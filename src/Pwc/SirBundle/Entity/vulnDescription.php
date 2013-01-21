@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Pwc\SirBundle\Repository\VulnDescriptionRepository")
  * @ORM\Table(name="vulndescription")
  * @Gedmo\Loggable
  */
