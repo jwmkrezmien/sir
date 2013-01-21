@@ -96,3 +96,5 @@ owaspitem:
     urlaccess:                "Failure to Restrict URL Access"
     translayprot:             "Insufficient Transport Layer Protection"
     redirects:                "Unvalidated Redirects and Forwards"
+
+no_description_found:         "No description was found"
