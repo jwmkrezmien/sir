@@ -1,8 +1,8 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 {% form_theme form 'PwcSirBundle:Form:fields.html.twig' %}
 
-{% block body %}
-<h1>{{ 'vulndescription.new.title'|trans }}</h1>
+{% block content %}
+<h1>{{ 'form.label.vulndescription._new'|trans({'%language%' : language.name|trans }) }}</h1>
 
 <form action="{{ path('vulndescription_create', { 'language': language.slug, 'slug': vulnerability.slug }) }}" method="post" {{ form_enctype(form) }}>
 
