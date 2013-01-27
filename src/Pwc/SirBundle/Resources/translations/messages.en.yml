@@ -24,6 +24,8 @@ form:
             time:                     "Time:"
             cost:                     "Cost:"
         vulndescription:
+            _new:                     "Add a new %language% description"
+            _edit:                    "Edit the %language% description"
             name:                     "Name:"
             description:              "Description:"
             risk:                     "Risk:"
@@ -97,4 +99,5 @@ owaspitem:
     translayprot:             "Insufficient Transport Layer Protection"
     redirects:                "Unvalidated Redirects and Forwards"
 
-no_description_found:         "No description was found"
+no_description_found:         "At this moment, no %language% description was found for the '%vulnerability%' vulnerabililty. If desired, a translation of the description can be added by proceeding to one of the links provided below."
+add_new_description:          "Add new %language% translation"
