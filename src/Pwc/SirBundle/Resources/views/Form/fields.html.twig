@@ -2,11 +2,23 @@
     {% spaceless %}
         <div class="row">
             {{ form_label(form, label|default(null)) }}
-            {{ form_errors(form) }}
             {{ form_widget(form) }}
+            {{ form_errors(form) }}
         </div>
     {% endspaceless %}
 {% endblock field_row %}
+
+{% block field_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <ul class="errors">
+                {% for error in errors %}
+                    <li class="error">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock field_errors %}
 
 {% block choice_widget %}
     {% spaceless %}

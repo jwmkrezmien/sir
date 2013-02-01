@@ -4,7 +4,7 @@
 {% block content %}
     <h1>{{ 'form.label.product._new' | trans() }}</h1>
 
-    <form action="{{ path('product_create') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('product_create') }}" method="post" {{ form_enctype(form) }} novalidate>
         {{ form_widget(form) }}
 
         <ul class="record_actions">

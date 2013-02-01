@@ -76,7 +76,7 @@ BUTTON:active, .button:active
 /*UL.record_actions*/
 UL.record_actions
 {
-    margin: 10px 0px 0px 153px;
+    margin: 10px 0px 0px 150px;
     padding: 0px;
     display: inline-block;
     list-style-type: none;
@@ -165,19 +165,19 @@ INPUT[type=text].sir:focus, INPUT[type=url].sir:focus, SELECT.sir:focus, TEXTARE
 /*UL.form-collection*/
 UL.form-collection
 {
-    margin: 0px;
-    padding: 0px;
+    margin: 0px -5px;
+    padding: 5px 0px;
     display: inline-block;
     list-style-type: none;
+    width: 515px;
 }
 UL.form-collection LI.add-child
 {
-    text-align: right;
     margin-right: 10px;
 }
 UL.form-collection LI.embedded-child
 {
-    background-color: #EDEDF7;
+    background-color: #F2F2F2;
     /*+border-radius:3px;*/
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -193,11 +193,11 @@ UL.form-collection LI.embedded-child .delete-child
 }
 UL.form-collection LI.embedded-child TEXTAREA.sir, UL.form-collection LI.embedded-child INPUT[type=text].sir, UL.form-collection LI.embedded-child INPUT[type=url].sir, UL.form-collection LI.embedded-child SELECT.sir
 {
-    width: 340px;
+    width: 330px;
 }
 UL.form-collection LI.embedded-child DIV.row
 {
-    width: 500px;
+    width: 493px;
 }
 /*#main*/
 #main
