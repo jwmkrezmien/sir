@@ -1,12 +1,12 @@
-{% block field_row %}
+{% block form_row  %}
     {% spaceless %}
-        <div class="row">
-            {{ form_label(form, label|default(null)) }}
+        <div class="row{% if errors %} hasError{% endif %}">
+            {{ form_label(form) }}
             {{ form_widget(form) }}
             {{ form_errors(form) }}
         </div>
     {% endspaceless %}
-{% endblock field_row %}
+{% endblock form_row %}
 
 {% block field_errors %}
     {% spaceless %}
@@ -19,6 +19,43 @@
         {% endif %}
     {% endspaceless %}
 {% endblock field_errors %}
+
+{% block form_widget_compound %}
+    {% spaceless %}
+
+            {% if form.parent is empty %}
+                {{ form_errors(form) }}
+            {% endif %}
+            {{ block('form_rows') }}
+            {{ form_rest(form) }}
+
+    {% endspaceless %}
+{% endblock form_widget_compound %}
+
+{% block collection_widget %}
+    {% spaceless %}
+        {% if prototype is defined %}
+            {% set attr = attr|merge({'data-prototype': form_widget(prototype) }) %}
+        {% endif %}
+
+        {% set attr = attr|merge({'class': form.vars.name ~ ' form-collection' }) %}
+        <ul {{ block('widget_container_attributes') }}>
+            {% if form.parent is empty %}
+                {{ form_errors(form) }}
+            {% endif %}
+            {% if form|length > 0 %}
+                {% for child in form %}
+            {% set attr = attr|merge({'class': 'embedded-child' }) %}
+            <li {{ block('widget_container_attributes') }}>
+                    {{ form_widget(child) }}
+            </li>
+                {% endfor %}
+            {% endif %}
+            {{ form_rest(form) }}
+        </ul>
+
+    {% endspaceless %}
+{% endblock collection_widget %}
 
 {% block choice_widget %}
     {% spaceless %}

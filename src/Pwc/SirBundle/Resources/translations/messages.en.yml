@@ -25,9 +25,11 @@ form:
             cost:                     "Cost:"
             vulnrefs:                 "Online References:"
             owaspitems:               "OWASP References:"
+            vulndescription:          "Descriptions:"
         vulndescription:
             _new:                     "Add a new %language% description"
             _edit:                    "Edit the %language% description"
+            _show:                    "Show the %language% description"
             name:                     "Name:"
             description:              "Description:"
             risk:                     "Risk:"
@@ -40,6 +42,8 @@ form:
             protocol:                 "Protocol:"
             port:                     "Port:"
         vulnref:
+            _new:                     "Add new online reference"
+            _delete:                  "Delete reference"
             name:                     "Name:"
             hyperlink:                "Hyperlink:"
 
@@ -103,5 +107,3 @@ owaspitem:
 
 no_description_found:         "At this moment, no %language% description was found for the '%vulnerability%' vulnerabililty. If desired, a translation of the description can be added by proceeding to one of the links provided below."
 add_new_description:          "Add new %language% translation"
-add_vulnref:                  "Add a new online reference for this vulnerability"
-delete_vulnref:               "Delete reference"

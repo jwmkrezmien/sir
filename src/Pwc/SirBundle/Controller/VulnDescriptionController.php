@@ -13,7 +13,7 @@ use Pwc\SirBundle\Form\VulnDescriptionType;
 /**
  * VulnDescription controller.
  *
- * @Route("/vulndescription")
+ * @Route("/vulnerability/description")
  */
 class VulnDescriptionController extends Controller
 {
@@ -37,11 +37,63 @@ class VulnDescriptionController extends Controller
     /**
      * Finds and displays a VulnDescription entity.
      *
-     * @Route("/show/{slug}", name="vulndescription_show")
+     * @Route("/show/{slug}", name="description_show")
      * @Template()
      */
     public function showAction($slug)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        // get all the languages
+        $languages = $em->getRepository('PwcSirBundle:Language')->findAll();
+
+        // walk through the array and check whether one corresponds with the slug provided in the route
+        foreach($languages as $language)
+        {
+            if($language->getSlug() == $languageSlug)
+            {
+                $languageFound = true;
+                $language->setActive(true);
+                break;
+            }
+        };
+
+        // if the language's slug was not found, throw an exception
+        if (!isset($languageFound)) throw $this->createNotFoundException('Unable to find Language entity.');
+
+        $entity = $em->getRepository('PwcSirBundle:Vulnerability')->findOneBySlugWithJoins($slug);
+        if (!$entity) throw $this->createNotFoundException('Unable to find Vulnerability entity.');
+
+        // walk through the array and set any language as available
+        array_walk($languages, function (&$object, $key, $entity) {
+
+            foreach($entity->getVulnDescriptions() as $description)
+            {
+                if($description->getLanguage()->getId() == $object->getId()) $object->setAvailable(false);
+            }
+
+        }, $entity);
+
+        foreach($entity->getVulnDescriptions() as $description)
+        {
+            if($description->getLanguage() == $language)
+            {
+                $descriptionFound = true;
+                break;
+            }
+        }
+
+        $deleteForm = $this->createDeleteForm($entity->getId());
+
+        return array(
+            'entity'       => $entity,
+            'description'  => isset($descriptionFound) ? $description : null,
+            'languages'    => $languages,
+            'language'     => $language,
+            'delete_form'  => $deleteForm->createView(),
+        );
+
+/*
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('PwcSirBundle:VulnDescription')->findOneBySlug($slug);
@@ -56,12 +108,13 @@ class VulnDescriptionController extends Controller
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         );
+*/
     }
 
     /**
      * Displays a form to create a new VulnDescription entity.
      *
-     * @Route("/new/{languageSlug}/{slug}", name="vulndescription_new")
+     * @Route("/new/{languageSlug}/{slug}", name="description_new")
      * @Template()
      */
     public function newAction($languageSlug, $slug)

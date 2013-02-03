@@ -35,7 +35,7 @@ class Language
      */
     protected $slug;
 
-    protected $available = true;
+    protected $available = false;
 
     protected $active = false;
 

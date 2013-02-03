@@ -1,3 +1,99 @@
+{% extends 'PwcSirBundle::base.html.twig' %}
+
+{% block content %}
+    <div id="contentHeader">
+        <h1>{{ entity.name }}</h1>
+
+        {% if description %}
+        <ul class="record_actions">
+            <li><a class="button" href="{{ path('vulndescription_edit', { 'slug': description.slug }) }}">Edit</a></li>
+            <li><form action="{{ path('vulndescription_delete', { 'slug': description.slug }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                <button type="submit">Delete</button>
+            </form></li>
+        </ul>
+        {% endif %}
+    </div>
+
+    <ul class="languages">
+        {% for language in languages %}
+            {% if language.active %}
+            <li class="{% if language.active %}active {% endif %}"><span class="bullet {% if language.available %}available{% else %}unavailable{% endif %}">&bull;</span> {{ language.name|trans }}</li>
+            {% else %}
+            <li><span class="bullet {% if language.available %}available{% else %}unavailable{% endif %}">&bull;</span> <a href="{{ path('vulnerability_show', { 'slug': entity.slug, 'languageSlug' : language.slug }) }}">{{ language.name|trans }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    {% if description %}
+    <ul class="description">
+        <li class="detail"><span class="attr-label">{{ 'form.label.vulndescription.name'|trans }}</span> <span class="attr-value">{{ description.name }}</span></li>
+        <li class="detail"><span class="attr-label">{{ 'form.label.vulndescription.description'|trans }}</span> <span class="attr-value">{{ description.description|nl2br }}</span></li>
+        <li class="detail"><span class="attr-label">{{ 'form.label.vulndescription.risk'|trans }}</span> <span class="attr-value">{{ description.risk|nl2br }}</span></li>
+        <li class="detail"><span class="attr-label">{{ 'form.label.vulndescription.solution'|trans }}</span> <span class="attr-value">{{ description.solution|nl2br }}</span></li>
+    </ul>
+    {% else %}
+    <p>{{  'no_description_found'|trans({'%language%' : language.name|trans, '%vulnerability%' : entity.name}) }}</p>
+    <a href="{{ path('vulndescription_new', { 'slug': entity.slug, 'languageSlug' : language.slug }) }}"> {{  'add_new_description'|trans({'%language%' : language.name|trans}) }}</a>
+    {% endif %}
+
+{% endblock %}
+
+{% block entity %}
+
+<h2>Vulnerability details</h2>
+<ul class="details">
+    <li class="detail"><span class="attr-label">{{ 'form.label.vulnerability.name'|trans }}</span> <span class="attr-value">{{ entity.name }}</span></li>
+    <li class="detail"><span class="attr-label">{{ 'form.label.vulnerability.product'|trans }}</span> <span class="attr-value">{{ entity.product|trans }}</span></li>
+    <li class="detail"><span class="attr-label">{{ 'form.label.vulnerability.tool'|trans }}</span> <span class="attr-value">{% if entity.tool %}{{ entity.tool }}{% else %}-{% endif %}</span></li>
+    <li class="detail"><span class="attr-label">{{ 'form.label.vulnerability.layer'|trans }}</span> <span class="attr-value">{{ entity.layer|trans }}</span></li>
+    <li class="detail"><span class="attr-label">{{ 'form.label.vulnerability.rootcause'|trans }}</span> <span class="attr-value">{{ entity.rootcause|trans }}</span></li>
+    <li class="detail">
+        <span class="attr-label">{{ 'form.label.owaspref.owaspitem'|trans }}</span>
+        <ul class="attr-value">
+            {% for owaspref in entity.owasprefs %}
+            <li>{{ owaspref.owaspitem|trans }}</li>
+            {% else %}-
+            {% endfor %}
+        </ul>
+    </li>
+
+    <li class="detail">
+        <span class="attr-label">{{ 'form.label.vulnref.hyperlink'|trans }}</span>
+        <ul class="attr-value">
+            {% for vulnref in entity.vulnrefs %}
+            <li><a href="{{ vulnref.hyperlink }}" target="_blank">{{ vulnref.name }}</a></li>
+            {% else %}-
+            {% endfor %}
+        </ul>
+    </li>
+    <li class="detail"><span class="attr-label">{{ 'form.label.vulnerability.likelihood'|trans }}</span> <span class="attr-value">{{ entity.likelihood|trans }}</span></li>
+    <li class="detail"><span class="attr-label">{{ 'form.label.vulnerability.impact'|trans }}</span> <span class="attr-value">{{ entity.impact|trans }}</span></li>
+    <li class="detail"><span class="attr-label">{{ 'form.label.vulnerability.time'|trans }}</span> <span class="attr-value">{{ entity.time|trans }}</span></li>
+    <li class="detail"><span class="attr-label">{{ 'form.label.vulnerability.cost'|trans }}</span> <span class="attr-value">{{ entity.cost|trans }}</span></li>
+</ul>
+
+<ul class="record_actions">
+    <li>
+        <a class="button" href="{{ path('vulnerability_edit', { 'id': entity.id }) }}">Edit</a>
+    </li>
+    <li>
+        <form action="{{ path('vulnerability_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block original %}
 <h1>VulnDescription</h1>
 
 <table class="record_properties">
@@ -47,3 +143,4 @@
         </form>
     </li>
 </ul>
+{% endblock original %}

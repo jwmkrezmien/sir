@@ -3,7 +3,7 @@
 namespace Pwc\SirBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -23,12 +23,15 @@ class VulnRef
     /**
      * @ORM\Column(type="string", length=100)
      * @Gedmo\Versioned
+     * @Assert\NotBlank()
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Gedmo\Versioned
+     * @Assert\NotBlank()
+     * @Assert\Url()
      */
     protected $hyperlink;
 
