@@ -1,0 +1,107 @@
+HTML
+{
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F7F7F7), color-stop(40%, #EDECEC), color-stop(100%, #F0EEEE));
+	background: -moz-linear-gradient(top, #F7F7F7, #EDECEC, #F0EEEE);
+	background-color: #F0EEEE;
+	height: 100%;
+	width: 100%;
+}
+BODY
+{
+	font: 77% Georgia;
+	color: #404040;
+	display: block;
+	margin: 0 auto;
+	width: 1024px;
+}
+/*Login Form*/
+FORM#login
+{
+	background-color: #E7E7E7;
+	padding: 10px;
+	border: 1px solid #D3D1D1;
+	/*+box-shadow:1px 1px #DFDFDF;*/
+	-moz-box-shadow: 1px 1px #DFDFDF;
+	-webkit-box-shadow: 1px 1px #DFDFDF;
+	-o-box-shadow: 1px 1px #DFDFDF;
+	box-shadow: 1px 1px #DFDFDF;
+	border-radius: 3px;
+	width: 590px;
+	margin: 100px auto 0;
+}
+FORM#login INPUT#username, FORM#login INPUT#password
+{
+	border: 1px solid #B7B7B7;
+	font: 100% Georgia;
+	/*+border-radius:3px;*/
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	border-radius: 3px;
+	padding: 10px 10px 10px 50px;
+	margin-right: 15px;
+	width: 200px;
+}
+FORM#login INPUT#username
+{
+	background: #FFFFFF url(../images/person.png) no-repeat 7px 7px;
+}
+FORM#login INPUT#password
+{
+	background: #FFFFFF url(../images/key.png) no-repeat 7px 6px;
+}
+FORM#login INPUT#username:focus, FORM#login INPUT#password:focus
+{
+	outline: 1px solid #5897FB;
+	/*+box-shadow:0 0 5px rgba(0, 0, 0, 0.3);*/
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	-o-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+INPUT[type=submit]
+{
+	background: url(../images/next-white.png) no-repeat;
+	border: none;
+	width: 28px;
+	height: 28px;
+	position: relative;
+	top: -5px;
+}
+INPUT[type=submit]:focus, INPUT[type=submit]:hover
+{
+	background: url(../images/next.png) no-repeat;
+}
+#main
+{
+	width: 100%;
+	height: 909px;
+	margin-top: 15px;
+	padding: 10px;
+	position: relative;
+	display: block;
+	background: url(../images/pwc_logo.png) no-repeat 250px 350px;
+}
+/*Error*/
+DIV#error
+{
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #D5291A), color-stop(40%, #B02115), color-stop(100%, #C22518));
+	background: -moz-linear-gradient(top, #D5291A, #B02115, #C22518);
+	background-color: #B02115;
+	/*+border-radius:0px 0px 5px 5px;*/
+	-moz-border-radius: 0px 0px 5px 5px;
+	-webkit-border-radius: 0px 0px 5px 5px;
+	-khtml-border-radius: 0px 0px 5px 5px;
+	border-radius: 0px 0px 5px 5px;
+	/*+box-shadow:1px 1px #CCB2B2;*/
+	-moz-box-shadow: 1px 1px #CCB2B2;
+	-webkit-box-shadow: 1px 1px #CCB2B2;
+	-o-box-shadow: 1px 1px #CCB2B2;
+	box-shadow: 1px 1px #CCB2B2;
+	color: #FFFFFF;
+	left: 215px;
+	padding: 10px;
+	position: relative;
+	text-align: center;
+	width: 575px;
+}

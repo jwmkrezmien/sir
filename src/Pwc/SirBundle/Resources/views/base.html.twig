@@ -7,7 +7,7 @@
 
     {% javascripts
     'bundles/pwcsir/js/chosen.jquery.js'
-    'bundles/pwcsir/js/select2.js' output='bundles/sir/js/main.js' %}
+    'bundles/pwcsir/js/select2.js' output='bundles/pwcsir/js/main.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
@@ -16,7 +16,7 @@
     'bundles/pwcsir/css/cssbase-min.css'
     'bundles/pwcsir/css/select2.css'
     'bundles/pwcsir/css/chosen.css'
-    'bundles/pwcsir/css/select2.css' filter='cssrewrite' output='bundles/sir/css/main.css' %}
+    'bundles/pwcsir/css/select2.css' filter='cssrewrite' output='bundles/pwcsir/css/main.css' %}
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
     {% endstylesheets %}
 
@@ -28,16 +28,20 @@
 {% block body %}
 <div id="main">
     {% block main %}
-    <div id="content">{% block content %}{% endblock %}</div>
-    <div id="sidebar">
-        {% block sidebar %}
-            <div id="options">{% block options %}test{% endblock %}</div>
-            <div id="vulnerability">{% block vulnerability %}{% endblock %}</div>
-        {% endblock %}
-    </div>
-    {% endblock %}
+        {% block fos_user_content %}
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+        <div id="sidebar">
+            {% block sidebar %}
+                <div id="options">{% block options %}test{% endblock options %}</div>
+                <div id="vulnerability">{% block vulnerability %}{% endblock vulnerability %}</div>
+            {% endblock sidebar %}
+        </div>
+        {% endblock fos_user_content %}
+    {% endblock main %}
 </div>
-{% endblock %}
+{% endblock body %}
 
 </body>
 </html>

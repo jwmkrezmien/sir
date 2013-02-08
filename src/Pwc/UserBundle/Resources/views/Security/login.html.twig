@@ -1,0 +1,26 @@
+{% extends "PwcUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+
+    <form id="login" action="{{ path("fos_user_security_check") }}" method="post">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+        <input type="text" id="username" name="_username" required="required" />
+        <input type="password" id="password" name="_password" required="required" />
+
+
+        <input type="submit" id="_submit" name="_submit" value="" />
+    </form>
+
+    {% if error %}
+        <div id="error">{{ error|trans({}, 'FOSUserBundle') }}</div>
+
+        <script>
+            $(document).ready(function()
+            {
+                $('#error').delay(5000).slideUp('slow');
+            });
+        </script>
+    {% endif %}
+
+{% endblock fos_user_content %}
