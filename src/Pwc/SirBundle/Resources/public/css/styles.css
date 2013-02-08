@@ -29,19 +29,50 @@ H1
 {
 	padding: 5px;
 }
+/*UL.entityIndex*/
+UL.entityIndex
+{
+	list-style: none;
+	margin: 0px;
+	padding: 15px;
+}
+UL.entityIndex LI
+{
+	border-bottom: 1px solid #E4E4E4;
+	margin-bottom: 5px;
+	position: relative;
+	width: 670px;
+}
+UL.entityIndex LI.entityNew
+{
+	border: 0px;
+	margin-top: 25px;
+}
+UL.entityIndex LI UL.actions
+{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+UL.entityIndex LI UL.actions LI
+{
+	width: 100%;
+}
 /*BUTTON and .button*/
 BUTTON, .button
 {
 	font: 100% Georgia;
 	background-color: #787878;
 	border: 1px solid #B1A9A9;
-	color: #FFF;
+	color: #FFFFFF;
 	/*+border-radius:3px;*/
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	-khtml-border-radius: 3px;
 	border-radius: 3px;
-	padding: 5px;
 	display: inline-block;
 	padding: 5px;
 	text-align: center;
@@ -50,6 +81,7 @@ BUTTON, .button
 .button
 {
 	width: 78px;
+	/*[empty]height:;*/
 	margin-top: 2px;
 }
 BUTTON:focus, BUTTON:hover, .button:focus, .button:hover
@@ -72,6 +104,11 @@ BUTTON:active, .button:active
 	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 	-o-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+LI.delete BUTTON
+{
+	height: 27px;
+	margin: 2px;
 }
 /*UL.record_actions*/
 UL.record_actions
@@ -351,7 +388,7 @@ UL.form-collection LI.embedded-child DIV.row
 	margin: 5px 5px 5px 440px;
 	width: 185px;
 }
-#content #contentHeader UL.record_actions FORM
+#content UL.record_actions FORM
 {
 	padding: 0px;
 }
@@ -425,4 +462,7 @@ UL.description LI.detail .attr-value
 	left: 100px;
 	position: relative;
 	width: 550px;
+}
+LI.delete BUTTON
+{
 }

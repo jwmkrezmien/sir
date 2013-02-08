@@ -3,6 +3,8 @@
 namespace Pwc\SirBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="Pwc\SirBundle\Repository\OwaspItemRepository")
@@ -37,6 +39,12 @@ class OwaspItem
      * @ORM\OneToMany(targetEntity="OwaspRef", mappedBy="vulnerability")
      */
     protected $owaspRefs;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128)
+     */
+    protected $slug;
 
     public function __toString()
     {
@@ -153,5 +161,28 @@ class OwaspItem
     public function getOwaspRefs()
     {
         return $this->owaspRefs;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Product
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

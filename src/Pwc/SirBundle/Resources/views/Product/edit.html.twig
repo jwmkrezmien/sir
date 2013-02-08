@@ -1,22 +1,24 @@
+{% extends 'PwcSirBundle::base.html.twig' %}
+{% form_theme edit_form 'PwcSirBundle:Form:fields.html.twig' %}
+
+{% block content %}
 <h1>Product edit</h1>
 
-<form action="{{ path('product_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<form action="{{ path('product_update', { 'slug': entity.slug }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
+
+    <ul class="record_actions">
+        <li class="submit"><button type="submit">{{ 'form.general.submit.edit'|trans }}</button></li>
+        <li class="delete">
+            <form action="{{ path('product_delete', { 'slug': entity.slug }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                <button type="submit">{{ 'form.general.submit.delete'|trans }}</button>
+            </form>
+        </li>
+        <li class="cancel">
+            <a href="{{ path('product') }}">{{ 'form.general.back' | trans() }}</a>
+        </li>
+    </ul>
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('product') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('product_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+{% endblock content %}

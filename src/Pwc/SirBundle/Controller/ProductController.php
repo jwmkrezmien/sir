@@ -37,20 +37,18 @@ class ProductController extends Controller
     /**
      * Finds and displays a Product entity.
      *
-     * @Route("/{id}/show", name="product_show")
+     * @Route("/{slug}/show", name="product_show")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:Product')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:Product')->findOneBySlug($slug);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Product entity.');
-        }
+        if (!$entity) throw $this->createNotFoundException('Unable to find Product entity.');
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getId());
 
         return array(
             'entity'      => $entity,
@@ -93,7 +91,7 @@ class ProductController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('product_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('product_show', array('slug' => $entity->getSlug())));
         }
 
         return array(
@@ -105,21 +103,19 @@ class ProductController extends Controller
     /**
      * Displays a form to edit an existing Product entity.
      *
-     * @Route("/{id}/edit", name="product_edit")
+     * @Route("/{slug}/edit", name="product_edit")
      * @Template()
      */
-    public function editAction($id)
+    public function editAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:Product')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:Product')->findOneBySlug($slug);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Product entity.');
-        }
+        if (!$entity) throw $this->createNotFoundException('Unable to find Product entity.');
 
         $editForm = $this->createForm(new ProductType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getId());
 
         return array(
             'entity'      => $entity,
@@ -131,21 +127,19 @@ class ProductController extends Controller
     /**
      * Edits an existing Product entity.
      *
-     * @Route("/{id}/update", name="product_update")
+     * @Route("/{slug}/update", name="product_update")
      * @Method("POST")
      * @Template("PwcSirBundle:Product:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:Product')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:Product')->findOneBySlug($slug);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Product entity.');
-        }
+        if (!$entity) throw $this->createNotFoundException('Unable to find Product entity.');
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getId());
         $editForm = $this->createForm(new ProductType(), $entity);
         $editForm->bind($request);
 
@@ -153,7 +147,7 @@ class ProductController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('product_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('product_show', array('slug' => $entity->getSlug())));
         }
 
         return array(
@@ -166,21 +160,19 @@ class ProductController extends Controller
     /**
      * Deletes a Product entity.
      *
-     * @Route("/{id}/delete", name="product_delete")
+     * @Route("/{slug}/delete", name="product_delete")
      * @Method("POST")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $slug)
     {
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('PwcSirBundle:Product')->find($id);
+            $entity = $em->getRepository('PwcSirBundle:Product')->findOneBySlug($slug);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Product entity.');
-            }
+            if (!$entity) throw $this->createNotFoundException('Unable to find Product entity.');
 
             $em->remove($entity);
             $em->flush();

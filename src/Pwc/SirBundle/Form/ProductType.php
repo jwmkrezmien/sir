@@ -13,7 +13,8 @@ class ProductType extends AbstractType
         $builder
             ->add('name')
             ->add('tools', null, array(
-                'multiple' => true
+                'multiple' => true,
+                'required' => false
             ));
     }
 

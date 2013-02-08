@@ -3,6 +3,8 @@
 namespace Pwc\SirBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -31,6 +33,12 @@ class Tool
      * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="tool")
      */
     protected $vulnerabilities;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128)
+     */
+    protected $slug;
 
     public function __construct()
     {
@@ -106,5 +114,28 @@ class Tool
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Product
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

@@ -1,37 +1,22 @@
-<h1>Product list</h1>
+{% extends 'PwcSirBundle::base.html.twig' %}
 
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
+{% block content %}
+<ul class="entityIndex">
+
     {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('product_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.name }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('product_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('product_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
-<ul>
     <li>
-        <a href="{{ path('product_new') }}">
-            Create a new entry
-        </a>
+        <a href="{{ path('product_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
+        <ul class="actions">
+            <li>
+                <a href="{{ path('product_edit', { 'slug': entity.slug }) }}">{{ 'form.general.submit.edit'|trans }}</a>
+            </li>
+        </ul>
+    </li>
+    {% endfor %}
+
+    <li class="entityNew">
+        <a href="{{ path('product_new') }}">{{ 'form.label.product._new'|trans }}</a>
     </li>
 </ul>
+
+{% endblock content %}

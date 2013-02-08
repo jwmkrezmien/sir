@@ -1,3 +1,6 @@
+{% extends 'PwcSirBundle::base.html.twig' %}
+
+{% block content %}
 <h1>Product</h1>
 
 <table class="record_properties">
@@ -14,20 +17,17 @@
 </table>
 
 <ul class="record_actions">
-    <li>
-        <a href="{{ path('product') }}">
-            Back to the list
-        </a>
+    <li class="submit">
+        <a class="button" href="{{ path('product_edit', { 'slug': entity.slug }) }}">{{ 'form.general.submit.edit'|trans }}</a>
     </li>
-    <li>
-        <a href="{{ path('product_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('product_delete', { 'id': entity.id }) }}" method="post">
+    <li class="delete">
+        <form action="{{ path('product_delete', { 'slug': entity.slug }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit">{{ 'form.general.submit.delete'|trans }}</button>
         </form>
     </li>
+    <li class="cancel">
+        <a href="{{ path('product') }}">{{ 'form.general.back' | trans() }}</a>
+    </li>
 </ul>
+{% endblock content %}
