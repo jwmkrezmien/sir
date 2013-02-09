@@ -1,8 +1,8 @@
 HTML
 {
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F7F7F7), color-stop(40%, #EDECEC), color-stop(100%, #F0EEEE));
-	background: -moz-linear-gradient(top, #F7F7F7, #EDECEC, #F0EEEE);
-	background-color: #F0EEEE;
+	background: url(../images/bg.jpg), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F7F7F7), color-stop(40%, #000), color-stop(100%, #F0EEEE));
+	background: url(../images/bg.jpg), -moz-linear-gradient(top, #F7F7F7, #EDECEC, #F0EEEE);
+	background-color:#F0EEEE;
 	height: 100%;
 	width: 100%;
 }
@@ -17,14 +17,14 @@ BODY
 /*Login Form*/
 FORM#login
 {
-	background-color: #E7E7E7;
+	background-color: #DFDFDF;
 	padding: 10px;
-	border: 1px solid #D3D1D1;
-	/*+box-shadow:1px 1px #DFDFDF;*/
-	-moz-box-shadow: 1px 1px #DFDFDF;
-	-webkit-box-shadow: 1px 1px #DFDFDF;
-	-o-box-shadow: 1px 1px #DFDFDF;
-	box-shadow: 1px 1px #DFDFDF;
+	border: 1px solid #BDBDBD;
+	/*+box-shadow:1px 1px #CDCDCD;*/
+	-moz-box-shadow: 1px 1px #CDCDCD;
+	-webkit-box-shadow: 1px 1px #CDCDCD;
+	-o-box-shadow: 1px 1px #CDCDCD;
+	box-shadow: 1px 1px #CDCDCD;
 	border-radius: 3px;
 	width: 590px;
 	margin: 100px auto 0;

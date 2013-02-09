@@ -1,9 +1,9 @@
 /*General*/
 HTML
 {
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F7F7F7), color-stop(40%, #EDECEC), color-stop(100%, #F0EEEE));
-    background: -moz-linear-gradient(top, #F7F7F7, #EDECEC, #F0EEEE);
-    background-color: #F0EEEE;
+    background: url(../images/bg.jpg), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F7F7F7), color-stop(40%, #000), color-stop(100%, #F0EEEE));
+    background: url(../images/bg.jpg), -moz-linear-gradient(top, #F7F7F7, #EDECEC, #F0EEEE);
+    background-color:#F0EEEE;
     height: 100%;
     width: 100%;
 }
