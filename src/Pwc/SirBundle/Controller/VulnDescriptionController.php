@@ -42,25 +42,28 @@ class VulnDescriptionController extends Controller
      */
     public function showAction($slug)
     {
-        $em = $this->getDoctrine()->getManager();
+        /*
+                $em = $this->getDoctrine()->getManager();
 
-        // get all the languages
-        $languages = $em->getRepository('PwcSirBundle:Language')->findAll();
+                // get all the languages
+                $languages = $em->getRepository('PwcSirBundle:Language')->findAll();
 
-        // walk through the array and check whether one corresponds with the slug provided in the route
-        foreach($languages as $language)
-        {
-            if($language->getSlug() == $languageSlug)
-            {
-                $languageFound = true;
-                $language->setActive(true);
-                break;
-            }
-        };
+                // walk through the array and check whether one corresponds with the slug provided in the route
+                foreach($languages as $language)
+                {
+                    if($language->getSlug() == $languageSlug)
+                    {
+                        $languageFound = true;
+                        $language->setActive(true);
+                        break;
+                    }
+                };
 
-        // if the language's slug was not found, throw an exception
-        if (!isset($languageFound)) throw $this->createNotFoundException('Unable to find Language entity.');
+                // if the language's slug was not found, throw an exception
+                if (!isset($languageFound)) throw $this->createNotFoundException('Unable to find Language entity.');
+        */
 
+        /*
         $entity = $em->getRepository('PwcSirBundle:Vulnerability')->findOneBySlugWithJoins($slug);
         if (!$entity) throw $this->createNotFoundException('Unable to find Vulnerability entity.');
 
@@ -92,23 +95,21 @@ class VulnDescriptionController extends Controller
             'language'     => $language,
             'delete_form'  => $deleteForm->createView(),
         );
+*/
 
-/*
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('PwcSirBundle:VulnDescription')->findOneBySlug($slug);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find VulnDescription entity.');
-        }
+        if (!$entity) throw $this->createNotFoundException('Unable to find VulnDescription entity.');
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getId());
 
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         );
-*/
     }
 
     /**

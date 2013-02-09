@@ -30,7 +30,17 @@
     {% block main %}
         {% block fos_user_content %}
         <div id="content">
-            {% block content %}{% endblock %}
+            {% block content %}
+            <div id="contentHeader">
+                {% block contentHeader %}{% endblock contentHeader %}
+            </div>
+            <div id="contentBody">
+                {% block contentBody %}{% endblock contentBody %}
+            </div>
+            <div id="contentFooter">
+                {% block contentFooter %}{% endblock contentFooter %}
+            </div>
+            {% endblock content %}
         </div>
         <div id="sidebar">
             {% block sidebar %}

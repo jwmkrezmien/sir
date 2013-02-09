@@ -1,9 +1,11 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 {% form_theme form 'PwcSirBundle:Form:fields.html.twig' %}
 
-{% block content %}
-    <h1>{{ 'form.label.product._new' | trans() }}</h1>
+{% block contentHeader %}
+    <h1>{{ 'form.label.product._new'|trans }}</h1>
+{% endblock contentHeader %}
 
+{% block contentBody %}
     <form action="{{ path('product_create') }}" method="post" {{ form_enctype(form) }} novalidate>
         {{ form_widget(form) }}
 
@@ -15,4 +17,4 @@
         </ul>
     </form>
 
-{% endblock %}
+{% endblock contentBody %}

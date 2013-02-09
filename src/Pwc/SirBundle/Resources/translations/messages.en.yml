@@ -11,9 +11,12 @@ form:
             _manage:                  "Manage the vulnerability's references"
         product:
             _new:                     "Add a new product"
+            name:                     "Name:"
+            tools:                    "Tools:"
         vulnerability:
             _new:                     "Add a new vulnerability"
             _edit:                    "Edit an existing vulnerability"
+            _show:                    "Vulnerability details"
             product:                  "Product:"
             tool:                     "Tool:"
             name:                     "Name:"
@@ -105,5 +108,7 @@ owaspitem:
     translayprot:             "Insufficient Transport Layer Protection"
     redirects:                "Unvalidated Redirects and Forwards"
 
-no_description_found:         "At this moment, no %language% description was found for the '%vulnerability%' vulnerabililty. If desired, a translation of the description can be added by proceeding to one of the links provided below."
-add_new_description:          "Add new %language% translation"
+interface:
+    description:
+        found:                "At this point in time, the vulnerability '%vulnerability%' already holds one or more report descriptions. In the list presented below, one can either choose to show or modify an existing description. Moreover, one can add a new description to this vulnerability."
+        non_found:            "At this moment, no %language% description was found for the '%vulnerability%' vulnerabililty. If desired, a translation of the description can be added by proceeding to one of the links provided below."
