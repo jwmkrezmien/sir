@@ -6,14 +6,15 @@ form:
             create:                   "Create"
             edit:                     "Edit"
             delete:                   "Delete"
+            save:                     "Save"
     label:
-        vulnref:
-            _manage:                  "Manage the vulnerability's references"
         product:
             _new:                     "Add a new product"
             name:                     "Name:"
             tools:                    "Tools:"
         vulnerability:
+            _entity:                  "Vulnerability"
+            _index:                   "Vulnerability overview"
             _new:                     "Add a new vulnerability"
             _edit:                    "Edit an existing vulnerability"
             _show:                    "Vulnerability details"
@@ -30,6 +31,7 @@ form:
             owaspitems:               "OWASP References:"
             vulndescription:          "Descriptions:"
         vulndescription:
+            _entity:                  "Description"
             _new:                     "Add a new %language% description"
             _edit:                    "Edit the %language% description"
             _show:                    "Show the %language% description"
@@ -40,13 +42,16 @@ form:
             language:                 "Language:"
             vulnerability:            "Vulnerability:"
         owaspref:
+            _entity:                  "OWASP reference"
             owaspitem:                "OWASP:"
         service:
             protocol:                 "Protocol:"
             port:                     "Port:"
         vulnref:
+            _entity:                  "Online reference"
             _new:                     "Add new online reference"
             _delete:                  "Delete reference"
+            _manage:                  "Manage the vulnerability's references"
             name:                     "Name:"
             hyperlink:                "Hyperlink:"
 
@@ -109,6 +114,6 @@ owaspitem:
     redirects:                "Unvalidated Redirects and Forwards"
 
 interface:
-    description:
-        found:                "At this point in time, the vulnerability '%vulnerability%' already holds one or more report descriptions. In the list presented below, one can either choose to show or modify an existing description. Moreover, one can add a new description to this vulnerability."
-        non_found:            "At this moment, no %language% description was found for the '%vulnerability%' vulnerabililty. If desired, a translation of the description can be added by proceeding to one of the links provided below."
+    vulndescription:
+        found:                "{0} At this point in time, the vulnerability '%vulnerability%' does not hold any report descriptions.|{1} At this point in time, the vulnerability '%vulnerability%' already holds a report description. In the list presented below, one can choose to show or modify an existing description.|]1,Inf] At this point in time, the vulnerability '%vulnerability%' already holds %count% report descriptions. In the list presented below, one can choose to show or modify an existing description."
+        allow_new:            "One can add a new description to this vulnerability for the languages presented below."

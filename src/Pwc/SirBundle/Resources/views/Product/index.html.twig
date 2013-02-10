@@ -1,11 +1,13 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 
-{% block content %}
-<ul class="entityIndex">
+{% block contentBody %}
+<ul class="entity index">
 
     {% for entity in entities %}
-    <li>
-        <a href="{{ path('product_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
+    <li class="detail">
+        <span class="attr-value">
+            <a href="{{ path('product_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
+        </span>
         <ul class="actions">
             <li>
                 <a href="{{ path('product_edit', { 'slug': entity.slug }) }}">{{ 'form.general.submit.edit'|trans }}</a>
@@ -14,9 +16,9 @@
     </li>
     {% endfor %}
 
-    <li class="entityNew">
+    <li class="detail new">
         <a href="{{ path('product_new') }}">{{ 'form.label.product._new'|trans }}</a>
     </li>
 </ul>
 
-{% endblock content %}
+{% endblock contentBody %}

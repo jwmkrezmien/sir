@@ -91,6 +91,18 @@ class EntityVersion
     }
 
     /**
+     * Returns a boolean reflecting whether this version holds alterations with respect to the current version
+     *
+     * @return boolean
+     */
+    public function hasAlterations()
+    {
+        foreach($this->getModifications() as $modification) if ($this->getAffectedByReversion($modification)) return true;
+
+        return false;
+    }
+
+    /**
      * Get a datetime object for the moment this entity version was set
      *
      * @return \DateTime
@@ -158,6 +170,16 @@ class EntityVersion
     public function getObjectName()
     {
         return $this->modContextProvider->getReversedEntityMapping($this->objectClass);
+    }
+
+    /**
+     * Get the label of the versioned object
+     *
+     * @return string
+     */
+    public function getObjectLabel()
+    {
+        return 'form.label.' . $this->modContextProvider->getReversedEntityMapping($this->objectClass) . '._entity';
     }
 
     /**

@@ -182,7 +182,7 @@ class VulnDescriptionController extends Controller
     /**
      * Displays a form to edit an existing VulnDescription entity.
      *
-     * @Route("/{slug}/edit", name="vulndescription_edit")
+     * @Route("/{slug}/edit", name="description_edit")
      * @Template()
      */
     public function editAction($slug)

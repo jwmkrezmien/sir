@@ -3,7 +3,7 @@ HTML
 {
     background: url(../images/bg.jpg), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F7F7F7), color-stop(40%, #000), color-stop(100%, #F0EEEE));
     background: url(../images/bg.jpg), -moz-linear-gradient(top, #F7F7F7, #EDECEC, #F0EEEE);
-    background-color:#F0EEEE;
+    background-color: #F0EEEE;
     height: 100%;
     width: 100%;
 }
@@ -32,23 +32,27 @@ H1
 /*UL.entityIndex*/
 UL.entityIndex
 {
-    list-style: none;
-    margin: 0px;
-    padding: 15px;
+    /*[disabled]list-style:none;*/
+    /*[disabled]margin:0px;*/
+    /*[disabled]padding:15px;*/
 }
 UL.entityIndex LI
 {
-    border-bottom: 1px solid #E4E4E4;
-    margin-bottom: 5px;
-    position: relative;
-    width: 670px;
+    /*[disabled]border-bottom:1px solid #E4E4E4;*/
+    /*[disabled]margin-bottom:5px;*/
+    /*[disabled]position:relative;*/
+    /*[disabled]width:670px;*/
 }
-UL.entityIndex LI.entityNew
+UL.entity.index LI.detail .attr-value
+{
+    left: 0px;
+}
+UL.entity.index LI.new
 {
     border: 0px;
     margin-top: 25px;
 }
-UL.entityIndex LI UL.actions
+UL.entity.index LI UL.actions
 {
     list-style: none;
     margin: 0px;
@@ -57,9 +61,14 @@ UL.entityIndex LI UL.actions
     right: 0px;
     top: 0px;
 }
-UL.entityIndex LI UL.actions LI
+UL.entity.index LI UL.actions LI
 {
     width: 100%;
+}
+UL.entity.index.description LI.detail .attr-value
+{
+    left: 100px;
+    width: 515px;
 }
 /*BUTTON and .button*/
 BUTTON, .button
@@ -132,10 +141,6 @@ UL.record_actions LI.cancel
     width: 130px;
     float: right;
     text-align: right;
-}
-UL.record_actions LI.delete
-{
-    margin-left: 5px;
 }
 FORM DIV.row
 {
@@ -309,6 +314,8 @@ UL.entity LI.detail
 {
     border-bottom: 1px solid #E4E4E4;
     margin-bottom: 10px;
+    margin-top: 5px;
+    padding-bottom: 5px;
     position: relative;
 }
 UL.entity LI.detail .attr-label
@@ -325,17 +332,23 @@ UL.entity LI.detail .attr-value
     left: 100px;
     top: 0px;
     position: relative;
+    width: 560px;
 }
 UL.entity LI.detail UL.attr-value LI
 {
     margin: 0px 0px 5px;
     padding: 0px;
 }
+UL.entity LI.detail UL.attr-value LI:last-child
+{
+    margin: 0px;
+}
 /*#content P*/
 #contentBody P
 {
     margin-left: 20px;
     margin-right: 20px;
+    line-height: 1.76;
 }
 /*#content UL.entity*/
 #contentBody UL.entity
@@ -377,7 +390,6 @@ UL.entity LI.detail UL.attr-value LI
     width: 700px;
     padding: 0px;
     position: absolute;
-    line-height: 1.76;
 }
 /*#content #contentHeader*/
 #content #contentHeader
@@ -423,39 +435,13 @@ UL.entity LI.detail UL.attr-value LI
     padding: 0px;
 }
 /*UL.languages*/
-UL.languages
-{
-    margin: 0px;
-    padding: 0px;
-}
-UL.languages
-{
-    display: inline-block;
-    list-style-type: none;
-    top: 50px;
-    line-height: normal;
-}
-UL.languages LI:first-child
-{
-    margin-left: 7px;
-}
-UL.languages LI
-{
-    float: left;
-    margin: 0px 10px;
-    position: relative;
-}
 UL.languages LI .bullet
 {
-    font-size: 177%;
-    top: 2px;
-    margin-right: 3px;
-    position: relative;
-    /*+text-shadow:1px 1px 1px #D4CACA;*/
-    -moz-text-shadow: 1px 1px 1px #D4CACA;
-    -webkit-text-shadow: 1px 1px 1px #D4CACA;
-    -o-text-shadow: 1px 1px 1px #D4CACA;
-    text-shadow: 1px 1px 1px #D4CACA;
+    /*[disabled]font-size:177%;*/
+    /*[disabled]top:2px;*/
+    /*[disabled]margin-right:3px;*/
+    /*[disabled]position:relative;*/
+    /*[disabled]+text-shadow:1px 1px 1px #D4CACA;*/
 }
 UL.languages LI SPAN.bullet.unavailable
 {
@@ -464,8 +450,4 @@ UL.languages LI SPAN.bullet.unavailable
 UL.languages LI SPAN.bullet.available
 {
     /*[disabled]color:#FF0000;*/
-}
-/*-*/
-LI.delete BUTTON
-{
 }

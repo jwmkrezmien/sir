@@ -62,7 +62,8 @@ class ModContextProvider
         $qb = $repo->createQueryBuilder('e')
                        ->where('e.objectClass = :parent_class AND e.objectId = :object_id')
                        ->orderBy('e.loggedAt', 'DESC')
-                       ->addOrderBy('e.version', 'DESC');
+                       ->addOrderBy('e.version', 'DESC')
+                       ->addOrderBy('e.id', 'DESC');
 
         $params = array(
                     ':parent_class' => 'Pwc\SirBundle\Entity\Vulnerability',
