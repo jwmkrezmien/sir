@@ -2,56 +2,99 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Test Application!{% endblock %}</title>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
     {% javascripts
     'bundles/pwcsir/js/chosen.jquery.js'
     'bundles/pwcsir/js/select2.js' output='bundles/pwcsir/js/main.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.no-icons.min.css">
+    <link rel="stylesheet" href="/bundles/pwcsir/css/sir.css" />
+
     {% stylesheets
-    'bundles/pwcsir/css/cssreset-min.css'
-    'bundles/pwcsir/css/cssbase-min.css'
     'bundles/pwcsir/css/select2.css'
-    'bundles/pwcsir/css/chosen.css'
-    'bundles/pwcsir/css/select2.css' filter='cssrewrite' output='bundles/pwcsir/css/main.css' %}
+    'bundles/pwcsir/css/chosen.css' filter='cssrewrite' output='bundles/pwcsir/css/main.css' %}
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
     {% endstylesheets %}
 
-    <link rel="stylesheet" type="text/css" media="screen" href="/bundles/pwcsir/css/styles.css" />
-
 </head>
+
 <body>
 
-{% block body %}
-<div id="main">
-    {% block main %}
-        {% block fos_user_content %}
-        <div id="content">
-            {% block content %}
-            <div id="contentHeader">
-                {% block contentHeader %}{% endblock contentHeader %}
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="navbar-content">
+                    {{ knp_menu_render('PwcSirBundle:Builder:mainMenu', {'currentClass': 'active', 'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
+                    {{ knp_menu_render('PwcSirBundle:Builder:userMenu', {'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
+                </div>
             </div>
-            <div id="contentBody">
-                {% block contentBody %}{% endblock contentBody %}
-            </div>
-            <div id="contentFooter">
-                {% block contentFooter %}{% endblock contentFooter %}
-            </div>
-            {% endblock content %}
         </div>
-        <div id="sidebar">
-            {% block sidebar %}
-                <div id="options">{% block options %}test{% endblock options %}</div>
-                <div id="vulnerability">{% block vulnerability %}{% endblock vulnerability %}</div>
-            {% endblock sidebar %}
+    </div>
+
+    <div class="main container">
+        <div class="page-header">
+            <h1>Settings</h1>
         </div>
-        {% endblock fos_user_content %}
-    {% endblock main %}
-</div>
-{% endblock body %}
+        <p class="lead">Ullam recusandae earum beatae voluptatum laudantium, ipsa ex rerum cumque.
+            Quod eius inventore excepturi quod at, occaecati, sequi esse autem facere
+            quaerat,
+            error doloremque repudiandae. Magnam nobis labore velit minima
+            voluptatibus neque commodi id aliquid doloremque irure aliqua iusto corporis
+            minus laboris deserunt, ullam quis nostrum.</p>
+        <div class="row-fluid">
+            <div class="span4">
+                {{ knp_menu_render('PwcSirBundle:Builder:settingsMenu', {'currentClass': 'active', 'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
+            </div>
+            <div class="span8">
+                <div class="alert">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <b>Warning!&nbsp;</b>You best check yourself, you're not looking so good.
+                </div>
+                <div class="well">
+                    <h4>Adding Components</h4>
+                    <div class="container-fluid">
+                        <div class="btn-group pull-right">
+                            <a class="btn dropdown-toggle btn-info btn-small" data-toggle="dropdown" href="#">Actions &nbsp; &nbsp;&nbsp;<span class="caret"></span></a>
+                            {{ knp_menu_render('PwcSirBundle:Builder:actionsMenu', {'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="well">
+                    <span class="label pull-left">Important</span><span class="label pull-left label-warning">New</span>
+                    <div class="pagination pagination-small pagination-centered">
+                        <ul>
+                            <li class="disabled">
+                                <a href="#">Prev</a>
+                            </li>
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
+
 </html>
