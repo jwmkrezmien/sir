@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Test Application!{% endblock %}</title>
+    <title>Security Issue Repository - {% block title %}{% if title is defined %}{{ title }}{% else %}No title set yet{% endif %}{% endblock %}</title>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
@@ -15,7 +15,6 @@
 
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.no-icons.min.css">
-    <link rel="stylesheet" href="/bundles/pwcsir/css/sir.css" />
 
     {% stylesheets
     'bundles/pwcsir/css/select2.css'
@@ -23,10 +22,13 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
     {% endstylesheets %}
 
+    <link rel="stylesheet" href="/bundles/pwcsir/css/sir.css" />
+
 </head>
 
 <body>
 
+    {% block body %}
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -40,14 +42,13 @@
 
     <div class="main container">
         <div class="page-header">
-            <h1>Settings</h1>
+            {% block pageHeader %}
+            <h1>{% if title is defined %}{{ title|trans }}{% else %}No title set yet{% endif %}</h1>
+            {% endblock pageHeader %}
         </div>
-        <p class="lead">Ullam recusandae earum beatae voluptatum laudantium, ipsa ex rerum cumque.
-            Quod eius inventore excepturi quod at, occaecati, sequi esse autem facere
-            quaerat,
-            error doloremque repudiandae. Magnam nobis labore velit minima
-            voluptatibus neque commodi id aliquid doloremque irure aliqua iusto corporis
-            minus laboris deserunt, ullam quis nostrum.</p>
+        {% block pageLead %}
+        <p class="lead">The Security Issue Repository uses several components that can be managed through this Settings page. These components include the management of Products, Tools and OWASP Lists.</p>
+        {% endblock pageLead %}
         <div class="row-fluid">
             <div class="span4">
                 {{ knp_menu_render('PwcSirBundle:Builder:settingsMenu', {'currentClass': 'active', 'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
@@ -58,43 +59,45 @@
                     <b>Warning!&nbsp;</b>You best check yourself, you're not looking so good.
                 </div>
                 <div class="well">
-                    <h4>Adding Components</h4>
-                    <div class="container-fluid">
-                        <div class="btn-group pull-right">
-                            <a class="btn dropdown-toggle btn-info btn-small" data-toggle="dropdown" href="#">Actions &nbsp; &nbsp;&nbsp;<span class="caret"></span></a>
-                            {{ knp_menu_render('PwcSirBundle:Builder:actionsMenu', {'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="well">
-                    <span class="label pull-left">Important</span><span class="label pull-left label-warning">New</span>
-                    <div class="pagination pagination-small pagination-centered">
-                        <ul>
-                            <li class="disabled">
-                                <a href="#">Prev</a>
-                            </li>
-                            <li>
-                                <a href="#">1</a>
-                            </li>
-                            <li>
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li>
-                                <a href="#">4</a>
-                            </li>
-                            <li>
-                                <a href="#">Next</a>
-                            </li>
-                        </ul>
-                    </div>
+                    {% block sectionHeader %}
+                    <h4>{% if subtitle is defined %}{{ subtitle|trans }}{% else %}No subtitle set yet{% endif %}</h4>
+                    {% endblock sectionHeader %}
+                    {% block contentBody %}{% endblock contentBody %}
                 </div>
             </div>
         </div>
     </div>
+    {% endblock body %}
 
 </body>
 
 </html>
+
+{% block label %}
+    <span class="label pull-left">Important</span>
+{% endblock label %}
+
+{% block paginator %}
+    <div class="pagination pagination-small pagination-centered">
+        <ul>
+            <li class="disabled">
+                <a href="#">Prev</a>
+            </li>
+            <li>
+                <a href="#">1</a>
+            </li>
+            <li>
+                <a href="#">2</a>
+            </li>
+            <li>
+                <a href="#">3</a>
+            </li>
+            <li>
+                <a href="#">4</a>
+            </li>
+            <li>
+                <a href="#">Next</a>
+            </li>
+        </ul>
+    </div>
+{% endblock paginator %}

@@ -5,14 +5,19 @@
 
     {% for entity in entities %}
     <li class="detail">
-        <span class="attr-value">
-            <a href="{{ path('product_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
-        </span>
-        <ul class="actions">
-            <li>
-                <a href="{{ path('product_edit', { 'slug': entity.slug }) }}">{{ 'form.general.submit.edit'|trans }}</a>
-            </li>
-        </ul>
+        <a href="{{ path('product_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
+        <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle btn-info btn-mini" data-toggle="dropdown" href="#">Actions &nbsp; &nbsp;&nbsp;<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li icon="icon-pencil" class="current first">
+                    <a href="/app_dev.php/product/"><i class="icon-pencil"></i>Edit</a>
+                </li>
+                <li icon="icon-trash" class="current last">
+                    <a href="/app_dev.php/product/">
+                    <i class="icon-trash"></i>Delete</a>
+                </li>
+            </ul>
+        </div>
     </li>
     {% endfor %}
 

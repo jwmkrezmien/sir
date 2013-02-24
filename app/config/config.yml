@@ -93,7 +93,7 @@ services:
     pwc_sir.form_type_extension:
         class: Pwc\SirBundle\Form\Extension\FormTypeExtension
         tags:
-            -  { name: form.type_extension, alias: form }
+            -  { name: form.type_extension, alias: text }
     pwc_sir.menu.voter.request:
         class: Pwc\SirBundle\Menu\RequestVoter
         arguments:

@@ -42,10 +42,10 @@ class EntityTypeExtension extends AbstractTypeExtension
                 {
                     if (!empty($attributes) && array_key_exists('class', $attributes))
                     {
-                        $attributes['class'] .= ' alter-select2';
+                        $attributes['class'] .= ' sir input-block-level';
                     }else{
 
-                        $attributes['class'] = 'alter-select2';
+                        $attributes['class'] = 'sir input-block-level';
 
                     }
                 }

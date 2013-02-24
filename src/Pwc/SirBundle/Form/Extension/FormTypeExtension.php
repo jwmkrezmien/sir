@@ -16,7 +16,7 @@ class FormTypeExtension extends AbstractTypeExtension
     */
     public function getExtendedType()
     {
-        return 'form';
+        return 'text';
     }
 
     /**
@@ -27,7 +27,7 @@ class FormTypeExtension extends AbstractTypeExtension
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-                        'attr'    => array('class' => 'sir')
+                        'attr'    => array('class' => 'sir input-block-level')
                     ));
     }
 }

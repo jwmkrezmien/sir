@@ -7,10 +7,10 @@
 {% block contentBody %}
 
 <ul class="entity">
-    <li class="detail"><span class="attr-label">{{ 'form.label.product.name'|trans }}</span> <span class="attr-value">{{ entity.name|trans }}</span></li>
+    <li class="detail"><label class="pull-left">{{ 'form.label.product.name'|trans }}</label><span class="value">{{ entity.name|trans }}</span></li>
     <li class="detail">
-        <span class="attr-label">{{ 'form.label.product.tools'|trans }}</span>
-        <ul class="attr-value">
+        <label class="pull-left">{{ 'form.label.product.tools'|trans }}</label>
+        <ul class="value">
             {% for tool in entity.tools %}
                 <li>{{ tool.name }}</li>
             {% else %}-
@@ -18,5 +18,13 @@
         </ul>
     </li>
 </ul>
+
+<div class="record_actions">
+    <form action="{{ path('product_delete', { 'slug': entity.slug }) }}" method="post">
+        {{ form_widget(delete_form) }}
+        <button type="submit" class="btn pull-left btn-info">{{ 'form.general.submit.delete'|trans }}</button>
+    </form>
+    <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back' | trans() }}</a>
+</div>
 
 {% endblock contentBody %}

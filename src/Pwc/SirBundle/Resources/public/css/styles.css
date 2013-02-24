@@ -29,20 +29,6 @@ H1
 {
     padding: 5px;
 }
-/*UL.entityIndex*/
-UL.entityIndex
-{
-    /*[disabled]list-style:none;*/
-    /*[disabled]margin:0px;*/
-    /*[disabled]padding:15px;*/
-}
-UL.entityIndex LI
-{
-    /*[disabled]border-bottom:1px solid #E4E4E4;*/
-    /*[disabled]margin-bottom:5px;*/
-    /*[disabled]position:relative;*/
-    /*[disabled]width:670px;*/
-}
 UL.entity.index LI.detail .attr-value
 {
     left: 0px;

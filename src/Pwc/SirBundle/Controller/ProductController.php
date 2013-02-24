@@ -30,6 +30,8 @@ class ProductController extends Controller
         $entities = $em->getRepository('PwcSirBundle:Product')->findAll();
 
         return array(
+            'title'    => 'Settings',
+            'subtitle' => 'Product management',
             'entities' => $entities,
         );
     }
@@ -52,6 +54,8 @@ class ProductController extends Controller
 
         return array(
             'entity'      => $entity,
+            'title'       => 'Settings',
+            'subtitle'    => 'Product details',
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -68,8 +72,10 @@ class ProductController extends Controller
         $form   = $this->createForm(new ProductType(), $entity);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+            'entity'      => $entity,
+            'title'       => 'Settings',
+            'subtitle'    => 'form.label.product._new',
+            'form'        => $form->createView(),
         );
     }
 

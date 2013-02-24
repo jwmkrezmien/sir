@@ -1,20 +1,15 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 {% form_theme form 'PwcSirBundle:Form:fields.html.twig' %}
 
-{% block contentHeader %}
-    <h1>{{ 'form.label.product._new'|trans }}</h1>
-{% endblock contentHeader %}
-
 {% block contentBody %}
     <form action="{{ path('product_create') }}" method="post" {{ form_enctype(form) }} novalidate>
         {{ form_widget(form) }}
 
-        <ul class="record_actions">
-            <li class="submit"><button type="submit">{{ 'form.general.submit.create' | trans() }}</button></li>
-            <li class="cancel">
-                <a href="{{ path('vulndescription') }}">{{ 'form.general.back' | trans() }}</a>
-            </li>
-        </ul>
+        <div class="record_actions">
+            <button type="submit" class="btn pull-left btn-info">{{ 'form.general.submit.create' | trans() }}</button>
+            <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back' | trans() }}</a>
+        </div>
+
     </form>
 
 {% endblock contentBody %}
