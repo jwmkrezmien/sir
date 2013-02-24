@@ -22,9 +22,9 @@
 <div class="record_actions">
     <form action="{{ path('product_delete', { 'slug': entity.slug }) }}" method="post">
         {{ form_widget(delete_form) }}
-        <button type="submit" class="btn pull-left btn-info">{{ 'form.general.submit.delete'|trans }}</button>
+        <button type="submit" class="btn btn-info">{{ 'form.general.submit.delete'|trans }}</button>
+        <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back' | trans() }}</a>
     </form>
-    <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back' | trans() }}</a>
 </div>
 
 {% endblock contentBody %}

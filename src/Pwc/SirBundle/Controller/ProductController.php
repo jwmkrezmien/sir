@@ -29,10 +29,17 @@ class ProductController extends Controller
 
         $entities = $em->getRepository('PwcSirBundle:Product')->findAll();
 
+        $pagination = $this->get('knp_paginator')->paginate(
+            $entities,
+            $this->get('request')->query->get('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
         return array(
-            'title'    => 'Settings',
-            'subtitle' => 'Product management',
-            'entities' => $entities,
+            'title'      => 'Settings',
+            'subtitle'   => 'Product management',
+            'entities'   => $entities,
+            'pagination' => $pagination
         );
     }
 

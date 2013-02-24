@@ -1,10 +1,12 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 
 {% block contentBody %}
+{{ knp_pagination_sortable(pagination, 'Name', 'name') }}
+
 <ul class="entity index">
 
-    {% for entity in entities %}
-    <li class="detail">
+    {% for entity in pagination %}
+    <li class="detail{% if loop.index is odd %} color{% endif %}">
         <a href="{{ path('product_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
         <div class="btn-group pull-right">
             <a class="btn dropdown-toggle btn-info btn-mini" data-toggle="dropdown" href="#">Actions &nbsp; &nbsp;&nbsp;<span class="caret"></span></a>
@@ -22,8 +24,12 @@
     {% endfor %}
 
     <li class="detail new">
-        <a href="{{ path('product_new') }}">{{ 'form.label.product._new'|trans }}</a>
+        <i class="icon-plus-sign"></i> <a href="{{ path('product_new') }}">{{ 'form.label.product._new'|trans }}</a>
     </li>
 </ul>
+
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
 
 {% endblock contentBody %}
