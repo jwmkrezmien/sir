@@ -73,6 +73,7 @@
                             function() { $( "#{{ id }}" ).select2({
                                 {% if empty_value is not none %}placeholder: "{{ empty_value|trans }}{% if required == false %} [{{ 'form.general.optional'|trans }}]{% endif %}",{% endif %}
                                 {% if required == false %}allowClear: true,{% endif %}
+                                containerCssClass: 'sir'
                             });
                     });
                 </script>

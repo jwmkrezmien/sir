@@ -8,8 +8,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
     {% javascripts
-    'bundles/pwcsir/js/chosen.jquery.js'
-    'bundles/pwcsir/js/select2.js' output='bundles/pwcsir/js/main.js' %}
+    'bundles/pwcsir/js/chosen.jquery.min.js'
+    'bundles/pwcsir/js/select2.min.js' output='bundles/pwcsir/js/main.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.no-icons.min.css">
 
     {% stylesheets
-    'bundles/pwcsir/css/select2.css'
-    'bundles/pwcsir/css/chosen.css' filter='cssrewrite' output='bundles/pwcsir/css/main.css' %}
+    'bundles/pwcsir/css/chosen.css'
+    'bundles/pwcsir/css/select2.css' filter='cssrewrite' output='bundles/pwcsir/css/main.css' %}
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
     {% endstylesheets %}
 
