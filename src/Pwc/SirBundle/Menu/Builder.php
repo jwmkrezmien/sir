@@ -18,7 +18,7 @@ class Builder extends ContainerAware
              ->setAttribute('icon', 'icon-book');
         $menu->addChild('Vulnerabilities', array('route' => 'vulnerability'))
              ->setAttribute('icon', 'icon-bolt');
-        $menu->addChild('Settings', array('route' => '_homepage'))
+        $menu->addChild('Settings', array('route' => 'settings'))
              ->setAttribute('icon', 'icon-cogs');
 
         return $menu;

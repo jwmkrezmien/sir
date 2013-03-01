@@ -13,7 +13,7 @@ use Pwc\SirBundle\Form\ProductType;
 /**
  * Product controller.
  *
- * @Route("/product")
+ * @Route("/settings/product")
  */
 class ProductController extends Controller
 {
