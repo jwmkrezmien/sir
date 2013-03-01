@@ -1,0 +1,6 @@
+parameters:
+    page_range:           5
+    page_name:            page
+    page_limit:           10
+    sort_field_name:      sort
+    sort_direction_name:  direction

@@ -1,1 +1,1 @@
-<a{% for attr, value in options %} {{ attr }}="{{ value }}"{% endfor %}><a href="#">{% if options.class == 'desc' %}<i class="icon-caret-down"></i>{% else %}<i class="icon-caret-up"></i>{% endif %} {{ title }}</a>
+{% if options.class == 'asc' %}<i class="icon-caret-down"></i>{% else %}<i class="icon-caret-up"></i>{% endif %} <a{% for attr, value in options %} {{ attr }}="{{ value }}"{% endfor %}>{{ title }}</a>

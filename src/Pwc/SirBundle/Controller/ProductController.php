@@ -27,12 +27,17 @@ class ProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('PwcSirBundle:Product')->findAll();
+        $pc = $this->get('pagination_checker');
+        $pc->setAllowedFieldNames(array('name'));
+
+        $entities = ($pc->getSortField() ? $em->getRepository('PwcSirBundle:Product')->findAllSorted($pc->getSortField(), $pc->getSortDirection()) : $em->getRepository('PwcSirBundle:Product')->findAll());
+
+        $pc->setPaginatedSubject($entities);
 
         $pagination = $this->get('knp_paginator')->paginate(
             $entities,
-            $this->get('request')->query->get('page', 1)/*page number*/,
-            10/*limit per page*/
+            $pc->getPage(),
+            $pc->getPageLimit()
         );
 
         return array(

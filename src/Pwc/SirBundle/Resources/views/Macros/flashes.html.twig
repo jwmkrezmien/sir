@@ -1,0 +1,39 @@
+{% macro render_flash(type, message, close, use_raw) %}
+    <div class="alert alert-{{ type }}" data-alert="alert">
+        {% if close|default(true) %}
+            <button type="button" class="close" data-dismiss="alert">×</button>
+        {% endif %}
+        {% if use_raw|default(false) %}
+            <b>{{ ('interface.flash.' ~ type) |trans }}:</b> {{ message|trans|raw }}
+        {% else %}
+            <b>{{ ('interface.flash.' ~ type) |trans }}:</b> {{ message|trans }}
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro show(type, close, use_raw) %}
+    {% set types = ['info', 'error', 'warning', 'success'] %}
+    {% if close is not defined %}
+        {% set close = true %}
+    {% endif %}
+    {% if use_raw is not defined %}
+        {% set use_raw = false %}
+    {% endif %}
+    {% if app.session.flashbag.peekAll|length > 0 %}
+        {% if type|default(false) %}
+            {% if app.session.flashbag.has(type) %}
+                {% for message in app.session.flashbag.get(type) %}
+                    {{ _self.render_flash(type, message, close, use_raw) }}
+                {% endfor %}
+            {% endif %}
+        {% else %}
+            {% for type in types %}
+                {% if app.session.flashbag.has(type) %}
+                    {% for message in app.session.flashbag.get(type) %}
+                        {{ _self.render_flash(type, message, close, use_raw) }}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endmacro %}

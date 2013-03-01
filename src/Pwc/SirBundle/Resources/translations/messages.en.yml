@@ -114,6 +114,11 @@ owaspitem:
     redirects:                "Unvalidated Redirects and Forwards"
 
 interface:
+    flash:
+        warning:              "Warning"
+        info:                 "Info"
+        error:                "Error"
+        success:              "Success"
     vulndescription:
         found:                "{0} At this point in time, the vulnerability '%vulnerability%' does not hold any report descriptions.|{1} At this point in time, the vulnerability '%vulnerability%' already holds a report description. In the list presented below, one can choose to show or modify an existing description.|]1,Inf] At this point in time, the vulnerability '%vulnerability%' already holds %count% report descriptions. In the list presented below, one can choose to show or modify an existing description."
         allow_new:            "One can add a new description to this vulnerability for the languages presented below."

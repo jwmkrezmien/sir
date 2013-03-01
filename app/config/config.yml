@@ -4,6 +4,7 @@ imports:
     - { resource: application.yml }
     - { resource: doctrine_extensions.yml }
     - { resource: mod_entity_mapping.yml }
+    - { resource: pagination.yml }
 
 framework:
     #esi:             ~
@@ -83,11 +84,11 @@ fos_user:
     user_class:     Pwc\SirBundle\Entity\User
 
 knp_paginator:
-    page_range: 5                      # default page range used in pagination control
+    page_range:              "%page_range%"          # default page range used in pagination control
     default_options:
-        page_name: page                # page query parameter name
-        sort_field_name: sort          # sort field query parameter name
-        sort_direction_name: direction # sort direction query parameter name
+        page_name:           "%page_name%"           # page query parameter name
+        sort_field_name:     "%sort_field_name%"     # sort field query parameter name
+        sort_direction_name: "%sort_direction_name%" # sort direction query parameter name
     template:
         pagination: PwcSirBundle:Pagination:twitter_bootstrap_pagination.html.twig     # sliding pagination controls template
         sortable: PwcSirBundle:Pagination:sortable_link.html.twig # sort link template
@@ -96,6 +97,15 @@ services:
     mod_context_provider:
         class:        Pwc\SirBundle\Service\ModContextProvider
         arguments:    [ @doctrine.orm.entity_manager, %mod_entity_mapping% ]
+    pagination_checker:
+        class:        Pwc\SirBundle\Service\PaginationChecker
+        scope: request
+        arguments:    [ @session, @request]
+        calls:
+            - [ setPageName, [ "%page_name%" ] ]
+            - [ setPageLimit, [ "%page_limit%" ] ]
+            - [ setSortFieldName, [ "%sort_field_name%" ] ]
+            - [ setDirectionName, [ "%sort_direction_name%" ] ]
     pwc_sir.entity_type_extension:
         class: Pwc\SirBundle\Form\Extension\EntityTypeExtension
         tags:
