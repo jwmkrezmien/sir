@@ -29,7 +29,7 @@ class Builder extends ContainerAware
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav pull-right');
 
-        $menu->addChild('User', array('label' => $this->container->get('security.context')->getToken()->getUser()->getFirstname() ? $this->container->get('security.context')->getToken()->getUser()->getFirstname() : 'Welcome, ' . $this->container->get('security.context')->getToken()->getUser()->getUsername()))
+        $menu->addChild('User', array('label' => $this->container->get('security.context')->getToken()->getUser()->getFirstname() && $this->container->get('security.context')->getToken()->getUser()->getLastname() ? $this->container->get('security.context')->getToken()->getUser()->getFirstname() . ' ' . $this->container->get('security.context')->getToken()->getUser()->getLastname() : $this->container->get('security.context')->getToken()->getUser()->getUsername()))
             ->setAttribute('dropdown', true)
             ->setAttribute('icon', 'icon-user');
 
