@@ -2,11 +2,17 @@ form:
     general:
         optional:                     "Optional"
         back:                         "Back to list"
+        actions:                      "Actions"
         submit:
             create:                   "Create"
             edit:                     "Edit"
             delete:                   "Delete"
             save:                     "Save"
+        modal:
+            header:                   "Before we proceed.."
+            delete:                   "You are about to delete this %type% from the repository. Are you sure want to remove '%name%' now?"
+            cancel:                   "Cancel"
+            proceed:                  "Delete it now!"
     label:
         product:
             _new:                     "Add a new product"

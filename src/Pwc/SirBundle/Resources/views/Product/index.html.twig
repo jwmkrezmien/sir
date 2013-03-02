@@ -8,18 +8,7 @@
     {% for entity in pagination %}
     <li class="detail{% if loop.index is odd %} color{% endif %}">
         <a href="{{ path('product_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
-        <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle btn-info btn-mini" data-toggle="dropdown" href="#">Actions &nbsp; &nbsp;&nbsp;<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li icon="icon-pencil" class="current first">
-                    <a href="/app_dev.php/product/"><i class="icon-pencil"></i>Edit</a>
-                </li>
-                <li icon="icon-trash" class="current last">
-                    <a href="/app_dev.php/product/">
-                    <i class="icon-trash"></i>Delete</a>
-                </li>
-            </ul>
-        </div>
+        {% include "PwcSirBundle:Includes:actions.html.twig" with { 'editRoute': path('product_edit', { 'slug': entity.slug }), 'deleteRoute': path('product_delete', { 'slug': entity.slug }) } %}
     </li>
     {% endfor %}
 
@@ -31,5 +20,22 @@
 <div class="navigation">
     {{ knp_pagination_render(pagination) }}
 </div>
+
+
+
+<script>
+
+$(document).ready(function()
+{
+    $('A.delete').click(function(e) {
+
+        e.preventDefault();
+
+
+
+    });
+});
+
+</script>
 
 {% endblock contentBody %}

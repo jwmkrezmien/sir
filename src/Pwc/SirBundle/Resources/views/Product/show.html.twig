@@ -19,12 +19,30 @@
     </li>
 </ul>
 
-<div class="record_actions">
+
+
+<div id="deleteModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="deleteModalLabel">{{ 'form.general.modal.header'|trans }}</h3>
+    </div>
+    <div class="modal-body">
+        <p>{{ 'form.general.modal.delete'|trans({ '%type%' : 'product', '%name%' : 'yo momma' }) }}</p>
+    </div>
+
     <form action="{{ path('product_delete', { 'slug': entity.slug }) }}" method="post">
         {{ form_widget(delete_form) }}
-        <button type="submit" class="btn btn-info">{{ 'form.general.submit.delete'|trans }}</button>
-        <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back' | trans() }}</a>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">{{ 'form.general.modal.cancel'|trans }}</button>
+            <button type="submit" class="btn btn-primary">{{ 'form.general.modal.proceed'|trans }}</button>
+        </div>
     </form>
+</div>
+
+
+<div class="record_actions">
+    <a class="btn btn-info" href= "#deleteModal" role="button" data-toggle="modal">{{ 'form.general.submit.delete'|trans }}</a>
+    <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back'|trans }}</a>
 </div>
 
 {% endblock contentBody %}

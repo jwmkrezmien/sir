@@ -62,7 +62,7 @@ class ProductController extends Controller
 
         if (!$entity) throw $this->createNotFoundException('Unable to find Product entity.');
 
-        $deleteForm = $this->createDeleteForm($entity->getId());
+        $deleteForm = $this->createDeleteForm($entity->getSlug());
 
         return array(
             'entity'      => $entity,
@@ -183,7 +183,7 @@ class ProductController extends Controller
      */
     public function deleteAction(Request $request, $slug)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm($slug);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -199,11 +199,10 @@ class ProductController extends Controller
         return $this->redirect($this->generateUrl('product'));
     }
 
-    private function createDeleteForm($id)
+    private function createDeleteForm($slug)
     {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
+        return $this->createFormBuilder(array('slug' => $slug))
+            ->add('slug', 'hidden')
+            ->getForm();
     }
 }
