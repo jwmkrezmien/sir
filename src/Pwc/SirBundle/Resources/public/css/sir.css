@@ -123,11 +123,15 @@ UL.entity LI.new
 .record_actions
 {
     position: relative;
-    padding: 0px 5px;
+    margin-bottom: 10px;
     top: 15px;
 }
-.record_actions A
+.record_actions A.cancel
 {
     top: 5px;
     position: relative;
+}
+.btn SPAN.actions
+{
+    margin-right: 10px;
 }

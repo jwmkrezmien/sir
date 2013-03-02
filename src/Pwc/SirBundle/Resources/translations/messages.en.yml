@@ -8,9 +8,10 @@ form:
             edit:                     "Edit"
             delete:                   "Delete"
             save:                     "Save"
+            show:                     "Show"
         modal:
             header:                   "Before we proceed.."
-            delete:                   "You are about to delete this %type% from the repository. Are you sure want to remove '%name%' now?"
+            delete:                   "You are about to delete a %type% from the repository. Are you sure want to remove the %type% '%name%' now?"
             cancel:                   "Cancel"
             proceed:                  "Delete it now!"
     label:
