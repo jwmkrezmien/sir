@@ -2,14 +2,13 @@
 {% form_theme form 'PwcSirBundle:Form:fields.html.twig' %}
 
 {% block contentBody %}
-    <form action="{{ path('product_create') }}" method="post" {{ form_enctype(form) }} novalidate>
-        {{ form_widget(form) }}
+<form action="{{ path('product_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+    {{ form_widget(form) }}
 
-        <div class="record_actions">
-            <button type="submit" class="btn btn-info">{{ 'form.general.submit.create' | trans() }}</button>
-            <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back' | trans() }}</a>
-        </div>
+    <div class="record_actions">
+        <button type="submit" class="btn btn-info">{{ 'form.general.submit.create'|trans }}</button>
+        <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back'|trans }}</a>
+    </div>
 
-    </form>
-
+</form>
 {% endblock contentBody %}

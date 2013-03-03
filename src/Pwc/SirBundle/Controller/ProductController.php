@@ -17,6 +17,8 @@ use Pwc\SirBundle\Form\ProductType;
  */
 class ProductController extends Controller
 {
+    protected $title = "Settings";
+
     /**
      * Lists all Product entities.
      *
@@ -28,23 +30,14 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $pc = $this->get('pagination_checker');
-        $pc->setAllowedFieldNames(array('name'));
+        $pc->addAllowedFieldName('name');
 
-        $entities = ($pc->getSortField() ? $em->getRepository('PwcSirBundle:Product')->findAllSorted($pc->getSortField(), $pc->getSortDirection()) : $em->getRepository('PwcSirBundle:Product')->findAll());
-
-        $pc->setPaginatedSubject($entities);
-
-        $pagination = $this->get('knp_paginator')->paginate(
-            $entities,
-            $pc->getPage(),
-            $pc->getPageLimit()
-        );
+        $pc->setPaginatedSubject($pc->isSortable() ? $em->getRepository('PwcSirBundle:Product')->findAllSorted($pc->getSortField(), $pc->getSortDirection()) : $em->getRepository('PwcSirBundle:Product')->findAll());
 
         return array(
-            'title'      => 'Settings',
-            'subtitle'   => 'Product management',
-            'entities'   => $entities,
-            'pagination' => $pagination
+            'title'      => $this->title,
+            'subtitle'   => $this->get('translator')->trans('form.general.subtitle.management', array('%type%' => 'Product')),
+            'pagination' => $pc->getPagination()
         );
     }
 
@@ -66,8 +59,8 @@ class ProductController extends Controller
 
         return array(
             'entity'      => $entity,
-            'title'       => 'Settings',
-            'subtitle'    => 'Product details',
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.details', array('%type%' => 'Product')),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -85,9 +78,9 @@ class ProductController extends Controller
 
         return array(
             'entity'      => $entity,
-            'title'       => 'Settings',
-            'subtitle'    => 'form.label.product._new',
-            'form'        => $form->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.new', array('%type%' => 'Product')),
+            'form'        => $form->createView()
         );
     }
 
@@ -112,9 +105,13 @@ class ProductController extends Controller
             return $this->redirect($this->generateUrl('product_show', array('slug' => $entity->getSlug())));
         }
 
+        $this->get('session')->getFlashBag()->add('warning', 'form.general.flash.save_unable');
+
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+            'entity'      => $entity,
+            'form'        => $form->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.new', array('%type%' => 'Product'))
         );
     }
 
@@ -133,12 +130,12 @@ class ProductController extends Controller
         if (!$entity) throw $this->createNotFoundException('Unable to find Product entity.');
 
         $editForm = $this->createForm(new ProductType(), $entity);
-        $deleteForm = $this->createDeleteForm($entity->getId());
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.edit', array('%type%' => 'Product'))
         );
     }
 
@@ -157,7 +154,6 @@ class ProductController extends Controller
 
         if (!$entity) throw $this->createNotFoundException('Unable to find Product entity.');
 
-        $deleteForm = $this->createDeleteForm($entity->getId());
         $editForm = $this->createForm(new ProductType(), $entity);
         $editForm->bind($request);
 
@@ -168,10 +164,13 @@ class ProductController extends Controller
             return $this->redirect($this->generateUrl('product_show', array('slug' => $entity->getSlug())));
         }
 
+        $this->get('session')->getFlashBag()->add('warning', 'form.general.flash.save_unable');
+
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.edit', array('%type%' => 'Product'))
         );
     }
 

@@ -1,11 +1,6 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 
-{% block contentHeader %}
-    <h1>{{ entity.name|trans }}</h1>
-{% endblock contentHeader %}
-
 {% block contentBody %}
-
 <ul class="entity">
     <li class="detail"><label class="pull-left">{{ 'form.label.product.name'|trans }}</label><span class="value">{{ entity.name|trans }}</span></li>
     <li class="detail">
@@ -20,10 +15,9 @@
 </ul>
 
 <div class="record_actions">
-    <a class="btn btn-info" href= "#deleteModal" role="button" data-toggle="modal">{{ 'form.general.submit.delete'|trans }}</a>
+    <a class="btn btn-info" href= "#deleteModal" role="button" data-toggle="modal">{{ 'form.general.button.delete'|trans }}</a>
     <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back'|trans }}</a>
 </div>
 
 {% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'type': 'product', 'deleteRoute': path('product_delete', { 'slug': entity.slug }), 'delete_form': delete_form } %}
-
 {% endblock contentBody %}

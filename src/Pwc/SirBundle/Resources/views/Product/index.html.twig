@@ -1,9 +1,10 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 
 {% block contentBody %}
-{{ knp_pagination_sortable(pagination, 'Name', 'name') }}
-
 <ul class="entity index">
+    <li class="detail sort">
+        {{ knp_pagination_sortable(pagination, 'name', 'name') }}
+    </li>
 
     {% for entity in pagination %}
     <li class="detail{% if loop.index is odd %} color{% endif %}">
@@ -13,12 +14,11 @@
     {% endfor %}
 
     <li class="detail new">
-        <i class="icon-plus-sign"></i> <a href="{{ path('product_new') }}">{{ 'form.label.product._new'|trans }}</a>
+        <i class="icon-plus-sign"></i> <a href="{{ path('product_new') }}">{{ 'form.general.link.add_new'|trans({ '%type%': 'product' }) }}</a>
     </li>
 </ul>
 
 <div class="navigation">
     {{ knp_pagination_render(pagination) }}
 </div>
-
 {% endblock contentBody %}

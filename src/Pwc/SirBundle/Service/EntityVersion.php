@@ -123,6 +123,30 @@ class EntityVersion
     }
 
     /**
+     * Get the label class based on the action that was performed
+     *
+     * @return string
+     */
+    public function getLabelClass()
+    {
+        switch ($this->action)
+        {
+            case 'create':
+                $result = 'label-success';
+                break;
+
+            case 'update':
+                $result = 'label-warning';
+                break;
+
+            case 'delete':
+                $result = 'label-info';
+                break;
+        }
+        return isset($result) ? $result : false;
+    }
+
+    /**
      * Get the namespace of the class
      *
      * @return string
@@ -159,7 +183,7 @@ class EntityVersion
      */
     public function getUsername()
     {
-        return $this->version;
+        return $this->username;
     }
 
     /**

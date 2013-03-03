@@ -102,7 +102,7 @@ services:
     pagination_checker:
         class:        Pwc\SirBundle\Service\PaginationChecker
         scope: request
-        arguments:    [ @session, @request]
+        arguments:    [ @session, @translator, @request, @knp_paginator]
         calls:
             - [ setPageName, [ "%page_name%" ] ]
             - [ setPageLimit, [ "%page_limit%" ] ]

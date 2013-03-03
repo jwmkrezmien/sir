@@ -2,14 +2,13 @@
 {% form_theme edit_form 'PwcSirBundle:Form:fields.html.twig' %}
 
 {% block contentBody %}
-<form action="{{ path('product_update', { 'slug': entity.slug }) }}" method="post" {{ form_enctype(edit_form) }}>
+<form action="{{ path('product_update', { 'slug': entity.slug }) }}" method="post" {{ form_enctype(edit_form) }} novalidate>
     {{ form_widget(edit_form) }}
 
     <div class="record_actions">
-        <button type="submit" class="btn btn-info">{{ 'form.general.submit.edit'|trans }}</button>
-        <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back' | trans() }}</a>
+        <button type="submit" class="btn btn-info">{{ 'form.general.button.edit'|trans }}</button>
+        <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back'|trans }}</a>
     </div>
 
 </form>
-
 {% endblock contentBody %}

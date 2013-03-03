@@ -3,11 +3,16 @@
 namespace Pwc\SirBundle\Service;
 
 use Symfony\Component\HttpFoundation\Session\Session,
-    Symfony\Component\HttpFoundation\Request;
+    Symfony\Component\HttpFoundation\Request,
+    Symfony\Bundle\FrameworkBundle\Translation\Translator;
+
+use Knp\Component\Pager\Paginator;
 
 class PaginationChecker
 {
     protected $session;
+
+    protected $translator;
 
     protected $request;
 
@@ -19,57 +24,116 @@ class PaginationChecker
 
     protected $allowedFieldNames = array();
 
-    public function __construct(Session $session, Request $request)
+    protected $paginator;
+
+    public function __construct(Session $session, Translator $translator, Request $request, Paginator $paginator)
     {
         $this->session = $session;
+        $this->translator = $translator;
         $this->request = $request;
+        $this->paginator = $paginator;
 
         $this->default['page_name'] = 1;
         $this->default['sort_field_name'] = false;
         $this->default['sort_direction_name'] = 'asc';
     }
 
-    public function getPageLimit()
+    public function getPagination($notifyByFlash = true)
+    {
+        $pagination = $this->paginator->paginate(
+            $this->array,
+            $this->getPage(),
+            $this->getPageLimit()
+        );
+
+        $this->validateRequest($notifyByFlash);
+
+        $pagination->setParam('sort', empty($this->allowedFieldNames) ? null : $this->getSortField());
+        $pagination->setParam('direction', empty($this->allowedFieldNames) ? null : $this->getSortDirection());
+
+        return $pagination;
+    }
+
+    protected function getPageLimit()
     {
         return $this->settings['page_limit'];
     }
 
-    public function setAllowedFieldNames(array $array = array())
+    public function addAllowedFieldName($field)
     {
-        $this->allowedFieldNames = $array;
+        if(is_string($field)) $this->allowedFieldNames[] = $field;
     }
 
-    public function validRequest()
+    public function isSortable()
     {
-        $result = true;
+        return !empty($this->allowedFieldNames) ? true: false;
+    }
 
+    protected function validateRequest($notifyByFlash = true)
+    {
+        if(!$this->validInputPage($notifyByFlash)) $result = false;
+        if(!empty($this->allowedFieldNames) && !$this->validInputSortCombination($notifyByFlash)) $result = false;
+
+        return isset($result) ? $result : true;
+    }
+
+    protected function validInputPage($notifyByFlash = true)
+    {
         // check whether a valid page number is provided
-        if (!$this->validPage())
+        if(is_null($this->getRequestParamValue('page_name')))
         {
-            $this->session->getFlashBag()->add('warning', 'Invalid page name');
-            $result = false;
-        }
+            $result = true;
 
-        if(!$this->validSortCombination()) $result = false;
+        }else
+        {
+            if ($this->validPage())
+            {
+                $result = true;
+
+            }else
+            {
+                if ($notifyByFlash) $this->session->getFlashBag()->add('warning', $this->translator->trans('form.general.flash.invalid_page'));
+                $result = false;
+            }
+        }
 
         return $result;
     }
 
-    public function validSortCombination()
+    protected function validInputSortCombination($notifyByFlash = true)
     {
-        $result = true;
-
         // check whether a valid sort field is provided
-        if (!$this->validSortField())
+        if(is_null($this->getRequestParamValue('sort_field_name')) && is_null($this->getRequestParamValue('sort_direction_name')))
         {
-            $this->session->getFlashBag()->add('warning', 'Invalid sort field');
+            if ($notifyByFlash) $this->session->getFlashBag()->add('info', $this->translator->trans('form.general.flash.sorted_by_default', array('%field%' => $this->getSortField())));
+            $result = true;
+
+        }elseif(!is_null($this->getRequestParamValue('sort_field_name')) && is_null($this->getRequestParamValue('sort_direction_name')))
+        {
+            if ($notifyByFlash) $this->session->getFlashBag()->add('warning', $this->translator->trans('form.general.flash.direction_not_provided', array('%field%' => $this->getSortField())));
             $result = false;
 
-            // if a valid name is provided for the name of the sorted field, check whether the direction is correct
-        }elseif (!$this->validSortDirection())
+        }elseif(is_null($this->getRequestParamValue('sort_field_name')) && !is_null($this->getRequestParamValue('sort_direction_name')))
         {
-            $this->session->getFlashBag()->add('success', 'Invalid sort direction');
+            if ($notifyByFlash) $this->session->getFlashBag()->add('warning', $this->translator->trans('form.general.flash.field_not_provided', array('%field%' => $this->getSortField())));
             $result = false;
+
+        }elseif(!is_null($this->getRequestParamValue('sort_field_name')) && !is_null($this->getRequestParamValue('sort_direction_name')))
+        {
+            $result = true;
+
+            if (!$this->validSortField())
+            {
+                if ($notifyByFlash) $this->session->getFlashBag()->add('warning', $this->translator->trans('form.general.flash.invalid_sort_field', array('%field%' => $this->getSortField())));
+                $result = false;
+            }
+
+            if (!$this->validSortDirection())
+            {
+                if ($notifyByFlash) $this->session->getFlashBag()->add('warning', $this->translator->trans('form.general.flash.invalid_sort_direction', array('%field%' => $this->getSortField())));
+                $result = false;
+
+            }
         }
 
         return $result;
@@ -77,27 +141,29 @@ class PaginationChecker
 
     public function getPage()
     {
-        return ($this->validPage() ? $this->getRequestParamValue('page_name') : $this->default['page_name']);
-    }
-
-    public function getSortDirection()
-    {
-        return ($this->validSortDirection() ? $this->getRequestParamValue('sort_direction_name') : $this->default['sort_direction_name']);
-    }
-
-    public function getSortField()
-    {
-        return ($this->validSortField() ? $this->getRequestParamValue('sort_field_name') : isset($this->allowedFieldNames[0]) ? $this->allowedFieldNames[0] : $this->default['sort_field_name']);
+        return !is_null($this->getRequestParamValue('page_name')) && $this->validPage() ? $this->getRequestParamValue('page_name') : $this->default['page_name'];
     }
 
     protected function validPage()
     {
+        // page is valid when (1) no page is provided,
+        // or (2) when a page is provided, which is numeric and in range
         return is_numeric($this->getRequestParamValue('page_name')) && $this->getRequestParamValue('page_name') <= ceil(count($this->array) / $this->settings['page_limit']) ? true : false;
+    }
+
+    public function getSortField()
+    {
+        return ($this->validSortField() ? $this->getRequestParamValue('sort_field_name') : !empty($this->allowedFieldNames) &&  isset($this->allowedFieldNames[0]) ? $this->allowedFieldNames[0] : $this->default['sort_field_name']);
     }
 
     protected function validSortField()
     {
         return in_array($this->getRequestParamValue('sort_field_name'), $this->allowedFieldNames);
+    }
+
+    public function getSortDirection()
+    {
+        return ($this->validSortDirection() ? $this->getRequestParamValue('sort_direction_name') : $this->default['sort_direction_name']);
     }
 
     protected function validSortDirection()
@@ -108,7 +174,7 @@ class PaginationChecker
 
     protected function getRequestParamValue($param)
     {
-        return $this->request->query->get($this->settings[$param], $this->default[$param]);
+        return $this->request->query->get($this->settings[$param]);
     }
 
     /**

@@ -8,17 +8,19 @@
     {% endspaceless %}
 {% endblock form_row %}
 
-{% block field_errors %}
+{% block form_errors %}
     {% spaceless %}
         {% if errors|length > 0 %}
-            <ul class="errors">
-                {% for error in errors %}
-                    <li class="error">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
-                {% endfor %}
-            </ul>
+            {% for error in errors %}
+                <div class="alert alert-error" data-alert="alert">
+                    <b>{{ ('interface.flash.error')|trans }}:</b> {{ error.messagePluralization is null
+                                                                        ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                                                        : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators') }}
+                </div>
+            {% endfor %}
         {% endif %}
     {% endspaceless %}
-{% endblock field_errors %}
+{% endblock form_errors %}
 
 {% block form_widget_compound %}
     {% spaceless %}

@@ -1,1 +1,1 @@
-{% if options.class == 'asc' %}<i class="icon-caret-down"></i>{% else %}<i class="icon-caret-up"></i>{% endif %} <a{% for attr, value in options %} {{ attr }}="{{ value }}"{% endfor %}>{{ title }}</a>
+{% if options.class == 'asc' %}<i class="icon-caret-down"></i>{% else %}<i class="icon-caret-up"></i>{% endif %} <a{% for attr, value in options %} {{ attr }}="{{ value }}"{% endfor %}>{{ ('form.general.link.sort_by.' ~ options.class)|trans({ '%title%' : title }) }}</a>

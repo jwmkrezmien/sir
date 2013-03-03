@@ -59,7 +59,7 @@
                 {{ flashes.show }}
                 <div class="well">
                     {% block sectionHeader %}
-                    <h4>{% if subtitle is defined %}{{ subtitle|trans }}{% else %}No subtitle set yet{% endif %}</h4>
+                    <h4>{% if subtitle is defined %}{{ subtitle }}{% else %}No subtitle set yet{% endif %}</h4>
                     {% endblock sectionHeader %}
                     {% block contentBody %}{% endblock contentBody %}
                 </div>
@@ -71,7 +71,3 @@
 </body>
 
 </html>
-
-{% block label %}
-    <span class="label pull-left">Important</span>
-{% endblock label %}
