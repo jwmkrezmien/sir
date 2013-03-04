@@ -3,6 +3,16 @@
     margin-top: 60px;
     margin-bottom: 40px;
 }
+/*Fix: text align of error messages in embedded-child forms*/
+.alert.alert-error
+{
+    text-align: left;
+}
+/*Fix: error message under select2-container*/
+.select2-container.sir
+{
+    margin-bottom: 10px;
+}
 /*Fix: select2 position of selected element*/
 UL.select2-choices LI.select2-search-choice
 {
@@ -28,6 +38,7 @@ FORM LABEL
     border: 1px solid #D6D3D3;
     border-bottom: 0px;
     background-color: #E2E2E2;
+    text-align: left;
     width: 150px;
 }
 .formRow
@@ -183,23 +194,5 @@ UL.entity LI.detail.sort I, UL.entity LI.detail.new I
 {
     margin-right: 5px;
 }
-/*.record_actions*/
-.record_actions
-{
-    position: relative;
-    margin-bottom: 10px;
-    top: 15px;
-}
-.record_actions A.cancel
-{
-    top: 5px;
-    position: relative;
-}
-.btn SPAN.actions
-{
-    margin-right: 10px;
-}
-UL.dropdown-menu A I
-{
-    margin-right: 10px;
-}
+/*embedded-child*/
+UL.form
