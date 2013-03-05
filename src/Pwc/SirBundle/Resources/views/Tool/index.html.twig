@@ -1,39 +1,24 @@
-<h1>Tool list</h1>
+{% extends 'PwcSirBundle::base.html.twig' %}
 
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Slug</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('tool_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.name }}</td>
-            <td>{{ entity.slug }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('tool_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('tool_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+{% block contentBody %}
+    <ul class="entity index">
+        <li class="detail sort">
+            {{ knp_pagination_sortable(pagination, 'name', 'name') }}
+        </li>
 
-<ul>
-    <li>
-        <a href="{{ path('tool_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+        {% for entity in pagination %}
+            <li class="detail{% if loop.index is odd %} color{% endif %}">
+                <a href="{{ path('tool_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
+                {% include "PwcSirBundle:Includes:actions.html.twig" with { 'showRoute': path('tool_show', { 'slug': entity.slug }), 'editRoute': path('tool_edit', { 'slug': entity.slug }), 'deleteRoute': path('tool_delete', { 'slug': entity.slug }) } %}
+            </li>
+        {% endfor %}
+
+        <li class="detail new">
+            <i class="icon-plus-sign"></i> <a href="{{ path('tool_new') }}">{{ 'form.general.link.add_new'|trans({ '%type%': 'tool' }) }}</a>
+        </li>
+    </ul>
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock contentBody %}

@@ -1,16 +1,14 @@
-<h1>Tool creation</h1>
+{% extends 'PwcSirBundle::base.html.twig' %}
+{% form_theme form 'PwcSirBundle:Form:fields.html.twig' %}
 
-<form action="{{ path('tool_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
+{% block contentBody %}
+    <form action="{{ path('tool_create') }}" method="post" {{ form_enctype(form) }} novalidate>
+        {{ form_widget(form) }}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('tool') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        <div class="record_actions">
+            <button type="submit" class="btn btn-info">{{ 'form.general.button.create'|trans }}</button>
+            <a class="pull-right cancel" href="{{ path('tool') }}">{{ 'form.general.back'|trans }}</a>
+        </div>
+
+    </form>
+{% endblock contentBody %}

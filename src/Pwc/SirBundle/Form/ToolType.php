@@ -12,8 +12,10 @@ class ToolType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('slug')
-            ->add('products')
+            ->add('products', null, array(
+                        'multiple' => true,
+                        'required' => false
+                    ));
         ;
     }
 

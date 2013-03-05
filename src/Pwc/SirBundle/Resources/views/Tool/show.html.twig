@@ -1,37 +1,23 @@
-<h1>Tool</h1>
+{% extends 'PwcSirBundle::base.html.twig' %}
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <td>{{ entity.name }}</td>
-        </tr>
-        <tr>
-            <th>Slug</th>
-            <td>{{ entity.slug }}</td>
-        </tr>
-    </tbody>
-</table>
+{% block contentBody %}
+    <ul class="entity">
+        <li class="detail"><label class="pull-left">{{ 'form.label.tool.name'|trans }}</label><span class="value">{{ entity.name|trans }}</span></li>
+        <li class="detail">
+            <label class="pull-left">{{ 'form.label.tool.products'|trans }}</label>
+            <ul class="value">
+                {% for product in entity.products %}
+                    <li>{{ product.name }}</li>
+                {% else %}-
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('tool') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('tool_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('tool_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+    <div class="record_actions">
+        <a class="btn btn-info" href= "#deleteModal" role="button" data-toggle="modal">{{ 'form.general.button.delete'|trans }}</a>
+        <a class="pull-right cancel" href="{{ path('tool') }}">{{ 'form.general.back'|trans }}</a>
+    </div>
+
+    {% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'type': 'tool', 'deleteRoute': path('tool_delete', { 'slug': entity.slug }), 'delete_form': delete_form } %}
+{% endblock contentBody %}

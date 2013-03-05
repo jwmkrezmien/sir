@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Pwc\SirBundle\Repository\ToolRepository")
  * @ORM\Table(name="tool")
  */
 class Tool
@@ -21,6 +21,7 @@ class Tool
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     protected $name;
 

@@ -4,13 +4,13 @@
         <h3 id="deleteModalLabel">{{ 'form.general.modal.header'|trans }}</h3>
     </div>
     <div class="modal-body">
-        <p>{{ 'form.general.modal.delete'|trans({ '%type%' : type, '%name%' : entity.name|trans }) }}</p>
+        <p>{{ 'form.general.modal.delete.description'|trans({ '%type%' : type, '%name%' : entity.name|trans }) }}</p>
     </div>
     <form action="{{ deleteRoute }}" method="post">
         {{ form_widget(delete_form) }}
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">{{ 'form.general.modal.cancel'|trans }}</button>
-            <button type="submit" class="btn btn-primary">{{ 'form.general.modal.proceed'|trans }}</button>
+            <button type="submit" class="btn btn-primary">{{ 'form.general.modal.delete.proceed'|trans }}</button>
         </div>
     </form>
 </div>

@@ -35,6 +35,9 @@ form:
                 proceed:              "Delete it now!"
                 description:          "You are about to delete a %type% from the repository. Are you sure want to remove the %type% '%name%' now?"
     label:
+        tool:
+            name:                     "Name"
+            products:                 "Products"
         product:
             name:                     "Name"
             tools:                    "Tools"

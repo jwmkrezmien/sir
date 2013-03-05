@@ -13,10 +13,12 @@ use Pwc\SirBundle\Form\ToolType;
 /**
  * Tool controller.
  *
- * @Route("/tool")
+ * @Route("/settings/tool")
  */
 class ToolController extends Controller
 {
+    protected $title = "Settings";
+
     /**
      * Lists all Tool entities.
      *
@@ -27,33 +29,38 @@ class ToolController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('PwcSirBundle:Tool')->findAll();
+        $pc = $this->get('pagination_checker');
+        $pc->addAllowedFieldName('name');
+
+        $pc->setPaginatedSubject($pc->isSortable() ? $em->getRepository('PwcSirBundle:Tool')->findAllSorted($pc->getSortField(), $pc->getSortDirection()) : $em->getRepository('PwcSirBundle:Tool')->findAll());
 
         return array(
-            'entities' => $entities,
+            'title'      => $this->title,
+            'subtitle'   => $this->get('translator')->trans('form.general.subtitle.management', array('%type%' => 'Tool')),
+            'pagination' => $pc->getPagination()
         );
     }
 
     /**
      * Finds and displays a Tool entity.
      *
-     * @Route("/{id}/show", name="tool_show")
+     * @Route("/{slug}/show", name="tool_show")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:Tool')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:Tool')->findOneBySlug($slug);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Tool entity.');
-        }
+        if (!$entity) throw $this->createNotFoundException('Unable to find Tool entity.');
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getSlug());
 
         return array(
             'entity'      => $entity,
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.details', array('%type%' => 'Tool')),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -70,8 +77,10 @@ class ToolController extends Controller
         $form   = $this->createForm(new ToolType(), $entity);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+            'entity'      => $entity,
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.new', array('%type%' => 'Tool')),
+            'form'        => $form->createView()
         );
     }
 
@@ -84,103 +93,118 @@ class ToolController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity  = new Tool();
+        $entity = new Tool();
         $form = $this->createForm(new ToolType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
+
+            foreach($entity->getProducts() as $product)
+            {
+                $product->addTool($entity);
+                $em->persist($product);
+            }
+
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tool_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('tool_show', array('slug' => $entity->getSlug())));
         }
 
+        $this->get('session')->getFlashBag()->add('warning', 'form.general.flash.save_unable');
+
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+            'entity'      => $entity,
+            'form'        => $form->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.new', array('%type%' => 'Tool'))
         );
     }
 
     /**
      * Displays a form to edit an existing Tool entity.
      *
-     * @Route("/{id}/edit", name="tool_edit")
+     * @Route("/{slug}/edit", name="tool_edit")
      * @Template()
      */
-    public function editAction($id)
+    public function editAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:Tool')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:Tool')->findOneBySlug($slug);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Tool entity.');
-        }
+        if (!$entity) throw $this->createNotFoundException('Unable to find Tool entity.');
 
         $editForm = $this->createForm(new ToolType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.edit', array('%type%' => 'Tool'))
         );
     }
 
     /**
      * Edits an existing Tool entity.
      *
-     * @Route("/{id}/update", name="tool_update")
+     * @Route("/{slug}/update", name="tool_update")
      * @Method("POST")
      * @Template("PwcSirBundle:Tool:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:Tool')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:Tool')->findOneBySlug($slug);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Tool entity.');
-        }
+        if (!$entity) throw $this->createNotFoundException('Unable to find Tool entity.');
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new ToolType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+
+            foreach($entity->getProducts() as $product)
+            {
+                $product->addTool($entity);
+                $em->persist($product);
+            }
+
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tool_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('tool_show', array('slug' => $entity->getSlug())));
         }
+
+        $this->get('session')->getFlashBag()->add('warning', 'form.general.flash.save_unable');
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.edit', array('%type%' => 'Tool'))
         );
     }
 
     /**
      * Deletes a Tool entity.
      *
-     * @Route("/{id}/delete", name="tool_delete")
+     * @Route("/{slug}/delete", name="tool_delete")
      * @Method("POST")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $slug)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm($slug);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('PwcSirBundle:Tool')->find($id);
+            $entity = $em->getRepository('PwcSirBundle:Tool')->findOneBySlug($slug);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Tool entity.');
-            }
+            if (!$entity) throw $this->createNotFoundException('Unable to find Tool entity.');
 
             $em->remove($entity);
             $em->flush();
@@ -189,11 +213,10 @@ class ToolController extends Controller
         return $this->redirect($this->generateUrl('tool'));
     }
 
-    private function createDeleteForm($id)
+    private function createDeleteForm($slug)
     {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
+        return $this->createFormBuilder(array('slug' => $slug))
+            ->add('slug', 'hidden')
+            ->getForm();
     }
 }
