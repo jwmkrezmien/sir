@@ -162,10 +162,30 @@ class ToolController extends Controller
 
         if (!$entity) throw $this->createNotFoundException('Unable to find Tool entity.');
 
+        $products = array();
+        foreach ($entity->getProducts() as $product) $products[] = $product;
+
         $editForm = $this->createForm(new ToolType(), $entity);
         $editForm->bind($request);
 
-        if ($editForm->isValid()) {
+        if ($editForm->isValid())
+        {
+            // filter tools that are no longer present
+            foreach ($entity->getProducts() as $product)
+            {
+                foreach ($products as $key => $toDel) if ($toDel->getId() === $product->getId()) unset($products[$key]);
+            }
+
+            //var_dump($entity->getProducts());
+
+            // remove the relationship
+            foreach ($products as $product)
+            {
+                $product->getTools()->removeElement($entity);
+                $em->persist($product);
+            }
+
+            //var_dump($entity->getProducts()); exit();
 
             foreach($entity->getProducts() as $product)
             {

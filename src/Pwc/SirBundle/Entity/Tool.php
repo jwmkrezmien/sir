@@ -26,7 +26,7 @@ class Tool
     protected $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Product", mappedBy="tools")
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="tools", cascade={"persist", "remove"})
      **/
     private $products;
 

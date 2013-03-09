@@ -93,7 +93,7 @@ class Product
      */
     public function addTool(\Pwc\SirBundle\Entity\Tool $tool)
     {
-        $this->tools[] = $tool;
+        if (!$this->tools->contains($tool)) $this->tools[] = $tool;
     
         return $this;
     }
