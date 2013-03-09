@@ -195,4 +195,37 @@ UL.entity LI.detail.sort I, UL.entity LI.detail.new I
     margin-right: 5px;
 }
 /*embedded-child*/
-UL.form
+UL.form-collection
+{
+    margin: 0px;
+    list-style: none;
+    padding: 0px;
+    background-color: #F0EEEE;
+    border: 1px solid #D6D3D3;
+    /*+border-radius:3px;*/
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+}
+UL.form-collection LI.add-child
+{
+    padding: 15px;
+}
+UL.form-collection LI.embedded-child
+{
+    border-bottom: 1px solid #D6D3D3;
+    text-align: right;
+    padding: 10px 5px;
+}
+UL.form-collection LI.embedded-child A.delete-child
+{
+    position: relative;
+    right: 5px;
+}
+UL.form-collection LI.embedded-child LABEL
+{
+    background-color: #F5F5F5;
+    left: 0px;
+    width: 152px;
+}
