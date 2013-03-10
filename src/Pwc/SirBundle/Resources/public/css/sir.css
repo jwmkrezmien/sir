@@ -18,6 +18,11 @@ UL.select2-choices LI.select2-search-choice
 {
     top: 3px;
 }
+/*Fix: actions button margin*/
+SPAN.actions
+{
+    margin-right: 10px;
+}
 /*FORM related*/
 FORM LABEL
 {
