@@ -15,9 +15,9 @@
 </ul>
 
 <div class="record_actions">
-    <a class="btn btn-info" href= "#deleteModal" role="button" data-toggle="modal">{{ 'form.general.button.delete'|trans }}</a>
+    {% include "PwcSirBundle:Includes:actions.html.twig" with { 'entity': entity, 'editRoute': path('product_edit', { 'slug': entity.slug }), 'deleteRoute': path('product_delete', { 'slug': entity.slug }) } %}
     <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back'|trans }}</a>
 </div>
 
-{% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'type': 'product', 'deleteRoute': path('product_delete', { 'slug': entity.slug }), 'delete_form': delete_form } %}
+{% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'delete_form': delete_form } %}
 {% endblock contentBody %}

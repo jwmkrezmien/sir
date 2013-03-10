@@ -52,7 +52,7 @@ class Builder extends ContainerAware
         $menu->setChildrenAttribute('class', 'nav nav-stacked nav-pills');
 
         $menu->addChild('Product management', array('route' => 'product'));
-        $menu->addChild('Tool management', array('route' => 'product'));
+        $menu->addChild('Tool management', array('route' => 'tool'));
         $menu->addChild('OWASP list management', array('route' => 'product'));
 
         return $menu;

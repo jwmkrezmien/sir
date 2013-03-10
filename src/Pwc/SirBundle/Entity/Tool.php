@@ -12,6 +12,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Tool
 {
+    protected $entityType = 'Tool';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -49,6 +51,16 @@ class Tool
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Get entity type
+     *
+     * @return string
+     */
+    public function getEntityType()
+    {
+        return $this->entityType;
     }
 
     /**

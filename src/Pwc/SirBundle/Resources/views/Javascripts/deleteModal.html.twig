@@ -1,0 +1,25 @@
+<script>
+
+    $(document).ready(function()
+    {
+        $('A.delete').click(function() {
+
+            var url = $(this).attr('data-url');
+            var message = $(this).attr('data-message');
+            var slug = $(this).attr('data-slug');
+
+            if (typeof url !== 'undefined' && url !== false && typeof message !== 'undefined' && message !== false && typeof slug !== 'undefined' && slug !== false)
+            {
+                $(document).find("#deleteModal #modal-description").html(message);
+                $(document).find("#deleteModal FORM").attr('action', url);
+                $(document).find("#deleteModal FORM INPUT#form_slug").attr('value', slug);
+
+            }else{
+
+                return false;
+            }
+        });
+
+    });
+
+</script>

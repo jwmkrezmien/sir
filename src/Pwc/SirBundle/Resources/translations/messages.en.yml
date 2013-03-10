@@ -16,10 +16,10 @@ form:
                 asc:                  "Sort descending by %title%"
                 desc:                 "Sort ascending by %title%"
         button:
-            create:                   "Create"
+            show:                     "Show"
             edit:                     "Edit"
             delete:                   "Delete"
-            show:                     "Show"
+            save:                     "Save"
         flash:
             save_unable:              "Unable to save your input. Review the errors below and try again."
             invalid_page:             "An invalid page number was provided. Now viewing the first page."

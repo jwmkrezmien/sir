@@ -9,7 +9,7 @@
     {% for entity in pagination %}
     <li class="detail{% if loop.index is odd %} color{% endif %}">
         <a href="{{ path('product_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
-        {% include "PwcSirBundle:Includes:actions.html.twig" with { 'showRoute': path('product_show', { 'slug': entity.slug }), 'editRoute': path('product_edit', { 'slug': entity.slug }), 'deleteRoute': path('product_delete', { 'slug': entity.slug }) } %}
+        {% include "PwcSirBundle:Includes:actions.html.twig" with { 'size': 'btn-mini', 'pull': 'pull-right', 'entity': entity, 'showRoute': path('product_show', { 'slug': entity.slug }), 'editRoute': path('product_edit', { 'slug': entity.slug }), 'deleteRoute': path('product_delete', { 'slug': entity.slug }) } %}
     </li>
     {% endfor %}
 
@@ -21,4 +21,7 @@
 <div class="navigation">
     {{ knp_pagination_render(pagination) }}
 </div>
+
+{% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'delete_form': delete_form } %}
+
 {% endblock contentBody %}

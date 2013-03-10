@@ -23,6 +23,11 @@ SPAN.actions
 {
     margin-right: 10px;
 }
+/*Fix: actions button icon margin right*/
+UL.dropdown-menu LI A I
+{
+    margin-right: 10px;
+}
 /*FORM related*/
 FORM LABEL
 {
@@ -198,6 +203,15 @@ UL.entity LI.detail.sort
 UL.entity LI.detail.sort I, UL.entity LI.detail.new I
 {
     margin-right: 5px;
+}
+/*.record_actions*/
+DIV.record_actions
+{
+    margin-top: 20px;
+}
+DIV.record_actions A.cancel
+{
+    margin-top: 5px;
 }
 /*embedded-child*/
 UL.form-collection

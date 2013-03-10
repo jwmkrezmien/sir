@@ -1,16 +1,20 @@
-<div class="btn-group pull-right">
-    <a class="btn dropdown-toggle btn-info btn-mini" data-toggle="dropdown" href="#"><span class="actions">{{ 'form.general.actions'|trans }}</span><span class="caret"></span></a>
+<div class="btn-group {{ pull|default('') }}">
+    <a class="btn dropdown-toggle btn-info {{ size|default('') }}" data-toggle="dropdown" href="#"><span class="actions">{{ 'form.general.actions'|trans }}</span><span class="caret"></span></a>
     <ul class="dropdown-menu">
+        {% if showRoute is defined %}
         <li>
             <a href="{{ showRoute }}"><i class="icon-eye-open"></i>{{ 'form.general.button.show'|trans }}</a>
         </li>
+        {% endif %}
+        {% if editRoute is defined %}
         <li>
             <a href="{{ editRoute }}"><i class="icon-pencil"></i>{{ 'form.general.button.edit'|trans }}</a>
         </li>
-<!--
+        {% endif %}
+        {% if deleteRoute is defined %}
         <li icon="icon-trash">
-            <a class="delete" href="{{ deleteRoute }}"><i class="icon-trash"></i>{{ 'form.general.submit.delete'|trans }}</a>
+            <a class="delete" href= "#deleteModal" role="button" data-toggle="modal" data-slug="{{ entity.slug }}" data-url="{{ deleteRoute }}" data-message="{{ 'form.general.modal.delete.description'|trans({ '%type%': entity.entityType|lower, '%name%': entity.name }) }}"><i class="icon-trash"></i>{{ 'form.general.button.delete'|trans }}</a>
         </li>
--->
+        {% endif %}
     </ul>
 </div>

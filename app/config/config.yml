@@ -94,8 +94,6 @@ knp_paginator:
         sortable: PwcSirBundle:Pagination:sortable_link.html.twig # sort link template
 
 services:
-    form_renderer:
-        class:        Pwc\SirBundle\Service\FormRenderer
     mod_context_provider:
         class:        Pwc\SirBundle\Service\ModContextProvider
         arguments:    [ @doctrine.orm.entity_manager, %mod_entity_mapping% ]

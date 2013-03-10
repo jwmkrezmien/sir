@@ -34,10 +34,13 @@ class ProductController extends Controller
 
         $pc->setPaginatedSubject($pc->isSortable() ? $em->getRepository('PwcSirBundle:Product')->findAllSorted($pc->getSortField(), $pc->getSortDirection()) : $em->getRepository('PwcSirBundle:Product')->findAll());
 
+        $deleteForm = $this->createDeleteForm('');
+
         return array(
             'title'      => $this->title,
             'subtitle'   => $this->get('translator')->trans('form.general.subtitle.management', array('%type%' => 'Product')),
-            'pagination' => $pc->getPagination()
+            'pagination' => $pc->getPagination(),
+            'delete_form' => $deleteForm->createView()
         );
     }
 
@@ -61,7 +64,7 @@ class ProductController extends Controller
             'entity'      => $entity,
             'title'       => $this->title,
             'subtitle'    => $this->get('translator')->trans('form.general.subtitle.details', array('%type%' => 'Product')),
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         );
     }
 

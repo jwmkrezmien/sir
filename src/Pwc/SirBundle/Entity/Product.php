@@ -12,6 +12,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Product
 {
+    protected $entityType = 'Product';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -50,6 +52,16 @@ class Product
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Get entity type
+     *
+     * @return string
+     */
+    public function getEntityType()
+    {
+        return $this->entityType;
     }
 
     /**
