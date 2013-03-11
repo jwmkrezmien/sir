@@ -3,7 +3,6 @@
 namespace Pwc\SirBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -13,6 +12,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class VulnDescription
 {
+    protected $entityType = 'Description';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -66,6 +67,16 @@ class VulnDescription
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * Get entity type
+     *
+     * @return string
+     */
+    public function getEntityType()
+    {
+        return $this->entityType;
     }
 
     /**

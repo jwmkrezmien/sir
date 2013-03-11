@@ -1,33 +1,19 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 
-{% block content %}
-    <div id="contentHeader">
-        <h1>{{ entity.name }}</h1>
+{% block contentBody %}
+    <div class="well">
+        <ul class="entity">
+            <li class="detail"><label class="pull-left">{{ 'form.label.vulndescription.name'|trans }}</label><span class="value">{{ entity.name }}</span></li>
+            <li class="detail"><label class="pull-left">{{ 'form.label.vulndescription.description'|trans }}</label><span class="value">{{ entity.description|nl2br }}</span></li>
+            <li class="detail"><label class="pull-left">{{ 'form.label.vulndescription.risk'|trans }}</label><span class="value">{{ entity.risk|nl2br }}</span></li>
+            <li class="detail"><label class="pull-left">{{ 'form.label.vulndescription.solution'|trans }}</label><span class="value">{{ entity.solution|nl2br }}</span></li>
+        </ul>
+
+        <div class="record_actions">
+            {% include "PwcSirBundle:Includes:actions.html.twig" with { 'entity': entity, 'editRoute': path('description_edit', { 'slug': entity.slug }), 'deleteRoute': path('description_delete', { 'slug': entity.slug }) } %}
+            <a class="pull-right cancel" href="{{ path('description') }}">{{ 'form.general.back'|trans }}</a>
+        </div>
+
+        {% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'delete_form': delete_form } %}
     </div>
-
-    <ul class="entity">
-        <li class="detail"><span class="attr-label">{{ 'form.label.vulndescription.name'|trans }}</span> <span class="attr-value">{{ entity.name }}</span></li>
-        <li class="detail"><span class="attr-label">{{ 'form.label.vulndescription.description'|trans }}</span> <span class="attr-value">{{ entity.description|nl2br }}</span></li>
-        <li class="detail"><span class="attr-label">{{ 'form.label.vulndescription.risk'|trans }}</span> <span class="attr-value">{{ entity.risk|nl2br }}</span></li>
-        <li class="detail"><span class="attr-label">{{ 'form.label.vulndescription.solution'|trans }}</span> <span class="attr-value">{{ entity.solution|nl2br }}</span></li>
-    </ul>
-
-{% endblock content %}
-
-{% block sidebar %}
-    {% render url('vulnerability_widget', { 'slug': entity.vulnerability.slug }) %}
-{% endblock sidebar %}
-
-{% block test %}
-
-    <ul class="languages">
-        {% for language in languages %}
-            {% if language.active %}
-                <li class="{% if language.active %}active {% endif %}"><span class="bullet {% if language.available %}available{% else %}unavailable{% endif %}">&bull;</span> {{ language.name|trans }}</li>
-            {% else %}
-                <li><span class="bullet {% if language.available %}available{% else %}unavailable{% endif %}">&bull;</span> <a href="{{ path('vulnerability_show', { 'slug': entity.slug, 'languageSlug' : language.slug }) }}">{{ language.name|trans }}</a></li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-
-{% endblock test %}
+{% endblock contentBody %}
