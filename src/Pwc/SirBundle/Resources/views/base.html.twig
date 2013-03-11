@@ -45,7 +45,9 @@
     <div class="main container">
         <div class="page-header">
             {% block pageHeader %}
-            <h1>{% if title is defined %}{{ title|trans }}{% else %}No title set yet{% endif %}</h1>
+            <h1>{% if title is defined %}
+                    {{ title|trans }} {% if subtitle is defined %}- {% endif %}
+                {% endif %}{{ subtitle|default('No subtitle yet') }}</h1>
             {% endblock pageHeader %}
         </div>
         {% block pageLead %}
@@ -57,12 +59,7 @@
             </div>
             <div class="span8">
                 {{ flashes.show }}
-                <div class="well">
-                    {% block sectionHeader %}
-                    <h4>{% if subtitle is defined %}{{ subtitle }}{% else %}No subtitle set yet{% endif %}</h4>
-                    {% endblock sectionHeader %}
-                    {% block contentBody %}{% endblock contentBody %}
-                </div>
+                {% block contentBody %}{% endblock contentBody %}
             </div>
         </div>
     </div>

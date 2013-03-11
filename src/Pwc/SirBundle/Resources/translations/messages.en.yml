@@ -8,7 +8,8 @@ form:
             management:               "%type% management"
             details:                  "%type% details"
             new:                      "New %type%"
-            edit:                      "Edit %type%"
+            edit:                     "Edit %type%"
+            history:                  "%type% history"
         link:
             add_new:                  "Add a new %type%"
             revert:                   "Revert to Version %version%"
@@ -20,6 +21,7 @@ form:
             edit:                     "Edit"
             delete:                   "Delete"
             save:                     "Save"
+            history:                  "History"
         flash:
             save_unable:              "Unable to save your input. Review the errors below and try again."
             invalid_page:             "An invalid page number was provided. Now viewing the first page."

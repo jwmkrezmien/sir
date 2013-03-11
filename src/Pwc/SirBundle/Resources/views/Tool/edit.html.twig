@@ -2,6 +2,7 @@
 {% form_theme edit_form 'PwcSirBundle:Form:fields.html.twig' %}
 
 {% block contentBody %}
+<div class="well">
     <form action="{{ path('tool_update', { 'slug': entity.slug }) }}" method="post" {{ form_enctype(edit_form) }} novalidate>
         {{ form_widget(edit_form) }}
 
@@ -11,4 +12,5 @@
         </div>
 
     </form>
+</div>
 {% endblock contentBody %}

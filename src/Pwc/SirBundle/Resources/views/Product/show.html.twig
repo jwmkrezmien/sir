@@ -1,23 +1,25 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 
 {% block contentBody %}
-<ul class="entity">
-    <li class="detail"><label class="pull-left">{{ 'form.label.product.name'|trans }}</label><span class="value">{{ entity.name|trans }}</span></li>
-    <li class="detail">
-        <label class="pull-left">{{ 'form.label.product.tools'|trans }}</label>
-        <ul class="value">
-            {% for tool in entity.tools %}
-                <li>{{ tool.name }}</li>
-            {% else %}-
-            {% endfor %}
-        </ul>
-    </li>
-</ul>
+<div class="well">
+    <ul class="entity">
+        <li class="detail"><label class="pull-left">{{ 'form.label.product.name'|trans }}</label><span class="value">{{ entity.name|trans }}</span></li>
+        <li class="detail">
+            <label class="pull-left">{{ 'form.label.product.tools'|trans }}</label>
+            <ul class="value">
+                {% for tool in entity.tools %}
+                    <li>{{ tool.name }}</li>
+                {% else %}-
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
 
-<div class="record_actions">
-    {% include "PwcSirBundle:Includes:actions.html.twig" with { 'entity': entity, 'editRoute': path('product_edit', { 'slug': entity.slug }), 'deleteRoute': path('product_delete', { 'slug': entity.slug }) } %}
-    <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back'|trans }}</a>
+    <div class="record_actions">
+        {% include "PwcSirBundle:Includes:actions.html.twig" with { 'entity': entity, 'editRoute': path('product_edit', { 'slug': entity.slug }), 'deleteRoute': path('product_delete', { 'slug': entity.slug }) } %}
+        <a class="pull-right cancel" href="{{ path('product') }}">{{ 'form.general.back'|trans }}</a>
+    </div>
+
+    {% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'delete_form': delete_form } %}
 </div>
-
-{% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'delete_form': delete_form } %}
 {% endblock contentBody %}

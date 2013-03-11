@@ -1,6 +1,12 @@
 <div class="btn-group {{ pull|default('') }}">
     <a class="btn dropdown-toggle btn-info {{ size|default('') }}" data-toggle="dropdown" href="#"><span class="actions">{{ 'form.general.actions'|trans }}</span><span class="caret"></span></a>
     <ul class="dropdown-menu">
+        {% if historyRoute is defined %}
+            <li>
+                <a href="{{ historyRoute }}"><i class="icon-retweet"></i>{{ 'form.general.button.history'|trans }}</a>
+            </li>
+            <li class="divider"></li>
+        {% endif %}
         {% if showRoute is defined %}
         <li>
             <a href="{{ showRoute }}"><i class="icon-eye-open"></i>{{ 'form.general.button.show'|trans }}</a>
