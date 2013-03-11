@@ -34,10 +34,13 @@ class ToolController extends Controller
 
         $pc->setPaginatedSubject($pc->isSortable() ? $em->getRepository('PwcSirBundle:Tool')->findAllSorted($pc->getSortField(), $pc->getSortDirection()) : $em->getRepository('PwcSirBundle:Tool')->findAll());
 
+        $deleteForm = $this->createDeleteForm('');
+
         return array(
             'title'      => $this->title,
             'subtitle'   => $this->get('translator')->trans('form.general.subtitle.management', array('%type%' => 'Tool')),
-            'pagination' => $pc->getPagination()
+            'pagination' => $pc->getPagination(),
+            'delete_form' => $deleteForm->createView()
         );
     }
 

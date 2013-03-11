@@ -1,24 +1,27 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 
 {% block contentBody %}
-    <ul class="entity index">
-        <li class="detail sort">
-            {{ knp_pagination_sortable(pagination, 'name', 'name') }}
+<ul class="entity index">
+    <li class="detail sort">
+        {{ knp_pagination_sortable(pagination, 'name', 'name') }}
+    </li>
+
+    {% for entity in pagination %}
+        <li class="detail{% if loop.index is odd %} color{% endif %}">
+            <a href="{{ path('tool_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
+            {% include "PwcSirBundle:Includes:actions.html.twig" with { 'size': 'btn-mini', 'pull': 'pull-right', 'entity': entity, 'showRoute': path('tool_show', { 'slug': entity.slug }), 'editRoute': path('tool_edit', { 'slug': entity.slug }), 'deleteRoute': path('tool_delete', { 'slug': entity.slug }) } %}
         </li>
+    {% endfor %}
 
-        {% for entity in pagination %}
-            <li class="detail{% if loop.index is odd %} color{% endif %}">
-                <a href="{{ path('tool_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
-                {% include "PwcSirBundle:Includes:actions.html.twig" with { 'showRoute': path('tool_show', { 'slug': entity.slug }), 'editRoute': path('tool_edit', { 'slug': entity.slug }), 'deleteRoute': path('tool_delete', { 'slug': entity.slug }) } %}
-            </li>
-        {% endfor %}
+    <li class="detail new">
+        <i class="icon-plus-sign"></i> <a href="{{ path('tool_new') }}">{{ 'form.general.link.add_new'|trans({ '%type%': 'tool' }) }}</a>
+    </li>
+</ul>
 
-        <li class="detail new">
-            <i class="icon-plus-sign"></i> <a href="{{ path('tool_new') }}">{{ 'form.general.link.add_new'|trans({ '%type%': 'tool' }) }}</a>
-        </li>
-    </ul>
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
 
-    <div class="navigation">
-        {{ knp_pagination_render(pagination) }}
-    </div>
+{% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'delete_form': delete_form } %}
+
 {% endblock contentBody %}
