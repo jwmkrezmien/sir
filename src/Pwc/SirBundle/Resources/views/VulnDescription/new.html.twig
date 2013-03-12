@@ -1,22 +1,16 @@
 {% extends 'PwcSirBundle::base.html.twig' %}
 {% form_theme form 'PwcSirBundle:Form:fields.html.twig' %}
 
-{% block content %}
-<h1>{{ 'form.label.vulndescription._new'|trans({'%language%' : language.name|trans }) }}</h1>
+{% block contentBody %}
+    <div class="well">
+        <form action="{{ path('description_create', { 'languageSlug' : language.slug, 'vulnerabilitySlug': vulnerability.slug }) }}" method="post" {{ form_enctype(form) }} novalidate>
+            {{ form_widget(form) }}
 
-<form action="{{ path('vulndescription_create', { 'language': language.slug, 'slug': vulnerability.slug }) }}" method="post" {{ form_enctype(form) }}>
+            <div class="record_actions">
+                <button type="submit" class="btn btn-info">{{ 'form.general.button.save'|trans }}</button>
+                <a class="pull-right cancel" href="{{ path('vulnerability_show', { 'slug' : vulnerability.slug  }) }}">{{ 'form.general.back'|trans }}</a>
+            </div>
 
-    <div class="row"><label for="vulnerability">{{ 'form.label.vulndescription.vulnerability'|trans }}</label><span id="vulnerability" class="strvalue">{{ vulnerability.name|trans }}</span></div>
-    <div class="row"><label for="language">{{ 'form.label.vulndescription.language'|trans }}</label><span id="language" class="strvalue">{{ language.name|trans }}</span></div>
-
-    {{ form_widget(form) }}
-
-    <ul class="record_actions">
-        <li class="submit"><button type="submit">{{ 'form.general.submit.create'|trans }}</button></li>
-        <li class="cancel">
-            <a href="{{ path('vulndescription') }}">{{ 'form.general.back'|trans }}</a>
-        </li>
-    </ul>
-</form>
-
-{% endblock %}
+        </form>
+    </div>
+{% endblock contentBody %}

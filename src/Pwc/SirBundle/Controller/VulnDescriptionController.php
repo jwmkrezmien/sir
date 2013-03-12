@@ -34,23 +34,24 @@ class VulnDescriptionController extends Controller
         $deleteForm = $this->createDeleteForm($entity->getSlug());
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.details', array('%type%' => 'Description'))
+            'entity'        => $entity,
+            'vulnerability' => $entity->getVulnerability(),
+            'delete_form'   => $deleteForm->createView(),
+            'subtitle'      => $this->get('translator')->trans('form.general.subtitle.details', array('%type%' => 'Description'))
         );
     }
 
     /**
      * Displays a form to create a new VulnDescription entity.
      *
-     * @Route("/new/{languageSlug}/{slug}", name="description_new")
+     * @Route("/new/{languageSlug}/{vulnerabilitySlug}", name="description_new")
      * @Template()
      */
-    public function newAction($languageSlug, $slug)
+    public function newAction($languageSlug, $vulnerabilitySlug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $vulnerability = $em->getRepository('PwcSirBundle:Vulnerability')->findOneBySlug($slug);
+        $vulnerability = $em->getRepository('PwcSirBundle:Vulnerability')->findOneBySlug($vulnerabilitySlug);
         if (!$vulnerability) throw $this->createNotFoundException('Unable to find Vulnerability entity.');
 
         $language = $em->getRepository('PwcSirBundle:Language')->findOneBySlug($languageSlug);
@@ -62,7 +63,6 @@ class VulnDescriptionController extends Controller
         $form = $this->createForm(new VulnDescriptionType(), $entity);
 
         return array(
-            'entity'        => $entity,
             'form'          => $form->createView(),
             'language'      => $language,
             'vulnerability' => $vulnerability,
@@ -73,18 +73,18 @@ class VulnDescriptionController extends Controller
     /**
      * Creates a new VulnDescription entity.
      *
-     * @Route("/create/{language}/{slug}", name="description_create")
+     * @Route("/create/{languageSlug}/{vulnerabilitySlug}", name="description_create")
      * @Method("POST")
      * @Template("PwcSirBundle:VulnDescription:new.html.twig")
      */
-    public function createAction(Request $request, $language, $slug)
+    public function createAction(Request $request, $languageSlug, $vulnerabilitySlug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $vulnerability = $em->getRepository('PwcSirBundle:Vulnerability')->findOneBySlug($slug);
+        $vulnerability = $em->getRepository('PwcSirBundle:Vulnerability')->findOneBySlug($vulnerabilitySlug);
         if (!$vulnerability) throw $this->createNotFoundException('Unable to find Vulnerability entity.');
 
-        $language = $em->getRepository('PwcSirBundle:Language')->findOneBySlug($language);
+        $language = $em->getRepository('PwcSirBundle:Language')->findOneBySlug($languageSlug);
         if (!$language) throw $this->createNotFoundException('Unable to find Language entity.');
 
         $entity = new VulnDescription();
@@ -99,13 +99,14 @@ class VulnDescriptionController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('vulnerability_show', array('slug' => $vulnerability->getSlug(), 'languageSlug' => $language->getSlug())));
+            return $this->redirect($this->generateUrl('vulnerability_show', array('slug' => $vulnerability->getSlug())));
         }
 
         return array(
-            'entity'      => $entity,
-            'form'        => $form->createView(),
-            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.new', array('%type%' => 'Description'))
+            'form'          => $form->createView(),
+            'language'      => $language,
+            'vulnerability' => $vulnerability,
+            'subtitle'      => $this->get('translator')->trans('form.general.subtitle.new', array('%type%' => 'Description'))
         );
     }
 
@@ -126,9 +127,10 @@ class VulnDescriptionController extends Controller
         $editForm = $this->createForm(new VulnDescriptionType(), $entity);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.edit', array('%type%' => 'Description'))
+            'entity'        => $entity,
+            'vulnerability' => $entity->getVulnerability(),
+            'edit_form'     => $editForm->createView(),
+            'subtitle'      => $this->get('translator')->trans('form.general.subtitle.edit', array('%type%' => 'Description'))
         );
     }
 
@@ -154,15 +156,16 @@ class VulnDescriptionController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('vulnerability_show', array('slug' => $entity->getVulnerability()->getSlug(), 'languageSlug' => $entity->getLanguage()->getSlug())));
+            return $this->redirect($this->generateUrl('description_show', array('slug' => $entity->getSlug())));
         }
 
         $this->get('session')->getFlashBag()->add('warning', 'form.general.flash.save_unable');
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.edit', array('%type%' => 'Description'))
+            'entity'        => $entity,
+            'vulnerability' => $entity->getVulnerability(),
+            'edit_form'     => $editForm->createView(),
+            'subtitle'      => $this->get('translator')->trans('form.general.subtitle.edit', array('%type%' => 'Description'))
         );
     }
 
@@ -187,7 +190,7 @@ class VulnDescriptionController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('vulnerability_show', array('slug' => $entity->getVulnerability()->getSlug(), 'languageSlug' => $entity->getLanguage()->getSlug())));
+        return $this->redirect($this->generateUrl('vulnerability_show', array('slug' => $entity->getVulnerability()->getSlug())));
     }
 
     private function createDeleteForm($slug)

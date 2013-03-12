@@ -11,10 +11,10 @@ class VulnDescriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'form.label.vulndescription.name', 'attr' => array("class" => "sir")))
-            ->add('description', null, array('label' => 'form.label.vulndescription.description', 'attr' => array("class" => "sir")))
-            ->add('risk', null, array('label' => 'form.label.vulndescription.risk', 'attr' => array("class" => "sir")))
-            ->add('solution', null, array('label' => 'form.label.vulndescription.solution', 'attr' => array("class" => "sir")))
+            ->add('name', null, array('label' => 'form.label.vulndescription.name'))
+            ->add('description', null, array('label' => 'form.label.vulndescription.description'))
+            ->add('risk', null, array('label' => 'form.label.vulndescription.risk'))
+            ->add('solution', null, array('label' => 'form.label.vulndescription.solution'))
         ;
     }
 
