@@ -17,6 +17,7 @@ form:
                 asc:                  "Sort descending by %title%"
                 desc:                 "Sort ascending by %title%"
         button:
+            new:                      "New"
             show:                     "Show"
             edit:                     "Edit"
             delete:                   "Delete"
@@ -44,10 +45,6 @@ form:
             name:                     "Name"
             tools:                    "Tools"
         vulnerability:
-            _entity:                  "Vulnerability"
-            _index:                   "Vulnerability overview"
-            _edit:                    "Edit an existing vulnerability"
-            _show:                    "Vulnerability details"
             product:                  "Product"
             tool:                     "Tool"
             name:                     "Name"
@@ -61,10 +58,6 @@ form:
             owaspitems:               "OWASP References"
             vulndescription:          "Descriptions"
         vulndescription:
-            _entity:                  "Description"
-            _new:                     "Add a new %language% description"
-            _edit:                    "Edit the %language% description"
-            _show:                    "Show the %language% description"
             name:                     "Name"
             description:              "Description"
             risk:                     "Risk"
@@ -72,16 +65,11 @@ form:
             language:                 "Language"
             vulnerability:            "Vulnerability"
         owaspref:
-            _entity:                  "OWASP reference"
             owaspitem:                "OWASP"
         service:
             protocol:                 "Protocol"
             port:                     "Port"
         vulnref:
-            _entity:                  "Online reference"
-            _new:                     "Add new online reference"
-            _delete:                  "Delete reference"
-            _manage:                  "Manage the vulnerability's references"
             name:                     "Name"
             hyperlink:                "Hyperlink"
 
@@ -149,6 +137,6 @@ interface:
         info:                 "Info"
         error:                "Error"
         success:              "Success"
-    vulndescription:
-        found:                "{0} At this point in time, the vulnerability '%vulnerability%' does not hold any report descriptions.|{1} At this point in time, the vulnerability '%vulnerability%' already holds a report description. In the list presented below, one can choose to show or modify an existing description.|]1,Inf] At this point in time, the vulnerability '%vulnerability%' already holds %count% report descriptions. In the list presented below, one can choose to show or modify an existing description."
-        allow_new:            "One can add a new description to this vulnerability for the languages presented below."
+#    vulndescription:
+#        found:                "{0} At this point in time, the vulnerability '%vulnerability%' does not hold any report descriptions.|{1} At this point in time, the vulnerability '%vulnerability%' already holds a report description. In the list presented below, one can choose to show or modify an existing description.|]1,Inf] At this point in time, the vulnerability '%vulnerability%' already holds %count% report descriptions. In the list presented below, one can choose to show or modify an existing description."
+#        allow_new:            "One can add a new description to this vulnerability for the languages presented below."

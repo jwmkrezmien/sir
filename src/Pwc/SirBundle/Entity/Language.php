@@ -37,8 +37,6 @@ class Language
 
     protected $available = false;
 
-    protected $active = false;
-
     public function __toString()
     {
         return $this->getName();
@@ -162,28 +160,5 @@ class Language
     public function getAvailable()
     {
         return $this->available;
-    }
-
-    /**
-     * Set the active status when the language is set for a particular object
-     *
-     * @param boolean $active
-     * @return Language
-     */
-    public function setActive($active)
-    {
-        $this->active = is_bool($active) ? $active : false;
-
-        return $this;
-    }
-
-    /**
-     * Get the active status when the language is set for a particular object
-     *
-     * @return boolean
-     */
-    public function getActive()
-    {
-        return $this->active;
     }
 }

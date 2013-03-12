@@ -18,27 +18,6 @@ use Pwc\SirBundle\Form\VulnDescriptionType;
 class VulnDescriptionController extends Controller
 {
     /**
-     * Lists all VulnDescription entities.
-     *
-     * @Route("/", name="description")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('PwcSirBundle:VulnDescription')->findAll();
-
-        $deleteForm = $this->createDeleteForm('');
-
-        return array(
-            'entities'   => $entities,
-            'delete_form' => $deleteForm->createView(),
-            'subtitle'      => $this->get('translator')->trans('form.general.subtitle.management', array('%type%' => 'Description'))
-        );
-    }
-
-    /**
      * Finds and displays a VulnDescription entity.
      *
      * @Route("/show/{slug}", name="description_show")

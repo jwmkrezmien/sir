@@ -23,6 +23,11 @@ SPAN.actions
 {
     margin-right: 10px;
 }
+/*Fix: all mini buttons*/
+A.btn.btn-mini
+{
+    width: 56px;
+}
 /*Fix: actions button icon margin right*/
 UL.dropdown-menu LI A I
 {
