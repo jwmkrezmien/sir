@@ -1,5 +1,13 @@
-{% extends 'PwcSirBundle::base.html.twig' %}
+{% extends 'PwcSirBundle:Division:left-small-right-large.html.twig' %}
+
+{% block sidebar %}
+    {{ knp_menu_render('PwcSirBundle:Builder:settingsMenu', {'currentClass': 'active', 'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
+{% endblock sidebar %}
+
+{% block lead %}
+    <p class="lead">{{ 'interface.text.settings.lead'|trans }}</p>
+{% endblock lead %}
 
 {% block contentBody %}
-
+    <p>{{ 'interface.text.settings.main'|trans }}</p>
 {% endblock contentBody %}

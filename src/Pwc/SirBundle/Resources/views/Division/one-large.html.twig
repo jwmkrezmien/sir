@@ -1,0 +1,10 @@
+{% extends 'PwcSirBundle::base.html.twig' %}
+
+{% block division %}
+<div class="row-fluid">
+    <div class="span12">
+        {{ flashes.show }}
+        {% block contentBody %}{% endblock contentBody %}
+    </div>
+</div>
+{% endblock division %}

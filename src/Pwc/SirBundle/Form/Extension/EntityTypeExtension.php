@@ -66,6 +66,6 @@ class EntityTypeExtension extends AbstractTypeExtension
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        if (array_key_exists('select2', $options)) $view->set('select2', $options['select2']);
+        if (array_key_exists('select2', $options)) $view->vars['select2'] = $options['select2'];
     }
 }

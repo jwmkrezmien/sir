@@ -1,0 +1,13 @@
+{% extends 'PwcSirBundle::base.html.twig' %}
+
+{% block division %}
+<div class="row-fluid">
+    <div class="span4">
+        {% block sidebar %}{% endblock sidebar %}
+    </div>
+    <div class="span8">
+        {{ flashes.show }}
+        {% block contentBody %}{% endblock contentBody %}
+    </div>
+</div>
+{% endblock division %}

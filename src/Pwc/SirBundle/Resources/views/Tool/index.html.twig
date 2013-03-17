@@ -1,4 +1,8 @@
-{% extends 'PwcSirBundle::base.html.twig' %}
+{% extends 'PwcSirBundle:Division:left-small-right-large.html.twig' %}
+
+{% block sidebar %}
+    {{ knp_menu_render('PwcSirBundle:Builder:settingsMenu', {'currentClass': 'active', 'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
+{% endblock sidebar %}
 
 {% block contentBody %}
 <div class="well">

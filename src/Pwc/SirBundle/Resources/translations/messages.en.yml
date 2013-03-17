@@ -12,6 +12,7 @@ form:
             history:                  "%type% history"
         link:
             add_new:                  "Add a new %type%"
+            delete:                   "Delete this %type%"
             revert:                   "Revert to Version %version%"
             sort_by:
                 asc:                  "Sort descending by %title%"
@@ -45,6 +46,7 @@ form:
             name:                     "Name"
             tools:                    "Tools"
         vulnerability:
+            _entity:                 "{1} Vulnerability|]2,Inf] Vulnerabilities"
             product:                  "Product"
             tool:                     "Tool"
             name:                     "Name"
@@ -55,6 +57,7 @@ form:
             time:                     "Time"
             cost:                     "Cost"
             vulnrefs:                 "Online References"
+            vulnref:                  "Online Reference"
             owaspitems:               "OWASP References"
             vulndescription:          "Descriptions"
         vulndescription:
@@ -65,11 +68,13 @@ form:
             language:                 "Language"
             vulnerability:            "Vulnerability"
         owaspref:
+            _entity:                 "{1} OWASP Reference|]2,Inf] OWASP References"
             owaspitem:                "OWASP"
         service:
             protocol:                 "Protocol"
             port:                     "Port"
         vulnref:
+            _entity:                 "{1} Online Reference|]2,Inf] Online References"
             name:                     "Name"
             hyperlink:                "Hyperlink"
 
@@ -137,6 +142,7 @@ interface:
         info:                 "Info"
         error:                "Error"
         success:              "Success"
-#    vulndescription:
-#        found:                "{0} At this point in time, the vulnerability '%vulnerability%' does not hold any report descriptions.|{1} At this point in time, the vulnerability '%vulnerability%' already holds a report description. In the list presented below, one can choose to show or modify an existing description.|]1,Inf] At this point in time, the vulnerability '%vulnerability%' already holds %count% report descriptions. In the list presented below, one can choose to show or modify an existing description."
-#        allow_new:            "One can add a new description to this vulnerability for the languages presented below."
+    text:
+        settings:
+            lead:             "The Security Issue Repository uses several components that can be managed through this Settings page. These components include the management of Products, Tools and OWASP Lists."
+            main:             "Please make a selection in the menu in the sidebar to manage one of the aforementioned entities."

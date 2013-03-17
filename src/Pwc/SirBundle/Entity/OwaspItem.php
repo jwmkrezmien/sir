@@ -36,7 +36,7 @@ class OwaspItem
     protected $rank;
 
     /**
-     * @ORM\OneToMany(targetEntity="OwaspRef", mappedBy="vulnerability")
+     * @ORM\OneToMany(targetEntity="OwaspRef", mappedBy="owaspitem")
      */
     protected $owaspRefs;
 

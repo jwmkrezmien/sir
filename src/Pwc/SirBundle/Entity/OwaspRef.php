@@ -13,6 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OwaspRef
 {
+    protected $entityType = 'OwaspRef';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -32,6 +34,16 @@ class OwaspRef
      * @Gedmo\Versioned
      */
     protected $owaspitem;
+
+    /**
+     * Get entity type
+     *
+     * @return string
+     */
+    public function getEntityType()
+    {
+        return $this->entityType;
+    }
 
     /**
      * Get id

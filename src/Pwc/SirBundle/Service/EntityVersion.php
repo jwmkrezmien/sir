@@ -203,7 +203,7 @@ class EntityVersion
      */
     public function getObjectLabel()
     {
-        return 'form.label.' . $this->modContextProvider->getReversedEntityMapping($this->objectClass) . '._entity';
+        return 'form.label.' . strtolower(call_user_func(array($this->modContextProvider->getCurrentObject($this->getObjectName(), $this->getObjectId()), 'getEntityType'))) . '._entity';
     }
 
     /**

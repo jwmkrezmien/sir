@@ -47,21 +47,11 @@
             {% block pageHeader %}
             <h1>{% if title is defined %}
                     {{ title|trans }} {% if subtitle is defined %}- {% endif %}
-                {% endif %}{{ subtitle|default('No subtitle yet') }}</h1>
+                {% endif %}{{ subtitle|default('- No subtitle yet') }}</h1>
             {% endblock pageHeader %}
         </div>
-        {% block pageLead %}
-        <p class="lead">The Security Issue Repository uses several components that can be managed through this Settings page. These components include the management of Products, Tools and OWASP Lists.</p>
-        {% endblock pageLead %}
-        <div class="row-fluid">
-            <div class="span4">
-                {{ knp_menu_render('PwcSirBundle:Builder:settingsMenu', {'currentClass': 'active', 'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
-            </div>
-            <div class="span8">
-                {{ flashes.show }}
-                {% block contentBody %}{% endblock contentBody %}
-            </div>
-        </div>
+        {% block lead %}{% endblock lead %}
+        {% block division %}{% endblock division %}
     </div>
     {% endblock body %}
 

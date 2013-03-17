@@ -33,6 +33,11 @@ UL.dropdown-menu LI A I
 {
     margin-right: 10px;
 }
+/*Fix: Form margin*/
+FORM
+{
+    margin: 0px;
+}
 /*FORM related*/
 FORM LABEL
 {

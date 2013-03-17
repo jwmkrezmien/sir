@@ -13,6 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class VulnRef
 {
+    protected $entityType = 'VulnRef';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -50,6 +52,16 @@ class VulnRef
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * Get entity type
+     *
+     * @return string
+     */
+    public function getEntityType()
+    {
+        return $this->entityType;
     }
 
     /**

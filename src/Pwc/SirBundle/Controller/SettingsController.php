@@ -23,7 +23,8 @@ class SettingsController extends Controller
     public function indexAction()
     {
         return array(
-            'title'      => 'Settings'
+            'title'      => 'Settings',
+            'subtitle'   => 'Overview'
         );
     }
 }
