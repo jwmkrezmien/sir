@@ -1,26 +1,29 @@
-{% extends "PwcUserBundle::layout.html.twig" %}
+{% extends "PwcSirBundle:Division:login.html.twig" %}
 
 {% block fos_user_content %}
 
-    <form id="login" action="{{ path("fos_user_security_check") }}" method="post">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <div class="loginbox well">
+        <img src="/bundles/pwcsir/images/pwc_logo.jpg" class="logo">
 
-        <input type="text" id="username" name="_username" required="required" />
-        <input type="password" id="password" name="_password" required="required" />
+        {% if error %}
 
+            {% set type = 'error' %}
+            {% set message = error|trans({}, 'FOSUserBundle') %}
+            {% set close = true %}
+            {% set use_raw = false %}
 
-        <input type="submit" id="_submit" name="_submit" value="" />
-    </form>
+            {{ flashes.render_flash(type, message, close, use_raw) }}
 
-    {% if error %}
-        <div id="error">{{ error|trans({}, 'FOSUserBundle') }}</div>
+        {% endif %}
 
-        <script>
-            $(document).ready(function()
-            {
-                $('#error').delay(5000).slideUp('slow');
-            });
-        </script>
-    {% endif %}
+        <form id="login" action="{{ path("fos_user_security_check") }}" method="post" novalidate>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+            <input class="sir input-block-level" type="text" id="username" name="_username" required="required" />
+            <input class="sir input-block-level" type="password" id="password" name="_password" required="required" />
+
+            <button type="submit" class="btn btn-block btn-info" id="_submit" name="_submit">{{ 'form.general.button.login'|trans }}</button>
+        </form>
+    </div>
 
 {% endblock fos_user_content %}

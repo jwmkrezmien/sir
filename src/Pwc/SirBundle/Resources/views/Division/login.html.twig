@@ -1,0 +1,12 @@
+{% extends 'PwcSirBundle::base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span4 offset4">
+                {% block fos_user_content %}{% endblock fos_user_content %}
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

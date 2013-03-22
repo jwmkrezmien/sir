@@ -18,6 +18,7 @@ form:
                 asc:                  "Sort descending by %title%"
                 desc:                 "Sort ascending by %title%"
         button:
+            login:                    "Log in"
             new:                      "New"
             show:                     "Show"
             edit:                     "Edit"

@@ -29,32 +29,7 @@
 </head>
 
 <body>
-
-    {% block body %}
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <div class="navbar-content">
-                    {{ knp_menu_render('PwcSirBundle:Builder:mainMenu', {'currentClass': 'active', 'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
-                    {{ knp_menu_render('PwcSirBundle:Builder:userMenu', {'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="main container">
-        <div class="page-header">
-            {% block pageHeader %}
-            <h1>{% if title is defined %}
-                    {{ title|trans }} {% if subtitle is defined %}- {% endif %}
-                {% endif %}{{ subtitle|default('- No subtitle yet') }}</h1>
-            {% endblock pageHeader %}
-        </div>
-        {% block lead %}{% endblock lead %}
-        {% block division %}{% endblock division %}
-    </div>
-    {% endblock body %}
-
+{% block body %}{% endblock body %}
 </body>
 
 </html>
