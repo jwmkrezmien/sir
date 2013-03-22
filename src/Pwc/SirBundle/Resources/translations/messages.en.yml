@@ -4,6 +4,10 @@ form:
         back:                         "Back to list"
         actions:                      "Actions"
         version:                      "Version %version%"
+        account:
+            general:                  "Profile settings"
+            edit:                     "Edit account"
+            changepw:                 "Change password"
         subtitle:
             management:               "%type% management"
             details:                  "%type% details"
@@ -40,6 +44,10 @@ form:
                 proceed:              "Delete it now!"
                 description:          "You are about to delete a %type% from the repository. Are you sure want to remove the %type% '%name%' now?"
     label:
+        account:
+            username:                 "Username"
+            name:                     "Full name"
+            email:                    "E-mail"
         tool:
             name:                     "Name"
             products:                 "Products"

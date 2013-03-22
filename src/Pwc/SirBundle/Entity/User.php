@@ -27,10 +27,47 @@ class User extends \FOS\UserBundle\Entity\User
      */
     protected $lastName;
 
+    /**
+     * @ORM\Column(name="password_changed_at", type="datetime")
+     */
+    protected $password_changed_at;
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+
+        if(!$this->getPasswordChangedAt()) $this->setPasswordChangedAt(new \DateTime());
+    }
+
+    /**
+     * Set password_changed_at
+     *
+     * @param \DateTime $date
+     * @return User
+     */
+    public function setPasswordChangedAt(\DateTime $date)
+    {
+        $this->password_changed_at = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get password_changed_at
+     *
+     * @return \DateTime
+     */
+    public function getPasswordChangedAt()
+    {
+        return $this->password_changed_at;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->setPasswordChangedAt(new \DateTime());
+        parent::setPlainPassword($password);
+
+        return $this;
     }
 
     /**

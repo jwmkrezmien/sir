@@ -1,0 +1,4 @@
+pwc_user:
+    new_password:
+        lack_complexity:                   "The new password lacks the required complexity - Compliance level: %compliance%"
+

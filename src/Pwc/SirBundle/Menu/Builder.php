@@ -12,10 +12,10 @@ class Builder extends ContainerAware
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav nav-pills');
 
-        $menu->addChild('Home', array('route' => '_homepage'))
-             ->setAttribute('icon', 'icon-home');
-        $menu->addChild('Reports', array('route' => '_homepage'))
-             ->setAttribute('icon', 'icon-book');
+//        $menu->addChild('Home', array('route' => '_homepage'))
+//             ->setAttribute('icon', 'icon-home');
+//        $menu->addChild('Reports', array('route' => '_homepage'))
+//             ->setAttribute('icon', 'icon-book');
         $menu->addChild('Vulnerabilities', array('route' => 'vulnerability'))
              ->setAttribute('icon', 'icon-bolt');
         $menu->addChild('Settings', array('route' => 'settings'))
@@ -30,10 +30,10 @@ class Builder extends ContainerAware
         $menu->setChildrenAttribute('class', 'nav pull-right');
 
         $menu->addChild('User', array('label' => $this->container->get('security.context')->getToken()->getUser()->getFirstname() && $this->container->get('security.context')->getToken()->getUser()->getLastname() ? $this->container->get('security.context')->getToken()->getUser()->getFirstname() . ' ' . $this->container->get('security.context')->getToken()->getUser()->getLastname() : $this->container->get('security.context')->getToken()->getUser()->getUsername()))
-            ->setAttribute('dropdown', true)
-            ->setAttribute('icon', 'icon-user');
+             ->setAttribute('dropdown', true)
+             ->setAttribute('icon', 'icon-user');
 
-        $menu['User']->addChild('Account Settings', array('route' => 'fos_user_profile_show'))
+        $menu['User']->addChild('Profile settings', array('route' => 'fos_user_profile_show'))
                      ->setAttribute('icon', 'icon-edit');
 
         $menu['User']->addChild('Change Password', array('route' => 'fos_user_change_password'))
@@ -54,6 +54,17 @@ class Builder extends ContainerAware
         $menu->addChild('Product management', array('route' => 'product'));
         $menu->addChild('Tool management', array('route' => 'tool'));
         $menu->addChild('OWASP list management', array('route' => 'product'));
+
+        return $menu;
+    }
+
+    public function accountMenu(FactoryInterface $factory, array $options)
+    {
+        $menu = $factory->createItem('root');
+        $menu->setChildrenAttribute('class', 'nav nav-stacked nav-pills');
+
+        $menu->addChild('Profile settings', array('route' => 'fos_user_profile_show'));
+        $menu->addChild('Change password', array('route' => 'fos_user_change_password'));
 
         return $menu;
     }

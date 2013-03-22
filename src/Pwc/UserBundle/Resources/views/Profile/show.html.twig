@@ -1,5 +1,22 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "PwcSirBundle:Division:left-small-right-large.html.twig" %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:show_content.html.twig" %}
-{% endblock fos_user_content %}
+{% set subtitle = 'form.general.account.general'|trans %}
+
+{% block sidebar %}
+    {{ knp_menu_render('PwcSirBundle:Builder:accountMenu', {'currentClass': 'active', 'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
+{% endblock sidebar %}
+
+{% block contentBody %}
+    <div class="well">
+        <ul class="entity">
+            <li class="detail"><label class="pull-left">{{ 'form.label.account.username'|trans }}</label><span class="value">{{ user.username }}</span></li>
+            <li class="detail"><label class="pull-left">{{ 'form.label.account.name'|trans }}</label><span class="value">{% if user.firstname and user.lastname %}{{ user.firstname }} {{ user.lastname }}{% else %}-{% endif %}</span></li>
+            <li class="detail"><label class="pull-left">{{ 'form.label.account.email'|trans }}</label><span class="value">{{ user.email }}</span></li>
+        </ul>
+
+        <div class="record_actions">
+            {% include "PwcSirBundle:Includes:actions.html.twig" with { 'editRoute': path('fos_user_profile_edit') } %}
+        </div>
+
+    </div>
+{% endblock contentBody %}

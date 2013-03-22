@@ -1,5 +1,22 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "PwcSirBundle:Division:left-small-right-large.html.twig" %}
+{% form_theme form 'PwcSirBundle:Form:fields.html.twig' %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
-{% endblock fos_user_content %}
+{% set title = 'form.general.account.general'|trans %}
+{% set subtitle = 'form.general.account.edit'|trans %}
+
+{% block sidebar %}
+    {{ knp_menu_render('PwcSirBundle:Builder:accountMenu', {'currentClass': 'active', 'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
+{% endblock sidebar %}
+
+{% block contentBody %}
+    <div class="well">
+        <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit" novalidate>
+            {{ form_widget(form) }}
+
+            <div class="record_actions">
+                <button type="submit" class="btn btn-info">{{ 'form.general.button.save'|trans }}</button>
+                <a class="pull-right cancel" href="{{ path('fos_user_profile_show') }}">{{ 'form.general.back'|trans }}</a>
+            </div>
+        </form>
+    </div>
+{% endblock contentBody %}

@@ -3,16 +3,27 @@
         {% if close|default(true) %}
             <button type="button" class="close" data-dismiss="alert">×</button>
         {% endif %}
-        {% if use_raw|default(false) %}
-            <b>{{ ('interface.flash.' ~ type) |trans }}:</b> {{ message|trans|raw }}
+
+        {% if type == 'fos_user_success' %}
+            {% set type = 'success' %}
+
+            {% if use_raw|default(false) %}
+                <b>{{ ('interface.flash.' ~ type) |trans }}:</b> {{ message|trans({}, 'FOSUserBundle')|raw }}
+            {% else %}
+                <b>{{ ('interface.flash.' ~ type) |trans }}:</b> {{ message|trans({}, 'FOSUserBundle') }}
+            {% endif %}
         {% else %}
-            <b>{{ ('interface.flash.' ~ type) |trans }}:</b> {{ message|trans }}
+            {% if use_raw|default(false) %}
+                <b>{{ ('interface.flash.' ~ type) |trans }}:</b> {{ message|trans|raw }}
+            {% else %}
+                <b>{{ ('interface.flash.' ~ type) |trans }}:</b> {{ message|trans }}
+            {% endif %}
         {% endif %}
     </div>
 {% endmacro %}
 
 {% macro show(type, close, use_raw) %}
-    {% set types = ['info', 'error', 'warning', 'success'] %}
+    {% set types = ['info', 'error', 'warning', 'success', 'fos_user_success'] %}
     {% if close is not defined %}
         {% set close = true %}
     {% endif %}
