@@ -5,3 +5,13 @@ form:
     lastname:                    "Last name"
     new_password:                "New password"
     new_password_confirmation:   "Verification"
+
+interface:
+    password_age:                "{0} The new password is set less than a day ago|{1} One day old|]2,Inf] %count% days old"
+    password_age_label:          "Password age"
+    back_to:                     "Back to profile overview"
+
+flash:
+    about_to_expire:             "{1} Your password is about to expire in one day and it is highly recommended to change your password|]2,Inf]  Your password is about to expire in %count% days and it is highly recommended to change your password"
+    forced_renewal:              "Your account is flagged for password renewal. No further actions can be performed prior to this renewal"
+    password_expired:            "Your password credentials expired. No further actions can be performed prior to this renewal"

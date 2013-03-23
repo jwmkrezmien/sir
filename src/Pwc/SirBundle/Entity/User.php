@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends \FOS\UserBundle\Entity\User
 {
+    protected $maxPassAge = 90;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -32,6 +34,11 @@ class User extends \FOS\UserBundle\Entity\User
      */
     protected $password_changed_at;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $forced_renewal;
+
     public function __construct()
     {
         parent::__construct();
@@ -40,7 +47,70 @@ class User extends \FOS\UserBundle\Entity\User
     }
 
     /**
-     * Set password_changed_at
+     * Set the flag to renew the password upon the next login attempt
+     *
+     * @param $boolean
+     * @return User
+     */
+    public function setForcePasswordRenewal($boolean)
+    {
+        $this->forced_renewal = (Boolean) $boolean;
+
+        return $this;
+    }
+
+    /**
+     * Get the flag to renew the password upon the next login attempt
+     *
+     * @return boolean
+     */
+    public function isForcedToRenewPassword()
+    {
+        return $this->forced_renewal;
+    }
+
+    /**
+     * Get the flag to renew the password upon the next login attempt
+     *
+     * @return boolean
+     */
+    public function isPasswordExpired()
+    {
+        return $this->getPasswordAge() >= $this->maxPassAge ? true : false;
+    }
+
+    /**
+     * Get the password age in days
+     *
+     * @return integer
+     */
+    public function getPasswordAge()
+    {
+        return $this->getPasswordChangedAt()->diff(new \DateTime())->format('%a');
+    }
+
+    /**
+     * Get the number of days until a password change is required
+     *
+     * @return integer
+     */
+    public function getDaysUntilPasswordChange()
+    {
+        return $this->maxPassAge - $this->getPasswordChangedAt()->diff(new \DateTime())->format('%a');
+    }
+
+    /**
+     * See whether a restricted version of the interface is needed, because the password needs to be changed
+     *
+     * @return boolean
+     */
+    public function isRestricted()
+    {
+        return $this->isForcedToRenewPassword() || $this->isPasswordExpired() ? false : true;
+    }
+
+    /**
+     * Set the datetime object for the moment the password was changed for the last time
      *
      * @param \DateTime $date
      * @return User
@@ -53,7 +123,7 @@ class User extends \FOS\UserBundle\Entity\User
     }
 
     /**
-     * Get password_changed_at
+     * Get the datetime object for the moment the password was changed for the last time
      *
      * @return \DateTime
      */
@@ -64,6 +134,15 @@ class User extends \FOS\UserBundle\Entity\User
 
     public function setPlainPassword($password)
     {
+        // if the password was already changed before, then set the forced renewal flag to false
+        // this check is initiated to separate the user initiation process from the user update process
+        if (isset($this->forced_renewal))
+        {
+            $this->setForcePasswordRenewal(false);
+        }else{
+            $this->setForcePasswordRenewal(true);
+        }
+
         $this->setPasswordChangedAt(new \DateTime());
         parent::setPlainPassword($password);
 

@@ -12,14 +12,21 @@ class Builder extends ContainerAware
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav nav-pills');
 
-//        $menu->addChild('Home', array('route' => '_homepage'))
-//             ->setAttribute('icon', 'icon-home');
-//        $menu->addChild('Reports', array('route' => '_homepage'))
-//             ->setAttribute('icon', 'icon-book');
-        $menu->addChild('Vulnerabilities', array('route' => 'vulnerability'))
-             ->setAttribute('icon', 'icon-bolt');
-        $menu->addChild('Settings', array('route' => 'settings'))
-             ->setAttribute('icon', 'icon-cogs');
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        if($user->isRestricted())
+        {
+/*
+            $menu->addChild('Home', array('route' => '_homepage'))
+                 ->setAttribute('icon', 'icon-home');
+            $menu->addChild('Reports', array('route' => '_homepage'))
+                 ->setAttribute('icon', 'icon-book');
+*/
+            $menu->addChild('Vulnerabilities', array('route' => 'vulnerability'))
+                 ->setAttribute('icon', 'icon-bolt');
+            $menu->addChild('Settings', array('route' => 'settings'))
+                 ->setAttribute('icon', 'icon-cogs');
+        }
 
         return $menu;
     }
@@ -29,16 +36,21 @@ class Builder extends ContainerAware
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav pull-right');
 
-        $menu->addChild('User', array('label' => $this->container->get('security.context')->getToken()->getUser()->getFirstname() && $this->container->get('security.context')->getToken()->getUser()->getLastname() ? $this->container->get('security.context')->getToken()->getUser()->getFirstname() . ' ' . $this->container->get('security.context')->getToken()->getUser()->getLastname() : $this->container->get('security.context')->getToken()->getUser()->getUsername()))
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        $menu->addChild('User', array('label' => $user->getFirstname() && $user->getLastname() ? $user->getFirstname() . ' ' . $user->getLastname() : $user->getUsername()))
              ->setAttribute('dropdown', true)
              ->setAttribute('icon', 'icon-user');
 
-        $menu['User']->addChild('Profile settings', array('route' => 'fos_user_profile_show'))
-                     ->setAttribute('icon', 'icon-edit');
+        if($user->isRestricted())
+        {
+            $menu['User']->addChild('Profile settings', array('route' => 'fos_user_profile_show'))
+                         ->setAttribute('icon', 'icon-edit');
 
-        $menu['User']->addChild('Change Password', array('route' => 'fos_user_change_password'))
-                     ->setAttribute('icon', 'icon-key')
-                     ->setAttribute('divider_append', true);;
+            $menu['User']->addChild('Change Password', array('route' => 'fos_user_change_password'))
+                         ->setAttribute('icon', 'icon-key')
+                         ->setAttribute('divider_append', true);
+        }
 
         $menu['User']->addChild('Logout', array('route' => 'fos_user_security_logout'))
                      ->setAttribute('icon', 'icon-signout');
@@ -63,7 +75,9 @@ class Builder extends ContainerAware
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav nav-stacked nav-pills');
 
-        $menu->addChild('Profile settings', array('route' => 'fos_user_profile_show'));
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        if($user->isRestricted()) $menu->addChild('Profile settings', array('route' => 'fos_user_profile_show'));
         $menu->addChild('Change password', array('route' => 'fos_user_change_password'));
 
         return $menu;
