@@ -12,9 +12,9 @@ _homepage:
     pattern:   /
     defaults:  { _controller: PwcSirBundle:Vulnerability:index }
 
-product:
-    resource:  "@PwcSirBundle/Controller/ServiceController.php"
-    type:     annotation
+#product:
+#    resource:  "@PwcSirBundle/Controller/ServiceController.php"
+#    type:     annotation
 
 fos_user_security:
     resource:  "@FOSUserBundle/Resources/config/routing/security.xml"
