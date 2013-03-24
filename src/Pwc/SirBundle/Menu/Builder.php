@@ -65,7 +65,7 @@ class Builder extends ContainerAware
 
         $menu->addChild('Product management', array('route' => 'product'));
         $menu->addChild('Tool management', array('route' => 'tool'));
-        $menu->addChild('OWASP list management', array('route' => 'product'));
+        $menu->addChild('OWASP list management', array('route' => 'owaspset'));
 
         return $menu;
     }

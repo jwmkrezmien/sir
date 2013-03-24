@@ -141,10 +141,14 @@ services:
         class: Pwc\SirBundle\Form\Extension\EntityTypeExtension
         tags:
             -  { name: form.type_extension, alias: entity }
-    pwc_sir.form_type_extension:
-        class: Pwc\SirBundle\Form\Extension\FormTypeExtension
+    pwc_sir.text_type_extension:
+        class: Pwc\SirBundle\Form\Extension\TextTypeExtension
         tags:
             -  { name: form.type_extension, alias: text }
+    pwc_sir.integer_type_extension:
+        class: Pwc\SirBundle\Form\Extension\IntegerTypeExtension
+        tags:
+            -  { name: form.type_extension, alias: integer }
     pwc_sir.menu.voter.request:
         class: Pwc\SirBundle\Menu\RequestVoter
         arguments:

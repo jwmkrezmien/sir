@@ -86,9 +86,14 @@ form:
             protocol:                 "Protocol"
             port:                     "Port"
         vulnref:
-            _entity:                 "{1} Online Reference|]2,Inf] Online References"
+            _entity:                  "{0} Online Reference|{1} Online Reference|]2,Inf] Online References"
             name:                     "Name"
             hyperlink:                "Hyperlink"
+        owaspset:
+            _entity:                  "{0} OWASP List|{1} OWASP List|]2,Inf] OWASP Lists"
+            name:                     "Name"
+            year:                     "Year"
+            owaspitems:               "OWASP entries"
 
 product:
     empty_value:              "Choose the associated product"

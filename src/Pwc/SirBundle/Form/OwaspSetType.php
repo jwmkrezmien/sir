@@ -10,11 +10,12 @@ class OwaspSetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name')
-            ->add('year')
-            ->add('slug')
-        ;
+        $builder->add('name', null, array('label' => 'form.label.owaspset.name'))
+                ->add('year', null, array('label' => 'form.label.owaspset.year'))
+                ->add('owaspItems', 'collection', array(
+                    'type'  => new OwaspItemType(),
+                    'label' => 'form.label.owaspset.owaspitems'
+        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

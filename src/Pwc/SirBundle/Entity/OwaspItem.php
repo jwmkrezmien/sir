@@ -27,11 +27,19 @@ class OwaspItem
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     protected $name;
 
     /**
      * @ORM\Column(type="integer", length=2)
+     * @Assert\NotBlank()
+     * @Assert\Range(
+     *      min = "1",
+     *      max = "10",
+     *      minMessage = "OWASP Lists only consist of 10 items and hence a value between 1 and 10 is expected",
+     *      maxMessage = "OWASP Lists only consist of 10 items and hence a value between 1 and 10 is expected"
+     * )
      */
     protected $rank;
 

@@ -7,11 +7,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Pwc\SirBundle\Repository\OwaspSetRepository")
  * @ORM\Table(name="owaspset")
  */
 class OwaspSet
 {
+    protected $entityType = 'OwaspSet';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -21,16 +23,25 @@ class OwaspSet
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     protected $name;
 
     /**
      * @ORM\Column(type="integer", length=4)
+     * @Assert\NotBlank()
+     * @Assert\Range(
+     *      min = "2000",
+     *      max = "2050",
+     *      minMessage = "A year is only considered valid when set between 2000 and 2050",
+     *      maxMessage = "A year is only considered valid when set between 2000 and 2050"
+     * )
      */
     protected $year;
 
     /**
-     * @ORM\OneToMany(targetEntity="OwaspItem", mappedBy="owaspset")
+     * @ORM\OneToMany(targetEntity="OwaspItem", mappedBy="owaspset", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     protected $owaspItems;
 
@@ -40,14 +51,24 @@ class OwaspSet
      */
     protected $slug;
 
+    public function __construct()
+    {
+        $this->owaspItems = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     public function __toString()
     {
         return $this->getName();
     }
 
-    public function __construct()
+    /**
+     * Get entity type
+     *
+     * @return string
+     */
+    public function getEntityType()
     {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->entityType;
     }
 
     /**
@@ -89,8 +110,11 @@ class OwaspSet
      * @param \Pwc\SirBundle\Entity\OwaspItem $owaspItems
      * @return OwaspSet
      */
-    public function addOwaspItem(\Pwc\SirBundle\Entity\OwaspItem $owaspItem)
+    public function addOwaspItem($owaspItem)
     {
+        if ($owaspItem === null) $owaspItem = new \Pwc\SirBundle\Entity\OwaspItem();
+
+        $owaspItem->setOwaspset($this);
         $this->owaspItems[] = $owaspItem;
     
         return $this;

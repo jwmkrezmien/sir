@@ -47,10 +47,11 @@
             {% endif %}
             {% if form|length > 0 %}
                 {% for child in form %}
-            {% set attr = attr|merge({'class': 'embedded-child' }) %}
-            <li {{ block('widget_container_attributes') }}>
-                    {{ form_widget(child) }}
-            </li>
+                    {% set attr = attr|merge({'class': 'embedded-child' }) %}
+                    <li {{ block('widget_container_attributes') }}>
+                        <span class="index">{{ loop.index }}</span>
+                        {{ form_widget(child) }}
+                    </li>
                 {% endfor %}
             {% endif %}
             {{ form_rest(form) }}

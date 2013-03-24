@@ -36,7 +36,7 @@ class Service
     protected $protocol;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="integer", length=5)
      * @Gedmo\Versioned
      * @Assert\NotBlank()
      * @Assert\Range(

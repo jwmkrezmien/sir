@@ -13,10 +13,12 @@ use Pwc\SirBundle\Form\OwaspSetType;
 /**
  * OwaspSet controller.
  *
- * @Route("/owaspset")
+ * @Route("/settings/owaspset")
  */
 class OwaspSetController extends Controller
 {
+    protected $title = "Settings";
+
     /**
      * Lists all OwaspSet entities.
      *
@@ -28,10 +30,18 @@ class OwaspSetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('PwcSirBundle:OwaspSet')->findAll();
+        $pc = $this->get('pagination_checker');
+        $pc->addAllowedFieldName('name');
+
+        $pc->setPaginatedSubject($pc->isSortable() ? $em->getRepository('PwcSirBundle:OwaspSet')->findAllSorted($pc->getSortField(), $pc->getSortDirection()) : $em->getRepository('PwcSirBundle:OwaspSet')->findAll());
+
+        $deleteForm = $this->createDeleteForm('');
 
         return array(
-            'entities' => $entities,
+            'title'      => $this->title,
+            'subtitle'   => $this->get('translator')->trans('form.general.subtitle.management', array('%type%' => 'OWASP List')),
+            'pagination' => $pc->getPagination(),
+            'delete_form' => $deleteForm->createView()
         );
     }
 
@@ -44,21 +54,36 @@ class OwaspSetController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity  = new OwaspSet();
+        $entity = new OwaspSet();
+
+        for ($i = 1; $i <= 10; $i++)
+        {
+            $owaspitem = new \Pwc\SirBundle\Entity\OwaspItem();
+            $owaspitem->setRank($i);
+            $entity->addOwaspItem($owaspitem);
+        }
+
         $form = $this->createForm(new OwaspSetType(), $entity);
         $form->bind($request);
+
+        //var_dump($entity); exit();
+        //var_dump($request->request->get('pwc_sirbundle_owaspsettype')); exit();
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('owaspset_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('owaspset_show', array('slug' => $entity->getSlug())));
         }
 
+        $this->get('session')->getFlashBag()->add('warning', 'form.general.flash.save_unable');
+
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+            'entity'      => $entity,
+            'form'        => $form->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.new', array('%type%' => 'OWASP List'))
         );
     }
 
@@ -72,84 +97,89 @@ class OwaspSetController extends Controller
     public function newAction()
     {
         $entity = new OwaspSet();
-        $form   = $this->createForm(new OwaspSetType(), $entity);
+
+        for ($i = 1; $i <= 10; $i++)
+        {
+            $owaspitem = new \Pwc\SirBundle\Entity\OwaspItem();
+            $owaspitem->setRank($i);
+            $entity->addOwaspItem($owaspitem);
+        }
+
+        $form = $this->createForm(new OwaspSetType(), $entity);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+            'entity'      => $entity,
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.new', array('%type%' => 'OWASP List')),
+            'form'        => $form->createView()
         );
     }
 
     /**
      * Finds and displays a OwaspSet entity.
      *
-     * @Route("/{id}", name="owaspset_show")
+     * @Route("/{slug}", name="owaspset_show")
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:OwaspSet')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:OwaspSet')->findOneBySlug($slug);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find OwaspSet entity.');
-        }
+        if (!$entity) throw $this->createNotFoundException('Unable to find OwaspSet entity.');
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getSlug());
 
         return array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.details', array('%type%' => 'OWASP List')),
+            'delete_form' => $deleteForm->createView()
         );
     }
 
     /**
      * Displays a form to edit an existing OwaspSet entity.
      *
-     * @Route("/{id}/edit", name="owaspset_edit")
+     * @Route("/{slug}/edit", name="owaspset_edit")
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
+    public function editAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:OwaspSet')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:OwaspSet')->findOneBySlug($slug);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find OwaspSet entity.');
-        }
+        if (!$entity) throw $this->createNotFoundException('Unable to find OwaspSet entity.');
 
         $editForm = $this->createForm(new OwaspSetType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.edit', array('%type%' => 'OWASP List'))
         );
     }
 
     /**
      * Edits an existing OwaspSet entity.
      *
-     * @Route("/{id}", name="owaspset_update")
+     * @Route("/{slug}", name="owaspset_update")
      * @Method("PUT")
      * @Template("PwcSirBundle:OwaspSet:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PwcSirBundle:OwaspSet')->find($id);
+        $entity = $em->getRepository('PwcSirBundle:OwaspSet')->findOneBySlug($slug);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find OwaspSet entity.');
-        }
+        if (!$entity) throw $this->createNotFoundException('Unable to find OwaspSet entity.');
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new OwaspSetType(), $entity);
         $editForm->bind($request);
 
@@ -157,34 +187,35 @@ class OwaspSetController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('owaspset_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('owaspset_show', array('slug' => $entity->getSlug())));
         }
+
+        $this->get('session')->getFlashBag()->add('warning', 'form.general.flash.save_unable');
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'title'       => $this->title,
+            'subtitle'    => $this->get('translator')->trans('form.general.subtitle.edit', array('%type%' => 'OWASP List'))
         );
     }
 
     /**
      * Deletes a OwaspSet entity.
      *
-     * @Route("/{id}", name="owaspset_delete")
+     * @Route("/{slug}", name="owaspset_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $slug)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm($slug);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('PwcSirBundle:OwaspSet')->find($id);
+            $entity = $em->getRepository('PwcSirBundle:OwaspSet')->findOneBySlug($slug);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find OwaspSet entity.');
-            }
+            if (!$entity) throw $this->createNotFoundException('Unable to find OwaspSet entity.');
 
             $em->remove($entity);
             $em->flush();
@@ -200,11 +231,10 @@ class OwaspSetController extends Controller
      *
      * @return Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    private function createDeleteForm($slug)
     {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
+        return $this->createFormBuilder(array('slug' => $slug))
+            ->add('slug', 'hidden')
+            ->getForm();
     }
 }

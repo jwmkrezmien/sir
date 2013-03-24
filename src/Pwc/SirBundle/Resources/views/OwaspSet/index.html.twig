@@ -1,45 +1,32 @@
-{% extends '::base.html.twig' %}
+{% extends 'PwcSirBundle:Division:left-small-right-large.html.twig' %}
 
-{% block body -%}
-    <h1>OwaspSet list</h1>
+{% block sidebar %}
+    {{ knp_menu_render('PwcSirBundle:Builder:settingsMenu', {'currentClass': 'active', 'template': 'PwcSirBundle:Menu:knp_menu.html.twig'}) }}
+{% endblock sidebar %}
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Year</th>
-                <th>Slug</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('owaspset_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.year }}</td>
-                <td>{{ entity.slug }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('owaspset_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('owaspset_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block contentBody %}
+    <div class="well">
+        <ul class="entity index">
+            <li class="detail sort">
+                {{ knp_pagination_sortable(pagination, 'name', 'name') }}
+            </li>
 
-        <ul>
-        <li>
-            <a href="{{ path('owaspset_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+            {% for entity in pagination %}
+                <li class="detail{% if loop.index is odd %} color{% endif %}">
+                    <a href="{{ path('owaspset_show', { 'slug': entity.slug }) }}">{{ entity.name|trans }}</a>
+                    {% include "PwcSirBundle:Includes:actions.html.twig" with { 'size': 'btn-mini', 'pull': 'pull-right', 'entity': entity, 'showRoute': path('owaspset_show', { 'slug': entity.slug }), 'editRoute': path('owaspset_edit', { 'slug': entity.slug }), 'deleteRoute': path('owaspset_delete', { 'slug': entity.slug }) } %}
+                </li>
+            {% endfor %}
+
+            <li class="detail new">
+                <i class="icon-plus-sign"></i> <a href="{{ path('owaspset_new') }}">{{ 'form.general.link.add_new'|trans({ '%type%': 'owaspset' }) }}</a>
+            </li>
+        </ul>
+
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        {% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'delete_form': delete_form } %}
+    </div>
+{% endblock contentBody %}
