@@ -264,7 +264,22 @@ UL.form-collection LI.embedded-child
 {
     border-bottom: 1px solid #D6D3D3;
     text-align: right;
+    position: relative;
     padding: 10px 5px;
+}
+UL.form-collection LI.embedded-child SPAN.index
+{
+    background-color: #D6D3D3;
+    position: absolute;
+    top: 0px;
+    padding: 3px 10px 3px 20px;
+    right: 0px;
+    min-width: 60px;
+    /*+border-radius:0px 0px 0px 3px;*/
+    -moz-border-radius: 0px 0px 0px 3px;
+    -webkit-border-radius: 0px 0px 0px 3px;
+    -khtml-border-radius: 0px 0px 0px 3px;
+    border-radius: 0px 0px 0px 3px;
 }
 UL.form-collection LI.embedded-child A.delete-child
 {
