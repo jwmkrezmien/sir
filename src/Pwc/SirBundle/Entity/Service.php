@@ -3,7 +3,7 @@
 namespace Pwc\SirBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -13,6 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Service
 {
+    protected $entityType = 'Service';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -29,12 +31,20 @@ class Service
     /**
      * @ORM\Column(type="string", length=10)
      * @Gedmo\Versioned
+     * @Assert\NotBlank()
      */
     protected $protocol;
 
     /**
      * @ORM\Column(type="string", length=10)
      * @Gedmo\Versioned
+     * @Assert\NotBlank()
+     * @Assert\Range(
+     *      min = "1",
+     *      max = "65535",
+     *      minMessage = "Ports must be between 1 and 65535",
+     *      maxMessage = "Ports must be between 1 and 65535"
+     * )
      */
     protected $port;
 
@@ -43,6 +53,21 @@ class Service
      * @ORM\Column(length=40)
      */
     protected $slug;
+
+    public function __toString()
+    {
+        return $this->getProtocol();
+    }
+
+    /**
+     * Get entity type
+     *
+     * @return string
+     */
+    public function getEntityType()
+    {
+        return $this->entityType;
+    }
 
     /**
      * Get id

@@ -3,32 +3,37 @@
 <script>
 
     // Get the div that holds the collection of tags
-    var collectionHolder = $('ul.{{ entityName }}');
+    var collectionHolder = $('ul.form-collection');
 
     // setup an "add a tag" link
-    var $addTagLink = $('<a href="#">{{ add_entity_description }}</a>');
+    var $addTagLink = $('<a href="#"></a>');
     var $newLinkLi = $('<li></li>').attr('class', 'add-child').append($addTagLink);
 
     $(document).ready(function() {
 
-        collectionHolder.find('li.embedded-child').each(function() {
+        collectionHolder.find('LI.embedded-child').each(function() {
             addTagFormDeleteLink($(this));
         });
 
         // add the "add a tag" anchor and li to the tags ul
         collectionHolder.append($newLinkLi);
 
+        $('LI.add-child A').each(function (index, link)
+        {
+            $(link).html( '{{ 'form.general.link.add_new'|trans }}' );
+        });
+
         // count the current form inputs we have (e.g. 2), use that as the new
         // index when inserting a new item (e.g. 2)
         collectionHolder.data('index', collectionHolder.children('li.embedded-child').length);
 
-        $addTagLink.on('click', function(e) {
-
+        $('LI.add-child A').on('click', function(e)
+        {
             // prevent the link from creating a "#" on the URL
             e.preventDefault();
 
             // add a new tag form (see next code block)
-            addTagForm(collectionHolder, $newLinkLi);
+            addTagForm($(this).parents('ul.form-collection'), $(this).parents('ul.form-collection').find('LI.add-child'));
         });
 
         function addTagForm(collectionHolder, $newLinkLi)
@@ -55,13 +60,19 @@
         }
 
         function addTagFormDeleteLink($tagFormLi) {
-            var $removeFormA = $('<a href="#" class="delete-child">{{ delete_entity_description }}</a>');
+            var $removeFormA = $('<a href="#" class="delete-child">{{ 'form.general.link.delete'|trans }}</a>');
             $tagFormLi.append($removeFormA);
 
             $removeFormA.on('click', function(e) {
                 // prevent the link from creating a "#" on the URL
                 e.preventDefault();
+/*
+                // get the new index
+                var index = collectionHolder.data('index');
 
+                // decrease the index with one for the next item
+                collectionHolder.data('index', index - 1);
+*/
                 // remove the li for the tag form
                 $tagFormLi.remove();
             });

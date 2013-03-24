@@ -12,6 +12,7 @@ parameters:
                     impact:               Pwc\SirBundle\Entity\Impact
                     time:                 Pwc\SirBundle\Entity\Time
                     cost:                 Pwc\SirBundle\Entity\Cost
+                    service:              Pwc\SirBundle\Entity\Service
                 identifier:               slug
             vulndescription:
                 namespace:                Pwc\SirBundle\Entity\VulnDescription

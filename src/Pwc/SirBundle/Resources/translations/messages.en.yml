@@ -15,8 +15,8 @@ form:
             edit:                     "Edit %type%"
             history:                  "%type% history"
         link:
-            add_new:                  "Add a new %type%"
-            delete:                   "Delete this %type%"
+            add_new:                  "Add a new instance"
+            delete:                   "Delete this instance"
             revert:                   "Revert to Version %version%"
             sort_by:
                 asc:                  "Sort descending by %title%"
@@ -66,6 +66,7 @@ form:
             time:                     "Time"
             cost:                     "Cost"
             vulnrefs:                 "Online References"
+            services:                 "Services"
             vulnref:                  "Online Reference"
             owaspitems:               "OWASP References"
             vulndescription:          "Descriptions"
@@ -77,9 +78,11 @@ form:
             language:                 "Language"
             vulnerability:            "Vulnerability"
         owaspref:
-            _entity:                 "{1} OWASP Reference|]2,Inf] OWASP References"
+            _entity:                  "{0} OWASP Reference|{1} OWASP Reference|]2,Inf] OWASP References"
             owaspitem:                "OWASP"
         service:
+            _entity:                  "{0} Service|{1} Service|]2,Inf] Services"
+            _display:                 "%service% on port %port%"
             protocol:                 "Protocol"
             port:                     "Port"
         vulnref:

@@ -10,11 +10,8 @@ class ServiceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('protocol')
-            ->add('port')
-            ->add('vulnerability')
-        ;
+        $builder->add('protocol')
+                ->add('port');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
