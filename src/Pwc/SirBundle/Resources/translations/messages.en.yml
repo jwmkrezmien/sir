@@ -1,7 +1,8 @@
 form:
     general:
         optional:                     "Optional"
-        back:                         "Back to list"
+        back_list:                    "Back to list"
+        back_cancel:                  "Cancel"
         actions:                      "Actions"
         version:                      "Version %version%"
         account:
@@ -71,6 +72,7 @@ form:
             owaspitems:               "OWASP References"
             vulndescription:          "Descriptions"
         vulndescription:
+            _entity:                  "{0} Description|{1} Description|]2,Inf] Descriptions"
             name:                     "Name"
             description:              "Description"
             risk:                     "Risk"

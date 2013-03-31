@@ -65,6 +65,22 @@ FORM LABEL
 {
     margin-bottom: 10px;
 }
+.select2-drop
+{
+    width: 100%;
+    margin-top: -1px;
+    position: absolute;
+    z-index: 9999;
+    top: 100%;
+    background: #FFF;
+    color: #000;
+    /*[disabled]border:1px solid #AAA;*/
+    border: 1px solid rgba(82, 168, 236, 0.8);
+    border-top: 0;
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
 .select2-results .select2-highlighted
 {
     background-color: #0088CC;
@@ -77,6 +93,14 @@ FORM LABEL
     -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
 }
+.select2-container-active .select2-choice, .select2-container-active .select2-choices
+{
+    border: 1px solid rgba(82, 168, 236, 0.8);
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
 TEXTAREA.sir.input-block-level:focus, INPUT.sir.input-block-level:focus, .select2-container-active
 {
     border-color: rgba(82, 168, 236, 0.8);
@@ -88,6 +112,7 @@ TEXTAREA.sir.input-block-level:focus, INPUT.sir.input-block-level:focus, .select
 TEXTAREA.sir.input-block-level
 {
     height: 200px;
+    resize: vertical;
 }
 INPUT.sir, .select2-container-multi .select2-choices, TEXTAREA, INPUT[type="text"], INPUT[type="password"], INPUT[type="datetime"], INPUT[type="datetime-local"], INPUT[type="date"], INPUT[type="month"], INPUT[type="time"], INPUT[type="week"], INPUT[type="number"], INPUT[type="email"], INPUT[type="url"], INPUT[type="search"], INPUT[type="tel"], INPUT[type="color"], .uneditable-input
 {
@@ -178,7 +203,7 @@ UL.versions LI.version SPAN.title
 {
     display: inline-block;
     min-width: 100px;
-    width: 20%;
+    width: 30%;
 }
 /*UL.entity*/
 UL.entity
@@ -198,12 +223,21 @@ UL.entity LI.detail
     margin-bottom: 5px;
     padding: 5px 0px;
 }
+UL.entity.index LI.detail:last-child
+{
+    border-bottom: 0px;
+}
 UL.entity LI.detail .value
 {
     margin: 0px;
     padding: 0px;
     list-style: none;
     display: inline-block;
+    max-width: 70%;
+}
+UL.entity.index LI.detail .value
+{
+    max-width: 70%;
 }
 UL.entity LI.detail .value LI
 {

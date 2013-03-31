@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class VulnDescription
 {
-    protected $entityType = 'Description';
+    protected $entityType = 'VulnDescription';
 
     /**
      * @ORM\Id

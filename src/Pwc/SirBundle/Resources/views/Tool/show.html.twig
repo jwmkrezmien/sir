@@ -21,7 +21,7 @@
 
     <div class="record_actions">
         {% include "PwcSirBundle:Includes:actions.html.twig" with { 'entity': entity, 'editRoute': path('tool_edit', { 'slug': entity.slug }), 'deleteRoute': path('tool_delete', { 'slug': entity.slug }) } %}
-        <a class="pull-right cancel" href="{{ path('tool') }}">{{ 'form.general.back'|trans }}</a>
+        <a class="pull-right cancel" href="{{ path('tool') }}">{{ 'form.general.back_list' }}</a>
     </div>
 
     {% include "PwcSirBundle:Includes:deleteModal.html.twig" with { 'type': 'tool', 'deleteRoute': path('tool_delete', { 'slug': entity.slug }), 'delete_form': delete_form } %}
