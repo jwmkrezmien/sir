@@ -66,9 +66,6 @@ class OwaspSetController extends Controller
         $form = $this->createForm(new OwaspSetType(), $entity);
         $form->bind($request);
 
-        //var_dump($entity); exit();
-        //var_dump($request->request->get('pwc_sirbundle_owaspsettype')); exit();
-
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -118,7 +115,7 @@ class OwaspSetController extends Controller
     /**
      * Finds and displays a OwaspSet entity.
      *
-     * @Route("/{slug}", name="owaspset_show")
+     * @Route("/{slug}/show", name="owaspset_show")
      * @Method("GET")
      * @Template()
      */
@@ -168,8 +165,8 @@ class OwaspSetController extends Controller
     /**
      * Edits an existing OwaspSet entity.
      *
-     * @Route("/{slug}", name="owaspset_update")
-     * @Method("PUT")
+     * @Route("/{slug}/update", name="owaspset_update")
+     * @Method("POST")
      * @Template("PwcSirBundle:OwaspSet:edit.html.twig")
      */
     public function updateAction(Request $request, $slug)
@@ -203,8 +200,8 @@ class OwaspSetController extends Controller
     /**
      * Deletes a OwaspSet entity.
      *
-     * @Route("/{slug}", name="owaspset_delete")
-     * @Method("DELETE")
+     * @Route("/{slug}/delete", name="owaspset_delete")
+     * @Method("POST")
      */
     public function deleteAction(Request $request, $slug)
     {
@@ -234,7 +231,7 @@ class OwaspSetController extends Controller
     private function createDeleteForm($slug)
     {
         return $this->createFormBuilder(array('slug' => $slug))
-            ->add('slug', 'hidden')
-            ->getForm();
+                    ->add('slug', 'hidden')
+                    ->getForm();
     }
 }

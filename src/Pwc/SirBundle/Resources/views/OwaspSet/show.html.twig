@@ -6,18 +6,14 @@
 
 {% block contentBody %}
     <div class="well">
-        <ul class="entity">
+        <ul class="entity owasp">
             <li class="detail"><label class="pull-left">{{ 'form.label.owaspset.name'|trans }}</label><span class="value">{{ entity.name|trans }}</span></li>
             <li class="detail"><label class="pull-left">{{ 'form.label.owaspset.year'|trans }}</label><span class="value">{{ entity.year }}</span></li>
-            <li class="detail">
-                <label class="pull-left">{{ 'form.label.owaspset.owaspitems'|trans }}</label>
-                <ul class="value">
-                    {% for owaspitem in entity.owaspitems %}
-                        <li>{{ owaspitem.name }}</li>
-                    {% else %}-
-                    {% endfor %}
-                </ul>
-            </li>
+            {% for owaspitem in entity.owaspitems %}
+            <li class="detail"><label class="pull-left">#{{ owaspitem.rank }}</label><span class="value">{{ owaspitem.name|trans }}</span></li>
+            {% else %}
+            <li class="detail"><label class="pull-left">{{ 'form.label.owaspset.owaspitems'|trans }}</label><span class="value">-</span></li>
+            {% endfor %}
         </ul>
 
         <div class="record_actions">

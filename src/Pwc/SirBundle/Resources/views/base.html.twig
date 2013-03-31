@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Security Issue Repository - {% block title %}{% if title is defined %}{{ title }}{% else %}No title set yet{% endif %}{% endblock %}</title>
+    <title>Security Issue Repository - {% block title %}{% if title is defined %}{{ title|trans }} {% if subtitle is defined %}- {% endif %}{% endif %}{{ subtitle|default('- No subtitle yet') }}{% endblock %}</title>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
@@ -20,11 +20,10 @@
 
     {% stylesheets
     'bundles/pwcsir/css/chosen.css'
-    'bundles/pwcsir/css/select2.css' filter='cssrewrite' output='bundles/pwcsir/css/main.css' %}
+    'bundles/pwcsir/css/select2.css'
+    'bundles/pwcsir/css/sir.css' filter='cssrewrite' output='bundles/pwcsir/css/main.css' %}
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
     {% endstylesheets %}
-
-    <link rel="stylesheet" href="/bundles/pwcsir/css/sir.css" />
 
 </head>
 
