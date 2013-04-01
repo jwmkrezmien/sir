@@ -326,3 +326,20 @@ UL.form-collection LI.embedded-child LABEL
     left: 0px;
     width: 152px;
 }
+
+/*.nagivation*/
+.navigation
+{
+    position: relative;
+}
+.navigation A.cancel
+{
+    top: 3px;
+    right: 5px;
+    position: absolute;
+}
+/*.pagination*/
+.pagination
+{
+    margin-bottom: 0px;
+}

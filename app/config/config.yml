@@ -127,10 +127,10 @@ services:
             - { name: form.type, alias: pwc_user_change_password }
     mod_context_provider:
         class:        Pwc\SirBundle\Service\ModContextProvider
-        arguments:    [ @doctrine.orm.entity_manager, %mod_entity_mapping% ]
+        arguments:    [ @service_container, @doctrine.orm.entity_manager, %mod_entity_mapping% ]
     pagination_checker:
         class:        Pwc\SirBundle\Service\PaginationChecker
-        scope: request
+        scope:        request
         arguments:    [ @session, @translator, @request, @knp_paginator]
         calls:
             - [ setPageName, [ "%page_name%" ] ]

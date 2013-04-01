@@ -29,6 +29,7 @@ form:
             edit:                     "Edit"
             delete:                   "Delete"
             save:                     "Save"
+            search:                   "Search"
             history:                  "History"
         flash:
             save_unable:              "Unable to save your input. Review the errors below and try again."
@@ -38,6 +39,7 @@ form:
             field_not_provided:       "Currently, no field for sorting was provided. Using '%field%' as a default."
             invalid_sort_direction:   "An invalid sort direction was provided. Relapsed to default and sorted '%field%' ascending."
             invalid_sort_field:       "An invalid sort field was provided. Using '%field%' as a default."
+            not_found:                "The entity you searched for was not found. Try again."
         modal:
             header:                   "Before we proceed.."
             cancel:                   "Cancel"
@@ -53,11 +55,13 @@ form:
             name:                     "Name"
             products:                 "Products"
         product:
+            _entity:                  "{0} Product|{1} Product|[2,Inf] Products"
             name:                     "Name"
             tools:                    "Tools"
         vulnerability:
-            _entity:                 "{1} Vulnerability|]2,Inf] Vulnerabilities"
-            product:                  "Product"
+            _entity:                  "{0} Vulnerability|{1} Vulnerability|[2,Inf] Vulnerabilities"
+            _search:                  "Search a vulnerability"
+            products:                 "Products"
             tool:                     "Tool"
             name:                     "Name"
             layer:                    "Layer"
@@ -72,27 +76,30 @@ form:
             owaspitems:               "OWASP References"
             vulndescription:          "Descriptions"
         vulndescription:
-            _entity:                  "{0} Description|{1} Description|]2,Inf] Descriptions"
+            _entity:                  "{0} Description|{1} Description|[2,Inf] Descriptions"
             name:                     "Name"
             description:              "Description"
             risk:                     "Risk"
             solution:                 "Solution"
             language:                 "Language"
             vulnerability:            "Vulnerability"
+        productref:
+            _entity:                  "{0} Product Reference|{1} Product Reference|[2,Inf] Product References"
+            product:                  "Product"
         owaspref:
-            _entity:                  "{0} OWASP Reference|{1} OWASP Reference|]2,Inf] OWASP References"
+            _entity:                  "{0} OWASP Reference|{1} OWASP Reference|[2,Inf] OWASP References"
             owaspitem:                "OWASP"
         service:
-            _entity:                  "{0} Service|{1} Service|]2,Inf] Services"
+            _entity:                  "{0} Service|{1} Service|[2,Inf] Services"
             _display:                 "%service% on port %port%"
             protocol:                 "Protocol"
             port:                     "Port"
         vulnref:
-            _entity:                  "{0} Online Reference|{1} Online Reference|]2,Inf] Online References"
+            _entity:                  "{0} Online Reference|{1} Online Reference|[2,Inf] Online References"
             name:                     "Name"
             hyperlink:                "Hyperlink"
         owaspset:
-            _entity:                  "{0} OWASP List|{1} OWASP List|]2,Inf] OWASP Lists"
+            _entity:                  "{0} OWASP List|{1} OWASP List|[2,Inf] OWASP Lists"
             name:                     "Name"
             year:                     "Year"
             owaspitems:               "OWASP entries"

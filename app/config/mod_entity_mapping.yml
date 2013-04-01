@@ -4,7 +4,6 @@ parameters:
             vulnerability:
                 namespace:                Pwc\SirBundle\Entity\Vulnerability
                 attributes:
-                    product:              Pwc\SirBundle\Entity\Product
                     tool:                 Pwc\SirBundle\Entity\Tool
                     layer:                Pwc\SirBundle\Entity\Layer
                     rootcause:            Pwc\SirBundle\Entity\Rootcause
@@ -25,9 +24,13 @@ parameters:
             vulnref:
                 namespace:                Pwc\SirBundle\Entity\VulnRef
                 identifier:               slug
+            productref:
+                namespace:                Pwc\SirBundle\Entity\ProductRef
+                attributes:
+                    product:              Pwc\SirBundle\Entity\Product
             owaspref:
                 namespace:                Pwc\SirBundle\Entity\OwaspRef
                 attributes:
                     owaspitem:            Pwc\SirBundle\Entity\OwaspItem
         hierarchies:
-            vulnerability:                [ vulndescription, service, vulnref, owaspref ]
+            vulnerability:                [ vulndescription, productref, service, vulnref, owaspref ]

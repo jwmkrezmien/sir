@@ -185,6 +185,8 @@ class PaginationChecker
     public function setPaginatedSubject(array $array = array())
     {
         $this->array = $array;
+
+        return $this;
     }
 
     /**

@@ -3,9 +3,12 @@
 namespace Pwc\SirBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ModContextProvider
 {
+    protected $pagination_checker;
+
     protected $entityManager;
 
     protected $entityMapping;
@@ -16,13 +19,19 @@ class ModContextProvider
 
     public $currentVersions = array();
 
-    public function __construct(EntityManager $entityManager, array $entityMapping = array())
+    public function __construct(ContainerInterface $container, EntityManager $entityManager, array $entityMapping = array())
     {
+        $this->pagination_checker = $container->get('pagination_checker');
         $this->entityMapping = $entityMapping;
         $this->entityManager = $entityManager;
 
         $this->setGlossary('vulnerability');
         $this->setReversedMapping('vulnerability');
+    }
+
+    public function getPaginatedLogEntries($entity)
+    {
+        return $this->pagination_checker->setPaginatedSubject($this->getLogEntries($entity))->getPagination();
     }
 
     public function getLogEntries($entity)

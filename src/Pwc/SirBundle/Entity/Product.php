@@ -34,9 +34,9 @@ class Product
     private $tools;
 
     /**
-     * @ORM\OneToMany(targetEntity="Vulnerability", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="ProductRef", mappedBy="product")
      */
-    protected $vulnerabilities;
+    protected $productRefs;
 
     /**
      * @Gedmo\Slug(fields={"name"})
