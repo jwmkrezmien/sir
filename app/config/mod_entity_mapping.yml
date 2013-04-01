@@ -27,7 +27,7 @@ parameters:
             productref:
                 namespace:                Pwc\SirBundle\Entity\ProductRef
                 attributes:
-                    product:              Pwc\SirBundle\Entity\Product
+                    product:             Pwc\SirBundle\Entity\Product
             owaspref:
                 namespace:                Pwc\SirBundle\Entity\OwaspRef
                 attributes:
