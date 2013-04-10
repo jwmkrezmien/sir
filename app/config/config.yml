@@ -4,6 +4,7 @@ imports:
     - { resource: application.yml }
     - { resource: doctrine_extensions.yml }
     - { resource: mod_entity_mapping.yml }
+    - { resource: entity_remover.yml }
     - { resource: pagination.yml }
 
 framework:
@@ -128,6 +129,9 @@ services:
     mod_context_provider:
         class:        Pwc\SirBundle\Service\ModContextProvider
         arguments:    [ @service_container, @doctrine.orm.entity_manager, %mod_entity_mapping% ]
+    entity_remover:
+        class:        Pwc\SirBundle\Service\EntityRemover
+        arguments:    [ %entity_remover% ]
     pagination_checker:
         class:        Pwc\SirBundle\Service\PaginationChecker
         scope:        request

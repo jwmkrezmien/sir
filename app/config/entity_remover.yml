@@ -1,0 +1,9 @@
+parameters:
+    entity_remover:
+        Pwc\SirBundle\Entity\Vulnerability:
+            call:                   vulnerability
+            relations:
+                services:           service
+                vulnRefs:           vulnref
+                owaspRefs:          owaspRef
+                productRefs:        productRef
