@@ -9,6 +9,13 @@ form:
             general:                  "Profile settings"
             edit:                     "Edit account"
             changepw:                 "Change password"
+            complexity:               "Setting a new password for your account requires the new entry to comply to a set of complexity rules. These complexity rules are identified by the list below."
+            compl_rule1:              "The password has a length of eight characters (mandatory)"
+            compl_rule2:              "The password has at least one uppercase character"
+            compl_rule3:              "The password has at least two lower case characters"
+            compl_rule4:              "The password has at least one special character (!@#$%^&*()\-_=+{};:,<.>)"
+            compl_rule5:              "The password has at least one numeric character"
+            at_least_3:               "Apart from the mandatory length requirement at least three of the remaining complexity rules need to be adhered to."
         subtitle:
             management:               "%type% management"
             details:                  "%type% details"
